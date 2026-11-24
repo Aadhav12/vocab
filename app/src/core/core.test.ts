@@ -3,7 +3,7 @@ import { checkEnglish, checkNoun, checkPlural, checkWord, germanEq, normEn, chec
 import { adjForms, nounForms, verbForms } from './forms';
 import { applyAnswer, bookRechecks, dueCards, introduceWord, mastery, LADDER, markWeak, leechCards, clearLeech } from './srs';
 import { buildIndex, lookupToken, familyRoot, familyTree } from './index';
-import { buildPath, position, topicStats, syncInserts } from './path';
+import { buildPath, position, topicStats, syncInserts, insertNode } from './path';
 import { FORMATS, emptyProgress } from './types';
 import type { Word } from './types';
 import { applicable, itemsForFormat, readingItems, parseBrackets, translationItem } from './generate';
@@ -166,6 +166,25 @@ describe('path', () => {
     for (let i = 0; i < 5; i++) { p.introduced['w' + i] = 0; p.cards[`w${i}|de-en`] = { step: 0, due: 0, reps: 0, misses: 0, promotedAt: 0 }; }
     expect(syncInserts(idx, path, p)).toBe(true);
     expect(p.inserts.some((i) => i.kind === 'catchup')).toBe(true);
+  });
+});
+
+describe('leech drills', () => {
+  const path = buildPath(idx);
+  it('inserts a leech drill at 6 misses and drills the stubborn card', () => {
+    const p = emptyProgress();
+    introduceWord(p, 'der-anstieg', ['de-en', 'en-de', 'article']);
+    p.cards['der-anstieg|article'].misses = 6;
+    expect(syncInserts(idx, path, p)).toBe(true);
+    const ins = p.inserts.find((i) => i.kind === 'leech')!;
+    expect(ins.wordIds).toEqual(['der-anstieg']);
+    expect(syncInserts(idx, path, p)).toBe(false); // not inserted twice
+    const node = insertNode(idx, ins);
+    const run = buildRun(node, idx, p, rng);
+    expect(run.items.some((i) => i.card === 'article')).toBe(true);
+    expect(run.passMark).toBe(1);
+    clearLeech(p, 'der-anstieg');
+    expect(leechCards(p)).toHaveLength(0);
   });
 });
 
