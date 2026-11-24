@@ -87,9 +87,10 @@ export function checkWord(given: string, expected: string, accept: string[] = []
 /** Plural: with or without the leading "die". */
 export function checkPlural(given: string, expected: string): CheckResult {
   const g = clean(given).replace(/^die\s+/, '');
-  if (germanEq(g, expected)) return { ok: true, kind: 'ok' };
-  if (germanEqLoose(g, expected)) return { ok: false, kind: 'wrong', note: 'Check the capitalisation' };
-  if (levenshtein(fold(g), fold(expected)) === 1) return { ok: false, kind: 'wrong', note: 'Near miss — one letter off' };
+  const e = expected.replace(/^die\s+/, '');
+  if (germanEq(g, e)) return { ok: true, kind: 'ok' };
+  if (germanEqLoose(g, e)) return { ok: false, kind: 'wrong', note: 'Check the capitalisation' };
+  if (levenshtein(fold(g), fold(e)) === 1) return { ok: false, kind: 'wrong', note: 'Near miss — one letter off' };
   return { ok: false, kind: 'wrong' };
 }
 

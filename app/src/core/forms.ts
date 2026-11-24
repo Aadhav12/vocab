@@ -165,8 +165,8 @@ export function withArticle(w: Word): string {
 
 // ---------- adjectives ----------
 export function adjForms(w: Word): { komparativ: string; superlativ: string; regular: boolean } | null {
-  if (w.pos !== 'adj' || !w.adj || w.adj.noComparison) return null;
-  const a = w.adj;
+  if (w.pos !== 'adj' || w.adj?.noComparison) return null;
+  const a = w.adj ?? {};
   const l = w.lemma;
   let k = a.komparativ, s = a.superlativ;
   const regular = !(a.komparativ && a.superlativ);
