@@ -40,7 +40,7 @@ export const plain = (de: string) => de.replace(/[[\]]/g, '');
 
 const senseEn = (w: Word) => w.senses[0]?.en[0] ?? '';
 const POS_NAME: Record<string, string> = { noun: 'noun', verb: 'verb', adj: 'adjective', adv: 'adverb', prep: 'preposition', conj: 'conjunction', phrase: 'phrase' };
-const gen = (w: Word): Gender | undefined => w.noun?.gender;
+const gen = (w: Word): Gender | undefined => w.noun?.gender ?? undefined;
 
 // ---------- applicability ----------
 export function antonymsOf(idx: DataIndex, w: Word): Word[] {
@@ -121,7 +121,7 @@ function articleItem(w: Word): Item {
   const g = w.noun!.gender;
   return {
     id: nid('article'), format: 'article', wordId: w.id, card: 'article', mode: 'choice', label: 'Article', main: w.lemma, sub: senseEn(w),
-    choices: ['der', 'die', 'das'], answerIdx: ['m', 'f', 'n'].indexOf(g), keyed: true,
+    choices: ['der', 'die', 'das'], answerIdx: ['m', 'f', 'n'].indexOf(g as string), keyed: true,
   };
 }
 function pluralItem(w: Word): Item {

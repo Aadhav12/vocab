@@ -2,7 +2,7 @@
 import type { DataIndex } from './index';
 import type { Format, Insert, Progress, Word } from './types';
 import { FORMATS, FORMAT_NAMES } from './types';
-import { applicable } from './generate';
+import { itemsForFormat } from './generate';
 import { activeInserts, dueCards, leechCards } from './srs';
 
 export type NodeType =
@@ -36,7 +36,7 @@ export function buildPath(idx: DataIndex): Path {
         push({ ...base, id: `set:${s.id}:intro`, type: 'intro', name: 'Introduce', sub: `${s.words.length} new words`, glyph: '✦', boss: false });
         push({ ...base, id: `set:${s.id}:flash`, type: 'flash', name: 'Flashcards', sub: 'clean + fast', glyph: '⌨', boss: false });
         for (const f of FORMATS) {
-          if (s.words.some((w) => applicable(f, w, idx))) {
+          if (itemsForFormat(f, s.words, { idx, rng: () => 0.5 }).length > 0) {
             push({ ...base, id: `set:${s.id}:fmt:${f}`, type: 'fmt', format: f, name: FORMAT_NAMES[f], sub: 'every answer correct', glyph: '◆', boss: false });
           }
         }

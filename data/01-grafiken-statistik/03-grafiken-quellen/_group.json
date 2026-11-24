@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../app/schema/group.schema.json",
+  "schemaVersion": 1,
+  "id": "grafiken-quellen",
+  "name": "Grafiken einleiten & Quellen",
+  "description": "Introducing graphs, data and sources"
+}

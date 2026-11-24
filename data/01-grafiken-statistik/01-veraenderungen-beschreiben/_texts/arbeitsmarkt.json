@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../app/schema/text.schema.json",
+  "schemaVersion": 1,
+  "id": "arbeitsmarkt-in-zahlen",
+  "title": "Der Arbeitsmarkt in Zahlen",
+  "paragraphs": [
+    "Die Zahl der Arbeitslosen in Deutschland hat sich in den letzten dreißig Jahren stark verändert. Anfang der 1990er-Jahre lag sie bei rund 2,6 Millionen. Danach stieg sie allmählich an und erreichte 2005 mit knapp fünf Millionen ihren Höchststand. Die Statistik zeigt dabei deutliche Schwankungen.",
+    "Nach 2005 kam es zu einem deutlichen Rückgang. Bis 2019 sank die Zahl kontinuierlich auf weniger als die Hälfte. Die Arbeitslosenquote fiel auf rund fünf Prozent und damit auf den niedrigsten Wert seit der Wiedervereinigung.",
+    "Für diese positive Entwicklung gibt es mehrere Gründe. Wichtig waren unter anderem Reformen des Arbeitsmarkts und eine lange Phase wirtschaftlichen Wachstums. Außerdem verzeichneten viele Branchen einen steigenden Bedarf an Fachkräften, sodass die Unternehmen mehr Personal einstellten.",
+    "Im Jahr 2020 brach der Arbeitsmarkt wegen der Pandemie kurz ein: Die Zahl der Arbeitslosen nahm innerhalb weniger Monate um über 400.000 zu. Der Anstieg war jedoch geringer, als viele befürchtet hatten, und schon im folgenden Jahr begann sich der Markt zu erholen.",
+    "Seit 2022 nimmt die Zahl wieder leicht zu und liegt heute bei knapp drei Millionen. Ob dieser Trend anhält oder ob sich der Wert auf diesem Niveau stabilisiert, hängt vor allem von der wirtschaftlichen Entwicklung ab.",
+    "Große Unterschiede gibt es weiterhin zwischen den Regionen. In Bayern und Baden-Württemberg liegt die Quote deutlich unter dem Durchschnitt, in Bremen und Berlin dagegen deutlich darüber. Insgesamt hat sich der Abstand zwischen Ost und West in den letzten zwanzig Jahren aber stark verringert."
+  ],
+  "uses": [
+    "rund",
+    "allmaehlich",
+    "erreichen",
+    "knapp",
+    "der-hoechststand",
+    "der-rueckgang",
+    "sinken",
+    "kontinuierlich",
+    "fallen",
+    "der-wert",
+    "einbrechen",
+    "zunehmen",
+    "der-anstieg",
+    "gering",
+    "sich-erholen",
+    "leicht",
+    "liegen",
+    "sich-stabilisieren",
+    "die-statistik",
+    "die-schwankung",
+    "verzeichnen",
+    "das-wachstum",
+    "der-durchschnitt",
+    "dagegen",
+    "insgesamt",
+    "sich-verringern"
+  ],
+  "questions": [
+    {
+      "type": "rfn",
+      "prompt": "2005 waren in Deutschland fast fünf Millionen Menschen arbeitslos.",
+      "answer": "richtig"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Zwischen 2005 und 2019 schwankte die Zahl der Arbeitslosen stark.",
+      "answer": "falsch"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Während der Pandemie verloren vor allem junge Menschen ihre Arbeit.",
+      "answer": "nicht_im_text"
+    },
+    {
+      "type": "mc",
+      "prompt": "Wie war der Anstieg der Arbeitslosigkeit im Jahr 2020?",
+      "options": [
+        "größer als erwartet",
+        "kleiner als befürchtet",
+        "genauso groß wie 2005"
+      ],
+      "answer": 1
+    },
+    {
+      "type": "heading",
+      "paragraph": 4,
+      "options": [
+        "Ein kurzer Einbruch",
+        "Der Höchststand von 2005",
+        "Ein langer Abwärtstrend"
+      ],
+      "answer": 0
+    }
+  ]
+}

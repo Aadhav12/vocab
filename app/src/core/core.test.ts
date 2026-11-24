@@ -89,7 +89,7 @@ describe('form generation', () => {
     expect(nounForms(W('der-anstieg'))!.Gen[0]).toBe('Anstiegs');
   });
   it('comparison', () => {
-    expect(adjForms(W('hoch'))!.komparativ).toBe('höher');
+    expect(adjForms(W('stark'))!.komparativ).toBe('stärker');
     expect(adjForms(W('deutlich'))!.superlativ).toBe('am deutlichsten');
   });
 });
@@ -146,9 +146,9 @@ describe('path', () => {
   });
   it('group and topic rounds follow the last set', () => {
     const i = path.nodes.findIndex((n) => n.id === 'group:veraenderungen-beschreiben:flash');
-    expect(path.nodes[i - 1].id).toBe('set:anteile-vergleiche:test');
+    expect(path.nodes[i - 1].id).toBe('set:werte-staende:test');
     expect(path.nodes.map((n) => n.id)).toContain('topic:grafiken-statistik:test');
-    expect(path.nodes.filter((n) => n.type === 'greading').length).toBe(1);
+    expect(path.nodes.filter((n) => n.type === 'greading').length).toBe(4);
   });
   it('current node is the first not passed; inserts come first', () => {
     const p = emptyProgress();
@@ -300,9 +300,9 @@ describe('node runs and test scoring', () => {
   it('review mix adds earlier-set words to later set format nodes', () => {
     const p = emptyProgress();
     for (const w of scopeWords(idx, 'set', 'zunahme-abnahme')) p.introduced[w.id] = 0;
-    const node = path.byId.get('set:anteile-vergleiche:fmt:article')!;
+    const node = path.byId.get('set:schwankungen-wendepunkte:fmt:article')!;
     const run = buildRun(node, idx, p, rng);
-    const own = new Set(idx.setById.get('anteile-vergleiche')!.words.map((w) => w.id));
+    const own = new Set(idx.setById.get('schwankungen-wendepunkte')!.words.map((w) => w.id));
     expect(run.items.some((i) => !own.has(i.wordId))).toBe(true);
   });
   it('weighted sampling prefers weak words', () => {

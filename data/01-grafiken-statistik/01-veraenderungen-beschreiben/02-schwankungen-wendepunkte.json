@@ -1,0 +1,272 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "schwankungen-wendepunkte",
+  "name": "Schwankungen und Wendepunkte",
+  "words": [
+    {
+      "id": "schwanken",
+      "lemma": "schwanken",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to fluctuate", "to vary", "to sway"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": false,
+        "principal": { "praesens3sg": "schwankt", "praeteritum": "schwankte", "partizip2": "geschwankt", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "{0} etw. und etw. schwanken", "slots": [{ "prep": "zwischen", "case": "Dat", "obj": "range" }], "en": "to fluctuate between sth. and sth.", "example": "Die Werte schwanken [zwischen] zehn und zwanzig Prozent." }],
+      "examples": [{ "de": "Die Preise [schwankten] im Laufe des Jahres stark.", "en": "Prices fluctuated sharply over the course of the year." }]
+    },
+    {
+      "id": "die-schwankung",
+      "lemma": "Schwankung",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["fluctuation", "variation"] }],
+      "derivation": { "from": "schwanken", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": "Schwankungen", "genitive": "Schwankung", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "starken [Schwankungen] unterliegen", "en": "to be subject to strong fluctuations", "type": "other" }],
+      "examples": [{ "de": "Die [Schwankungen] sind vor allem saisonal bedingt.", "en": "The fluctuations are mainly seasonal." }]
+    },
+    {
+      "id": "stagnieren",
+      "lemma": "stagnieren",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to stagnate", "to level off", "to stand still"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": false,
+        "principal": { "praesens3sg": "stagniert", "praeteritum": "stagnierte", "partizip2": "stagniert", "aux": "haben" }
+      },
+      "examples": [{ "de": "Die Löhne [stagnieren] seit Jahren.", "en": "Wages have been stagnating for years." }],
+      "notes": ["-ieren verbs take no ge- in the Partizip II: stagniert."]
+    },
+    {
+      "id": "die-stagnation",
+      "lemma": "Stagnation",
+      "pos": "noun",
+      "level": "C1",
+      "senses": [{ "en": ["stagnation"] }],
+      "derivation": { "from": "stagnieren", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": null, "genitive": "Stagnation", "declension": "strong", "number": "singular-only" },
+      "examples": [{ "de": "Nach Jahren des Wachstums folgte eine Phase der [Stagnation].", "en": "Years of growth were followed by a phase of stagnation." }]
+    },
+    {
+      "id": "konstant",
+      "lemma": "konstant",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [{ "en": ["constant", "steady", "unchanged"] }],
+      "adj": { "noComparison": true, "use": "both" },
+      "collocations": [{ "de": "[konstant] bleiben", "en": "to remain constant", "type": "other" }],
+      "examples": [{ "de": "Die Zahl blieb über zehn Jahre [konstant].", "en": "The number remained constant for ten years." }]
+    },
+    {
+      "id": "stabil",
+      "lemma": "stabil",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [{ "en": ["stable", "steady", "sturdy"] }],
+      "adj": { "komparativ": "stabiler", "superlativ": "am stabilsten", "use": "both" },
+      "examples": [{ "de": "Die Preise sind seit Monaten [stabil].", "en": "Prices have been stable for months." }]
+    },
+    {
+      "id": "sich-stabilisieren",
+      "lemma": "sich stabilisieren",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to stabilise", "to settle", "to level out"] }],
+      "derivation": { "from": "stabil", "type": "other" },
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "akk",
+        "transitive": false,
+        "principal": { "praesens3sg": "stabilisiert sich", "praeteritum": "stabilisierte sich", "partizip2": "stabilisiert", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "sich {0} etw. stabilisieren", "slots": [{ "prep": "auf", "case": "Dat", "obj": "level" }], "en": "to stabilise at sth.", "example": "Der Preis hat sich [auf] einem hohen Niveau stabilisiert." }],
+      "examples": [{ "de": "Die Lage [hat sich] im Herbst [stabilisiert].", "en": "The situation stabilised in autumn." }],
+      "notes": ["auf + Dativ here: where it stays (auf einem Niveau), not where it goes."]
+    },
+    {
+      "id": "der-tiefstand",
+      "lemma": "Tiefstand",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["low", "all-time low", "lowest level", "low point"] }],
+      "noun": { "gender": "m", "plural": "Tiefstände", "genitive": "Tiefstands", "declension": "strong", "number": "both" },
+      "antonyms": ["der-hoechststand"],
+      "collocations": [{ "de": "einen historischen [Tiefstand] erreichen", "en": "to reach a historic low", "type": "noun-verb" }],
+      "examples": [{ "de": "2009 fiel der Wert auf einen [Tiefstand].", "en": "In 2009 the value fell to a low." }]
+    },
+    {
+      "id": "einbrechen",
+      "lemma": "einbrechen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [
+        { "en": ["to collapse", "to slump", "to plummet"], "hint": "of figures, suddenly", "domain": "statistics" },
+        { "en": ["to break in", "to burgle"], "hint": "into a building" }
+      ],
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "ein",
+        "reflexive": "none",
+        "transitive": false,
+        "principal": { "praesens3sg": "bricht ein", "praeteritum": "brach ein", "partizip2": "eingebrochen", "aux": "sein" },
+        "praesens": { "du": "brichst ein", "er": "bricht ein" },
+        "irregular": ["praesens3sg", "praeteritum", "partizip2", "aux"]
+      },
+      "rektion": [{ "pattern": "{0} etw. einbrechen", "slots": [{ "prep": "um", "case": "Akk", "obj": "amount" }], "en": "to slump by sth.", "example": "Der Umsatz brach [um] ein Viertel ein." }],
+      "examples": [{ "de": "Die Exporte [brachen] 2009 um 20 Prozent [ein].", "en": "Exports slumped by 20 per cent in 2009." }]
+    },
+    {
+      "id": "der-einbruch",
+      "lemma": "Einbruch",
+      "pos": "noun",
+      "level": "C1",
+      "senses": [
+        { "en": ["slump", "collapse", "sharp drop"], "domain": "statistics" },
+        { "en": ["break-in", "burglary"] }
+      ],
+      "derivation": { "from": "einbrechen", "type": "nominalisation" },
+      "noun": { "gender": "m", "plural": "Einbrüche", "genitive": "Einbruchs", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Nach dem [Einbruch] erholte sich der Markt schnell.", "en": "After the slump the market recovered quickly." }]
+    },
+    {
+      "id": "sich-erholen",
+      "lemma": "sich erholen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [{ "en": ["to recover", "to rest", "to get better"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "akk",
+        "transitive": false,
+        "principal": { "praesens3sg": "erholt sich", "praeteritum": "erholte sich", "partizip2": "erholt", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "sich {0} etw. erholen", "slots": [{ "prep": "von", "case": "Dat", "obj": "thing" }], "en": "to recover from sth.", "example": "Die Wirtschaft hat sich [von] der Krise erholt." }],
+      "examples": [{ "de": "Die Wirtschaft [hat sich] von der Krise [erholt].", "en": "The economy has recovered from the crisis." }]
+    },
+    {
+      "id": "die-erholung",
+      "lemma": "Erholung",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["recovery", "rest", "relaxation"] }],
+      "derivation": { "from": "sich-erholen", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": null, "genitive": "Erholung", "declension": "strong", "number": "singular-only" },
+      "examples": [{ "de": "Experten rechnen mit einer schnellen [Erholung] des Marktes.", "en": "Experts expect a quick recovery of the market." }]
+    },
+    {
+      "id": "sprunghaft",
+      "lemma": "sprunghaft",
+      "pos": "adj",
+      "level": "C1",
+      "senses": [{ "en": ["sharp", "sharply", "sudden", "suddenly", "abrupt"], "hint": "a sudden jump" }],
+      "adj": { "noComparison": true, "use": "both" },
+      "antonyms": ["allmaehlich"],
+      "examples": [{ "de": "Die Nachfrage stieg [sprunghaft] an.", "en": "Demand rose sharply." }]
+    },
+    {
+      "id": "kontinuierlich",
+      "lemma": "kontinuierlich",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [{ "en": ["continuous", "continuously", "steady", "steadily"] }],
+      "adj": { "noComparison": true, "use": "both" },
+      "examples": [{ "de": "Die Zahl ist [kontinuierlich] gestiegen.", "en": "The number has risen steadily." }]
+    },
+    {
+      "id": "allmaehlich",
+      "lemma": "allmählich",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [{ "en": ["gradual", "gradually"] }],
+      "adj": { "noComparison": true, "use": "both" },
+      "antonyms": ["sprunghaft"],
+      "examples": [{ "de": "Die Preise sinken [allmählich].", "en": "Prices are gradually falling." }]
+    },
+    {
+      "id": "drastisch",
+      "lemma": "drastisch",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [{ "en": ["drastic", "drastically", "dramatic", "dramatically"] }],
+      "adj": { "komparativ": "drastischer", "superlativ": "am drastischsten", "use": "both" },
+      "examples": [{ "de": "Die Kosten sind [drastisch] gestiegen.", "en": "Costs have risen drastically." }]
+    },
+    {
+      "id": "stark",
+      "lemma": "stark",
+      "pos": "adj",
+      "level": "A2",
+      "senses": [
+        { "en": ["sharp", "sharply", "strongly", "considerably"], "hint": "size of a change", "domain": "statistics" },
+        { "en": ["strong"] }
+      ],
+      "adj": { "komparativ": "stärker", "superlativ": "am stärksten", "use": "both", "irregular": ["komparativ", "superlativ"] },
+      "antonyms": ["gering"],
+      "examples": [{ "de": "Die Zahl ist [stark] gesunken.", "en": "The number has fallen sharply." }]
+    },
+    {
+      "id": "gering",
+      "lemma": "gering",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [{ "en": ["low", "small", "slight", "minor"] }],
+      "adj": { "komparativ": "geringer", "superlativ": "am geringsten", "use": "both" },
+      "antonyms": ["stark"],
+      "examples": [{ "de": "Der Unterschied ist nur [gering].", "en": "The difference is only slight." }]
+    },
+    {
+      "id": "der-wendepunkt",
+      "lemma": "Wendepunkt",
+      "pos": "noun",
+      "level": "C1",
+      "senses": [{ "en": ["turning point"] }],
+      "noun": { "gender": "m", "plural": "Wendepunkte", "genitive": "Wendepunkts", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Das Jahr 2015 war ein [Wendepunkt] in der Entwicklung.", "en": "The year 2015 was a turning point in the development." }]
+    },
+    {
+      "id": "sich-halbieren",
+      "lemma": "sich halbieren",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to halve", "to be halved", "to fall by half"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "akk",
+        "transitive": false,
+        "principal": { "praesens3sg": "halbiert sich", "praeteritum": "halbierte sich", "partizip2": "halbiert", "aux": "haben" }
+      },
+      "antonyms": ["sich-verdoppeln"],
+      "examples": [{ "de": "Der Anteil [hat sich] seit 1990 [halbiert].", "en": "The proportion has halved since 1990." }]
+    }
+  ],
+  "text": {
+    "id": "fahrradmarkt",
+    "title": "Auf und ab beim Fahrradmarkt",
+    "paragraphs": [
+      "Der Fahrradmarkt in Deutschland hat in den letzten Jahren starke Schwankungen erlebt. Bis 2019 blieben die Verkaufszahlen relativ konstant bei rund vier Millionen Rädern pro Jahr.",
+      "Im Jahr 2020 stieg die Nachfrage dann sprunghaft an, weil viele Menschen in der Pandemie Busse und Bahnen meiden wollten. 2021 und 2022 stagnierten die Verkäufe auf diesem hohen Niveau. Danach kam es jedoch zu einem Einbruch: 2023 sanken die Zahlen drastisch, und viele Händler hatten volle Lager.",
+      "Inzwischen hat sich der Markt stabilisiert. Fachleute erwarten aber, dass er sich nur allmählich erholt. Ein Wendepunkt war der Boom der E-Bikes: Ihr Anteil an allen verkauften Rädern hat kontinuierlich zugenommen."
+    ],
+    "uses": ["die-schwankung", "konstant", "stagnieren", "der-einbruch", "drastisch", "sich-stabilisieren", "allmaehlich", "sich-erholen", "der-wendepunkt", "kontinuierlich", "sprunghaft", "stark"],
+    "questions": [
+      { "type": "rfn", "prompt": "Bis 2019 änderten sich die Verkaufszahlen kaum.", "answer": "richtig" },
+      { "type": "rfn", "prompt": "2023 stiegen die Verkaufszahlen weiter an.", "answer": "falsch" },
+      { "type": "rfn", "prompt": "Die meisten E-Bikes werden im Ausland produziert.", "answer": "nicht_im_text" },
+      { "type": "mc", "prompt": "Was erwarten Fachleute für den Fahrradmarkt?", "options": ["Eine schnelle Erholung.", "Eine langsame Erholung.", "Einen weiteren Einbruch."], "answer": 1 }
+    ]
+  }
+}

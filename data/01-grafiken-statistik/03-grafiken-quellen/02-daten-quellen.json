@@ -1,0 +1,271 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "daten-quellen",
+  "name": "Daten und Quellen",
+  "words": [
+    {
+      "id": "die-quelle",
+      "lemma": "Quelle",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["source"] }, { "en": ["spring"], "hint": "water" }],
+      "noun": { "gender": "f", "plural": "Quellen", "genitive": "Quelle", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "eine [Quelle] angeben", "en": "to cite a source", "type": "noun-verb" }],
+      "examples": [{ "de": "Die [Quelle] der Daten ist das Statistische Bundesamt.", "en": "The source of the data is the Federal Statistical Office." }]
+    },
+    {
+      "id": "die-umfrage",
+      "lemma": "Umfrage",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["survey", "poll"] }],
+      "noun": { "gender": "f", "plural": "Umfragen", "genitive": "Umfrage", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "eine Umfrage [durchführen]", "en": "to carry out a survey", "type": "noun-verb" }],
+      "examples": [{ "de": "Laut einer [Umfrage] fühlen sich viele Studierende gestresst.", "en": "According to a survey, many students feel stressed." }]
+    },
+    {
+      "id": "befragen",
+      "lemma": "befragen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to survey", "to question", "to interview", "to ask"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "be",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "befragt", "praeteritum": "befragte", "partizip2": "befragt", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "jdn. {0} etw. befragen", "slots": [{ "prep": "zu", "case": "Dat", "obj": "topic" }], "en": "to question sb. about sth.", "example": "Die Studierenden wurden [zu] ihren Wohnkosten befragt." }],
+      "examples": [{ "de": "Für die Studie [wurden] 2.000 Personen [befragt].", "en": "2,000 people were surveyed for the study." }]
+    },
+    {
+      "id": "die-befragung",
+      "lemma": "Befragung",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["survey", "questioning", "interview"] }],
+      "derivation": { "from": "befragen", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": "Befragungen", "genitive": "Befragung", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Die [Befragung] fand im Frühjahr 2024 statt.", "en": "The survey took place in spring 2024." }]
+    },
+    {
+      "id": "der-befragte",
+      "lemma": "Befragte",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["respondent", "person surveyed"] }],
+      "derivation": { "from": "befragen", "type": "nominalisation" },
+      "noun": { "gender": "m", "plural": "Befragten", "genitive": "Befragten", "declension": "adjectival", "number": "both" },
+      "examples": [{ "de": "Die Mehrheit der [Befragten] ist mit dem Studium zufrieden.", "en": "The majority of respondents are satisfied with their studies." }],
+      "notes": ["Declined like an adjective: der/die Befragte, ein Befragter, eine Befragte, die Befragten, viele Befragte."]
+    },
+    {
+      "id": "die-studie",
+      "lemma": "Studie",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["study"], "hint": "a piece of research" }],
+      "noun": { "gender": "f", "plural": "Studien", "genitive": "Studie", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "eine Studie [durchführen]", "en": "to conduct a study", "type": "noun-verb" }],
+      "examples": [{ "de": "Eine neue [Studie] zeigt, dass Jugendliche weniger fernsehen.", "en": "A new study shows that young people watch less television." }]
+    },
+    {
+      "id": "erheben",
+      "lemma": "erheben",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to collect", "to gather"], "hint": "data", "domain": "statistics" }, { "en": ["to raise", "to levy"], "hint": "a fee, a claim" }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "er",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "erhebt", "praeteritum": "erhob", "partizip2": "erhoben", "aux": "haben" },
+        "irregular": ["praeteritum", "partizip2"]
+      },
+      "collocations": [{ "de": "Daten [erheben]", "en": "to collect data", "type": "noun-verb" }],
+      "examples": [{ "de": "Die Daten [wurden] im Jahr 2023 [erhoben].", "en": "The data was collected in 2023." }]
+    },
+    {
+      "id": "die-erhebung",
+      "lemma": "Erhebung",
+      "pos": "noun",
+      "level": "C1",
+      "senses": [{ "en": ["survey", "data collection"] }],
+      "derivation": { "from": "erheben", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": "Erhebungen", "genitive": "Erhebung", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Für die [Erhebung] wurden 5.000 Haushalte befragt.", "en": "5,000 households were questioned for the survey." }]
+    },
+    {
+      "id": "die-daten",
+      "lemma": "Daten",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["data"] }],
+      "noun": { "gender": null, "plural": "Daten", "genitive": "Daten", "declension": "strong", "number": "plural-only" },
+      "collocations": [{ "de": "Daten [erheben]", "en": "to collect data", "type": "noun-verb" }],
+      "examples": [{ "de": "Die [Daten] stammen aus dem Jahr 2022.", "en": "The data is from 2022." }],
+      "notes": ["Plural only in this sense (die Daten). The singular das Datum means 'date'."]
+    },
+    {
+      "id": "das-ergebnis",
+      "lemma": "Ergebnis",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [{ "en": ["result", "outcome", "finding"] }],
+      "derivation": { "from": "ergeben", "type": "nominalisation" },
+      "noun": { "gender": "n", "plural": "Ergebnisse", "genitive": "Ergebnisses", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "zu dem [Ergebnis] kommen, dass …", "en": "to come to the conclusion that …", "type": "other" }],
+      "examples": [{ "de": "Das [Ergebnis] der Studie hat viele überrascht.", "en": "The result of the study surprised many people." }]
+    },
+    {
+      "id": "ergeben",
+      "lemma": "ergeben",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to show", "to reveal", "to result in", "to yield"] }, { "en": ["to arise", "to result"], "hint": "sich ergeben aus" }],
+      "derivation": { "from": "geben", "type": "prefix-verb" },
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "er",
+        "reflexive": "optional",
+        "transitive": true,
+        "conjugatesLike": "geben",
+        "principal": { "praesens3sg": "ergibt", "praeteritum": "ergab", "partizip2": "ergeben", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "sich {0} etw. ergeben", "slots": [{ "prep": "aus", "case": "Dat", "obj": "source" }], "en": "to follow from sth.", "example": "Das ergibt sich [aus] den Daten." }],
+      "examples": [{ "de": "Die Umfrage [ergab], dass viele Studierende nebenbei arbeiten.", "en": "The survey showed that many students work alongside their studies." }]
+    },
+    {
+      "id": "der-zeitraum",
+      "lemma": "Zeitraum",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["period", "period of time", "time span"] }],
+      "noun": { "gender": "m", "plural": "Zeiträume", "genitive": "Zeitraums", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "im [Zeitraum] von 2010 bis 2020", "en": "in the period from 2010 to 2020", "type": "other" }],
+      "examples": [{ "de": "Im [Zeitraum] von 2010 bis 2020 hat sich die Zahl verdoppelt.", "en": "In the period from 2010 to 2020 the number doubled." }]
+    },
+    {
+      "id": "der-zeitpunkt",
+      "lemma": "Zeitpunkt",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["point in time", "moment", "time"] }],
+      "noun": { "gender": "m", "plural": "Zeitpunkte", "genitive": "Zeitpunkts", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "zum [Zeitpunkt] der Befragung", "en": "at the time of the survey", "type": "other" }],
+      "examples": [{ "de": "Zum [Zeitpunkt] der Befragung waren alle Teilnehmer berufstätig.", "en": "At the time of the survey all participants were employed." }]
+    },
+    {
+      "id": "sich-beziehen",
+      "lemma": "sich beziehen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to refer to", "to relate to"], "hint": "+ auf" }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "be",
+        "reflexive": "akk",
+        "transitive": false,
+        "principal": { "praesens3sg": "bezieht sich", "praeteritum": "bezog sich", "partizip2": "bezogen", "aux": "haben" },
+        "irregular": ["praeteritum", "partizip2"]
+      },
+      "rektion": [{ "pattern": "sich {0} etw. beziehen", "slots": [{ "prep": "auf", "case": "Akk", "obj": "thing" }], "en": "to refer to sth.", "example": "Die Zahlen beziehen sich [auf] das Jahr 2022." }],
+      "examples": [{ "de": "Die Zahlen [beziehen] sich auf das Jahr 2022.", "en": "The figures refer to 2022." }]
+    },
+    {
+      "id": "laut",
+      "lemma": "laut",
+      "pos": "prep",
+      "level": "B1",
+      "senses": [{ "en": ["according to"] }, { "en": ["loud", "loudly"], "hint": "adjective" }],
+      "prep": { "cases": ["Gen", "Dat"], "position": "pre" },
+      "examples": [{ "de": "[Laut] einer Umfrage arbeiten 60 Prozent der Studierenden nebenbei.", "en": "According to a survey, 60 per cent of students work alongside their studies." }],
+      "notes": ["Genitive in formal writing (laut des Berichts), dative is common (laut dem Bericht). Before a noun without article it doesn't change: laut Statistik."]
+    },
+    {
+      "id": "zufolge",
+      "lemma": "zufolge",
+      "pos": "prep",
+      "level": "C1",
+      "senses": [{ "en": ["according to"], "hint": "comes after the noun" }],
+      "prep": { "cases": ["Dat"], "position": "post" },
+      "examples": [{ "de": "Einer Studie [zufolge] schlafen Jugendliche zu wenig.", "en": "According to a study, young people don't sleep enough." }]
+    },
+    {
+      "id": "stammen",
+      "lemma": "stammen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to come from", "to originate from", "to date from"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": false,
+        "principal": { "praesens3sg": "stammt", "praeteritum": "stammte", "partizip2": "gestammt", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "{0} etw. stammen", "slots": [{ "prep": "aus", "case": "Dat", "obj": "origin" }], "en": "to come from sth.", "example": "Die Daten stammen [aus] einer Umfrage von 2023." }],
+      "examples": [{ "de": "Die Zahlen [stammen] aus dem Jahr 2022.", "en": "The figures are from 2022." }],
+      "notes": ["Almost only used in the present and Präteritum; the perfect is rare."]
+    },
+    {
+      "id": "veroeffentlichen",
+      "lemma": "veröffentlichen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to publish", "to release"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "ver",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "veröffentlicht", "praeteritum": "veröffentlichte", "partizip2": "veröffentlicht", "aux": "haben" }
+      },
+      "collocations": [{ "de": "eine Studie [veröffentlichen]", "en": "to publish a study", "type": "noun-verb" }],
+      "examples": [{ "de": "Die Studie [wurde] im März [veröffentlicht].", "en": "The study was published in March." }]
+    },
+    {
+      "id": "der-experte",
+      "lemma": "Experte",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["expert"] }],
+      "noun": { "gender": "m", "plural": "Experten", "genitive": "Experten", "declension": "weak-n", "number": "both" },
+      "examples": [{ "de": "Viele [Experten] erwarten einen weiteren Anstieg.", "en": "Many experts expect a further rise." }],
+      "notes": ["n-declension: der Experte, den/dem/des Experten. Female: die Expertin, die Expertinnen."]
+    },
+    {
+      "id": "die-statistik",
+      "lemma": "Statistik",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["statistics", "statistic"] }],
+      "noun": { "gender": "f", "plural": "Statistiken", "genitive": "Statistik", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Die [Statistik] zeigt einen klaren Trend.", "en": "The statistics show a clear trend." }]
+    }
+  ],
+  "text": {
+    "id": "umfragen",
+    "title": "Wie zuverlässig sind Umfragen?",
+    "paragraphs": [
+      "Laut einer aktuellen Umfrage lesen 60 Prozent der Deutschen täglich Nachrichten im Internet. Doch wie entstehen solche Zahlen? Für die Erhebung wurden im Zeitraum von März bis Mai 2.000 Personen online befragt.",
+      "Experten weisen darauf hin, dass man die Quelle und die Methode einer Studie immer prüfen sollte. Wer nur online befragt, erreicht zum Beispiel weniger ältere Menschen. Außerdem beziehen sich die Ergebnisse immer auf einen bestimmten Zeitpunkt.",
+      "Einer anderen Statistik zufolge, die bereits 2020 veröffentlicht wurde, lag der Wert damals nur bei 45 Prozent. Ob die Zahl wirklich gestiegen ist, ergibt sich aber nicht eindeutig aus den Daten, weil die beiden Studien unterschiedliche Methoden verwenden."
+    ],
+    "uses": ["laut", "die-umfrage", "die-erhebung", "der-zeitraum", "befragen", "der-experte", "die-quelle", "die-studie", "sich-beziehen", "das-ergebnis", "der-zeitpunkt", "die-statistik", "zufolge", "veroeffentlichen", "ergeben", "die-daten"],
+    "questions": [
+      { "type": "rfn", "prompt": "Für die aktuelle Umfrage wurden 2.000 Menschen befragt.", "answer": "richtig" },
+      { "type": "rfn", "prompt": "Mit Online-Umfragen erreicht man ältere Menschen besonders gut.", "answer": "falsch" },
+      { "type": "rfn", "prompt": "Die meisten Befragten lesen Nachrichten am Abend.", "answer": "nicht_im_text" },
+      { "type": "mc", "prompt": "Warum kann man die beiden Studien nicht einfach vergleichen?", "options": ["weil sie aus verschiedenen Ländern stammen", "weil sie unterschiedliche Methoden verwenden", "weil die ältere Studie nie veröffentlicht wurde"], "answer": 1 }
+    ]
+  }
+}

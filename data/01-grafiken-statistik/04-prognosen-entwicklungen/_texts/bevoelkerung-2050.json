@@ -1,0 +1,78 @@
+{
+  "$schema": "../../../../app/schema/text.schema.json",
+  "schemaVersion": 1,
+  "id": "bevoelkerung-2050",
+  "title": "Wie viele Menschen werden 2050 in Deutschland leben?",
+  "paragraphs": [
+    "Wie sich die Bevölkerung in Deutschland langfristig entwickeln wird, ist eine der wichtigsten Fragen für Politik und Wirtschaft. Das Statistische Bundesamt veröffentlicht dazu regelmäßig Prognosen, die auf verschiedenen Annahmen beruhen.",
+    "Drei Faktoren beeinflussen die Entwicklung besonders stark: die Geburtenrate, die Lebenserwartung und die Zuwanderung. Bisher wächst die Bevölkerung vor allem durch Zuwanderung, denn seit Jahrzehnten sterben in Deutschland mehr Menschen, als Kinder geboren werden.",
+    "Die Geburtenrate liegt seit vielen Jahren zwischen 1,3 und 1,6 Kindern pro Frau. Damit eine Bevölkerung ohne Zuwanderung konstant bleibt, wären rund 2,1 Kinder nötig. Gleichzeitig steigt die Lebenserwartung kontinuierlich: Ein heute geborenes Mädchen wird im Durchschnitt über 83 Jahre alt.",
+    "Je nach Annahme fallen die Prognosen sehr unterschiedlich aus. Kommen viele Menschen nach Deutschland, wird die Zahl der Einwohner voraussichtlich bis 2050 stabil bleiben oder sogar leicht steigen. Bei geringer Zuwanderung rechnen die Statistiker dagegen mit einem deutlichen Rückgang.",
+    "Sicher ist nur eines: Die Gesellschaft wird älter. Dieser demografische Wandel hat schon heute Folgen, etwa für die Renten und den Arbeitsmarkt. Experten erwarten, dass er sich in Zukunft noch verstärkt."
+  ],
+  "uses": [
+    "langfristig",
+    "sich-entwickeln",
+    "veroeffentlichen",
+    "die-prognose",
+    "die-annahme",
+    "der-faktor",
+    "beeinflussen",
+    "die-entwicklung",
+    "bisher",
+    "wachsen",
+    "unterschiedlich",
+    "voraussichtlich",
+    "stabil",
+    "rechnen",
+    "dagegen",
+    "der-rueckgang",
+    "der-wandel",
+    "die-folge",
+    "der-experte",
+    "erwarten",
+    "die-zukunft",
+    "die-rate",
+    "konstant",
+    "kontinuierlich",
+    "der-durchschnitt",
+    "steigen"
+  ],
+  "questions": [
+    {
+      "type": "rfn",
+      "prompt": "In Deutschland sterben seit Jahrzehnten mehr Menschen, als Kinder geboren werden.",
+      "answer": "richtig"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Alle Prognosen sagen für 2050 einen starken Rückgang der Bevölkerung voraus.",
+      "answer": "falsch"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Die Lebenserwartung ist in Süddeutschland höher als in Norddeutschland.",
+      "answer": "nicht_im_text"
+    },
+    {
+      "type": "mc",
+      "prompt": "Wovon hängt laut Text vor allem ab, ob die Bevölkerung wächst oder schrumpft?",
+      "options": [
+        "von der Zuwanderung",
+        "von der Zahl der Hochschulen",
+        "von den Renten"
+      ],
+      "answer": 0
+    },
+    {
+      "type": "heading",
+      "paragraph": 5,
+      "options": [
+        "Eine alternde Gesellschaft",
+        "Mehr Geburten als Todesfälle",
+        "Wie Prognosen entstehen"
+      ],
+      "answer": 0
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "werte-staende",
+  "name": "Werte und Stände",
+  "words": [
+    {
+      "id": "der-wert",
+      "lemma": "Wert",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["value", "figure"], "hint": "a number in a chart" }, { "en": ["worth", "value"], "hint": "how much sth. is worth" }],
+      "noun": { "gender": "m", "plural": "Werte", "genitive": "Werts", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "einen Wert [erreichen]", "en": "to reach a value", "type": "noun-verb" }],
+      "examples": [{ "de": "Der [Wert] lag 2022 bei 3,4 Prozent.", "en": "The figure was 3.4 per cent in 2022." }]
+    },
+    {
+      "id": "die-zahl",
+      "lemma": "Zahl",
+      "pos": "noun",
+      "level": "A1",
+      "senses": [{ "en": ["number", "figure"] }],
+      "noun": { "gender": "f", "plural": "Zahlen", "genitive": "Zahl", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Die [Zahl] der Arbeitslosen ist gesunken.", "en": "The number of unemployed people has fallen." }]
+    },
+    {
+      "id": "die-anzahl",
+      "lemma": "Anzahl",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["number", "count", "quantity"], "hint": "how many, starts with An-" }],
+      "derivation": { "from": "die-zahl", "type": "other" },
+      "noun": { "gender": "f", "plural": null, "genitive": "Anzahl", "declension": "strong", "number": "singular-only" },
+      "examples": [{ "de": "Die [Anzahl] der Teilnehmer war höher als erwartet.", "en": "The number of participants was higher than expected." }]
+    },
+    {
+      "id": "die-menge",
+      "lemma": "Menge",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [{ "en": ["amount", "quantity", "lot"] }],
+      "noun": { "gender": "f", "plural": "Mengen", "genitive": "Menge", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "eine große [Menge] an Daten", "en": "a large amount of data", "type": "other" }],
+      "examples": [{ "de": "Die [Menge] des Mülls hat sich verringert.", "en": "The amount of rubbish has decreased." }]
+    },
+    {
+      "id": "tragen",
+      "lemma": "tragen",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [{ "en": ["to carry", "to wear", "to bear"] }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "trägt", "praeteritum": "trug", "partizip2": "getragen", "aux": "haben" },
+        "praesens": { "du": "trägst", "er": "trägt" },
+        "konjunktiv2": "trüge",
+        "irregular": ["praesens3sg", "praeteritum", "partizip2"]
+      },
+      "collocations": [{ "de": "die Verantwortung [tragen]", "en": "to bear the responsibility", "type": "noun-verb" }],
+      "examples": [{ "de": "Sie [trägt] die Verantwortung für das Projekt.", "en": "She bears the responsibility for the project." }]
+    },
+    {
+      "id": "betragen",
+      "lemma": "betragen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to amount to", "to be"], "hint": "of a figure: 'the share is 35 %'" }],
+      "derivation": { "from": "tragen", "type": "prefix-verb" },
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "conjugatesLike": "tragen",
+        "principal": { "praesens3sg": "beträgt", "praeteritum": "betrug", "partizip2": "betragen", "aux": "haben" }
+      },
+      "examples": [{ "de": "Der Anteil [beträgt] 35 Prozent.", "en": "The share amounts to 35 per cent." }],
+      "notes": ["Takes the figure directly, with no preposition: Die Kosten betragen 300 Euro."]
+    },
+    {
+      "id": "sich-belaufen",
+      "lemma": "sich belaufen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to amount to", "to total"], "hint": "reflexive, + auf" }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "akk",
+        "transitive": false,
+        "principal": { "praesens3sg": "beläuft sich", "praeteritum": "belief sich", "partizip2": "belaufen", "aux": "haben" },
+        "irregular": ["praesens3sg", "praeteritum", "partizip2"]
+      },
+      "rektion": [{ "pattern": "sich {0} etw. belaufen", "slots": [{ "prep": "auf", "case": "Akk", "obj": "amount" }], "en": "to amount to sth.", "example": "Die Kosten belaufen sich [auf] drei Millionen Euro." }],
+      "synonyms": [{ "id": "betragen", "contrast": "sich belaufen needs sich + auf; betragen takes the figure directly", "example": "Die Kosten [belaufen] sich auf drei Millionen Euro." }],
+      "examples": [{ "de": "Die Kosten [belaufen] sich auf drei Millionen Euro.", "en": "The costs amount to three million euros." }]
+    },
+    {
+      "id": "liegen",
+      "lemma": "liegen",
+      "pos": "verb",
+      "level": "A1",
+      "senses": [{ "en": ["to be", "to stand at"], "hint": "of a figure: bei + value", "domain": "statistics" }, { "en": ["to lie", "to be located"] }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": false,
+        "principal": { "praesens3sg": "liegt", "praeteritum": "lag", "partizip2": "gelegen", "aux": "haben" },
+        "konjunktiv2": "läge",
+        "irregular": ["praeteritum", "partizip2"]
+      },
+      "rektion": [{ "pattern": "{0} etw. liegen", "slots": [{ "prep": "bei", "case": "Dat", "obj": "value" }], "en": "to be at / stand at sth.", "example": "Die Quote liegt [bei] zwölf Prozent." }],
+      "examples": [{ "de": "Die Arbeitslosenquote [liegt] bei zwölf Prozent.", "en": "The unemployment rate stands at twelve per cent." }],
+      "notes": ["In southern Germany and Austria the perfect is often formed with sein (ist gelegen)."]
+    },
+    {
+      "id": "erreichen",
+      "lemma": "erreichen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [{ "en": ["to reach", "to achieve"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "erreicht", "praeteritum": "erreichte", "partizip2": "erreicht", "aux": "haben" }
+      },
+      "examples": [{ "de": "Die Arbeitslosigkeit [erreichte] 2005 ihren Höchststand.", "en": "Unemployment reached its peak in 2005." }]
+    },
+    {
+      "id": "verzeichnen",
+      "lemma": "verzeichnen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to record", "to register", "to see"], "hint": "a rise, a loss…" }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "verzeichnet", "praeteritum": "verzeichnete", "partizip2": "verzeichnet", "aux": "haben" }
+      },
+      "collocations": [{ "de": "ein Plus [verzeichnen]", "en": "to record an increase", "type": "noun-verb" }],
+      "examples": [{ "de": "Die Branche [verzeichnete] ein Plus von acht Prozent.", "en": "The industry recorded an increase of eight per cent." }]
+    },
+    {
+      "id": "der-stand",
+      "lemma": "Stand",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["level", "state", "status"] }, { "en": ["stall", "stand"], "hint": "at a market" }],
+      "noun": { "gender": "m", "plural": "Stände", "genitive": "Stands", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "nach dem aktuellen [Stand]", "en": "as things currently stand", "type": "other" }],
+      "examples": [{ "de": "Nach dem aktuellen [Stand] gibt es 300 Teilnehmer.", "en": "As things stand, there are 300 participants." }]
+    },
+    {
+      "id": "der-rekord",
+      "lemma": "Rekord",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["record"], "hint": "best/highest ever" }],
+      "noun": { "gender": "m", "plural": "Rekorde", "genitive": "Rekords", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "einen neuen [Rekord] aufstellen", "en": "to set a new record", "type": "noun-verb" }],
+      "examples": [{ "de": "Die Exporte erreichten einen neuen [Rekord].", "en": "Exports reached a new record." }]
+    },
+    {
+      "id": "uebersteigen",
+      "lemma": "übersteigen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to exceed", "to be greater than"] }],
+      "derivation": { "from": "steigen", "type": "prefix-verb" },
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "über",
+        "reflexive": "none",
+        "transitive": true,
+        "conjugatesLike": "steigen",
+        "principal": { "praesens3sg": "übersteigt", "praeteritum": "überstieg", "partizip2": "überstiegen", "aux": "haben" }
+      },
+      "examples": [{ "de": "Die Nachfrage [übersteigt] das Angebot.", "en": "Demand exceeds supply." }],
+      "notes": ["Inseparable and transitive, so the perfect uses haben (hat überstiegen), unlike steigen."]
+    },
+    {
+      "id": "ueberschreiten",
+      "lemma": "überschreiten",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to exceed", "to go above", "to cross"], "hint": "a limit or threshold" }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "über",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "überschreitet", "praeteritum": "überschritt", "partizip2": "überschritten", "aux": "haben" },
+        "irregular": ["praeteritum", "partizip2"]
+      },
+      "antonyms": ["unterschreiten"],
+      "examples": [{ "de": "Die Temperatur [hat] den Grenzwert [überschritten].", "en": "The temperature has exceeded the limit." }]
+    },
+    {
+      "id": "unterschreiten",
+      "lemma": "unterschreiten",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to fall below", "to drop below"], "hint": "a limit or threshold" }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "unter",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "unterschreitet", "praeteritum": "unterschritt", "partizip2": "unterschritten", "aux": "haben" },
+        "irregular": ["praeteritum", "partizip2"]
+      },
+      "antonyms": ["ueberschreiten"],
+      "examples": [{ "de": "Die Zahl [hat] erstmals die Marke von 100.000 [unterschritten].", "en": "The number fell below the 100,000 mark for the first time." }]
+    },
+    {
+      "id": "fallen",
+      "lemma": "fallen",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [{ "en": ["to fall", "to drop"] }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": false,
+        "principal": { "praesens3sg": "fällt", "praeteritum": "fiel", "partizip2": "gefallen", "aux": "sein" },
+        "praesens": { "du": "fällst", "er": "fällt" },
+        "konjunktiv2": "fiele",
+        "irregular": ["praesens3sg", "praeteritum", "aux"]
+      },
+      "rektion": [
+        { "pattern": "{0} etw. fallen", "slots": [{ "prep": "auf", "case": "Akk", "obj": "level" }], "en": "to fall to sth.", "example": "Der Preis fiel [auf] 60 Dollar." },
+        { "pattern": "{0} etw. fallen", "slots": [{ "prep": "um", "case": "Akk", "obj": "amount" }], "en": "to fall by sth.", "example": "Der Kurs ist [um] zehn Prozent gefallen." }
+      ],
+      "examples": [{ "de": "Der Ölpreis [ist] auf 60 Dollar [gefallen].", "en": "The oil price has fallen to 60 dollars." }]
+    },
+    {
+      "id": "insgesamt",
+      "lemma": "insgesamt",
+      "pos": "adv",
+      "level": "B1",
+      "senses": [{ "en": ["in total", "altogether", "overall"] }],
+      "examples": [{ "de": "[Insgesamt] nahmen 2.000 Personen an der Umfrage teil.", "en": "In total, 2,000 people took part in the survey." }]
+    },
+    {
+      "id": "rund",
+      "lemma": "rund",
+      "pos": "adv",
+      "level": "B1",
+      "senses": [{ "en": ["around", "roughly", "approximately", "about"], "hint": "before a number" }, { "en": ["round"], "hint": "shape" }],
+      "examples": [{ "de": "Im Jahr 2000 waren es [rund] 175.000 Studierende.", "en": "In 2000 there were around 175,000 students." }]
+    },
+    {
+      "id": "knapp",
+      "lemma": "knapp",
+      "pos": "adv",
+      "level": "B2",
+      "senses": [{ "en": ["just under", "almost", "barely"], "hint": "before a number" }, { "en": ["scarce", "tight"], "hint": "of resources, time" }],
+      "examples": [{ "de": "[Knapp] die Hälfte der Befragten stimmte zu.", "en": "Just under half of the respondents agreed." }],
+      "notes": ["knapp 50 % = slightly less than 50 %; gut 50 % = slightly more."]
+    },
+    {
+      "id": "die-hoehe",
+      "lemma": "Höhe",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["level", "amount", "size"], "hint": "of costs, figures" }, { "en": ["height", "altitude"] }],
+      "noun": { "gender": "f", "plural": "Höhen", "genitive": "Höhe", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "Kosten in [Höhe] von drei Millionen Euro", "en": "costs amounting to three million euros", "type": "other" }],
+      "examples": [{ "de": "Die [Höhe] der Kosten überraschte viele.", "en": "The level of the costs surprised many people." }]
+    }
+  ],
+  "text": {
+    "id": "wasserverbrauch",
+    "title": "Wie viel Wasser brauchen wir?",
+    "paragraphs": [
+      "Der durchschnittliche Wasserverbrauch pro Person liegt in Deutschland heute bei rund 125 Litern am Tag. 1990 betrug der Wert noch knapp 150 Liter. Insgesamt ist die Menge also deutlich gesunken, vor allem wegen sparsamer Waschmaschinen und Toiletten.",
+      "Im Sommer kann der Verbrauch aber stark steigen. Im heißen Sommer 2022 überstieg die Nachfrage in einigen Gemeinden sogar das Angebot. Dort wurde ein neuer Rekord verzeichnet, und die Wasserwerke baten die Menschen, keine Gärten mehr zu bewässern.",
+      "Viele Leitungen sind alt und müssen erneuert werden. Die Kosten dafür belaufen sich nach dem aktuellen Stand auf mehrere Milliarden Euro."
+    ],
+    "uses": ["liegen", "rund", "betragen", "der-wert", "knapp", "insgesamt", "die-menge", "uebersteigen", "der-rekord", "verzeichnen", "sich-belaufen", "der-stand"],
+    "questions": [
+      { "type": "rfn", "prompt": "Heute verbraucht eine Person in Deutschland weniger Wasser als 1990.", "answer": "richtig" },
+      { "type": "rfn", "prompt": "Im Sommer 2022 gab es in allen Gemeinden zu wenig Wasser.", "answer": "falsch" },
+      { "type": "rfn", "prompt": "Wasser ist in Deutschland teurer als in den Nachbarländern.", "answer": "nicht_im_text" },
+      { "type": "mc", "prompt": "Wie hoch war der Verbrauch pro Person im Jahr 1990?", "options": ["etwas mehr als 150 Liter", "etwas weniger als 150 Liter", "genau 125 Liter"], "answer": 1 }
+    ]
+  }
+}

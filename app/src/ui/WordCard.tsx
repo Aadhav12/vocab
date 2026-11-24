@@ -101,7 +101,7 @@ export function WordCard({ w, compact = false }: { w: Word; compact?: boolean })
         {w.collocations?.length ? row('COLLOCATIONS', <div>{w.collocations.map((c, i) => <div key={i}><Gapped text={c.de} cls="serif" /> <span className="muted small">— {c.en}</span></div>)}</div>) : null}
         {syns.size > 0 && row('SYNONYMS', <div>{[...syns.values()].map(({ w: o, contrast }) => <div key={o.id}><span className="tag cyan" style={{ cursor: 'pointer' }} onClick={() => open(o.id)}>{o.lemma}</span> <span className="muted small">{contrast}</span></div>)}</div>)}
         {ants.length > 0 && row('OPPOSITES', <span className="row" style={{ gap: 6 }}>{ants.map((o) => <span key={o.id} className="tag" style={{ cursor: 'pointer' }} onClick={() => open(o.id)}>{o.noun ? articleFor(o.noun.gender, 'Nom') + ' ' : ''}{o.lemma}</span>)}</span>)}
-        {w.notes && row('NOTES', <span>{w.notes}</span>)}
+        {w.notes && row('NOTES', <div>{[w.notes].flat().map((n, i) => <div key={i}>{n}</div>)}</div>)}
         <Tree w={w} idx={idx} p={p} />
       </div>
     </div>

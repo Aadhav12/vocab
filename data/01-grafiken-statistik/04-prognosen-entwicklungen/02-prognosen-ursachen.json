@@ -1,0 +1,307 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "prognosen-ursachen",
+  "name": "Prognosen und Ursachen",
+  "words": [
+    {
+      "id": "die-prognose",
+      "lemma": "Prognose",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["forecast", "prediction", "prognosis"] }],
+      "noun": { "gender": "f", "plural": "Prognosen", "genitive": "Prognose", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "eine Prognose [aufstellen]", "en": "to make a forecast", "type": "noun-verb" }],
+      "examples": [{ "de": "Die [Prognose] für das Jahr 2030 ist eher pessimistisch.", "en": "The forecast for 2030 is rather pessimistic." }]
+    },
+    {
+      "id": "prognostizieren",
+      "lemma": "prognostizieren",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to forecast", "to predict"] }],
+      "derivation": { "from": "die-prognose", "type": "other" },
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "prognostiziert", "praeteritum": "prognostizierte", "partizip2": "prognostiziert", "aux": "haben" }
+      },
+      "examples": [{ "de": "Forscher [prognostizieren] einen weiteren Anstieg der Temperaturen.", "en": "Researchers forecast a further rise in temperatures." }]
+    },
+    {
+      "id": "voraussichtlich",
+      "lemma": "voraussichtlich",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [{ "en": ["expected", "probably", "likely", "expected to"] }],
+      "adj": { "noComparison": true, "use": "both" },
+      "examples": [{ "de": "Die Bauarbeiten dauern [voraussichtlich] bis 2027.", "en": "The construction work is expected to last until 2027." }]
+    },
+    {
+      "id": "erwarten",
+      "lemma": "erwarten",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [{ "en": ["to expect", "to anticipate"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "er",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "erwartet", "praeteritum": "erwartete", "partizip2": "erwartet", "aux": "haben" }
+      },
+      "examples": [{ "de": "Experten [erwarten] einen weiteren Anstieg der Mieten.", "en": "Experts expect rents to rise further." }]
+    },
+    {
+      "id": "die-erwartung",
+      "lemma": "Erwartung",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["expectation"] }],
+      "derivation": { "from": "erwarten", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": "Erwartungen", "genitive": "Erwartung", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "die Erwartungen [übertreffen]", "en": "to exceed expectations", "type": "noun-verb" }, { "de": "entgegen allen [Erwartungen]", "en": "contrary to all expectations", "type": "other" }],
+      "examples": [{ "de": "Das Ergebnis lag deutlich unter den [Erwartungen].", "en": "The result was well below expectations." }]
+    },
+    {
+      "id": "vermuten",
+      "lemma": "vermuten",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [{ "en": ["to suspect", "to assume", "to presume", "to guess"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "ver",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "vermutet", "praeteritum": "vermutete", "partizip2": "vermutet", "aux": "haben" }
+      },
+      "examples": [{ "de": "Die Forscher [vermuten], dass das Wetter eine Rolle spielt.", "en": "The researchers suspect that the weather plays a role." }]
+    },
+    {
+      "id": "die-vermutung",
+      "lemma": "Vermutung",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["assumption", "supposition", "suspicion", "guess"] }],
+      "derivation": { "from": "vermuten", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": "Vermutungen", "genitive": "Vermutung", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "die [Vermutung] liegt nahe, dass …", "en": "it seems likely that …", "type": "other" }],
+      "examples": [{ "de": "Die [Vermutung] wurde durch die Studie bestätigt.", "en": "The assumption was confirmed by the study." }]
+    },
+    {
+      "id": "annehmen",
+      "lemma": "annehmen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [{ "en": ["to assume", "to suppose"] }, { "en": ["to accept", "to take"], "hint": "an offer" }],
+      "derivation": { "from": "nehmen", "type": "prefix-verb" },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "an",
+        "reflexive": "none",
+        "transitive": true,
+        "conjugatesLike": "nehmen",
+        "principal": { "praesens3sg": "nimmt an", "praeteritum": "nahm an", "partizip2": "angenommen", "aux": "haben" }
+      },
+      "synonyms": [{ "id": "vermuten", "contrast": "annehmen is separable (nimmt … an); vermuten is not", "example": "Man [nimmt] an, dass die Zahl weiter steigt." }],
+      "examples": [{ "de": "Man [nimmt] [an], dass die Zahl weiter steigt.", "en": "It is assumed that the number will continue to rise." }]
+    },
+    {
+      "id": "die-annahme",
+      "lemma": "Annahme",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["assumption"] }, { "en": ["acceptance"] }],
+      "derivation": { "from": "annehmen", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": "Annahmen", "genitive": "Annahme", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "von der [Annahme] ausgehen, dass …", "en": "to start from the assumption that …", "type": "other" }],
+      "examples": [{ "de": "Die Prognose beruht auf der [Annahme], dass die Preise stabil bleiben.", "en": "The forecast is based on the assumption that prices stay stable." }]
+    },
+    {
+      "id": "rechnen",
+      "lemma": "rechnen",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [{ "en": ["to expect", "to reckon with"], "hint": "+ mit" }, { "en": ["to calculate", "to count"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": false,
+        "principal": { "praesens3sg": "rechnet", "praeteritum": "rechnete", "partizip2": "gerechnet", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "{0} etw. rechnen", "slots": [{ "prep": "mit", "case": "Dat", "obj": "thing" }], "en": "to expect sth.", "example": "Die Regierung rechnet [mit] einem Wachstum von zwei Prozent." }],
+      "examples": [{ "de": "Die Regierung [rechnet] mit einem Wachstum von zwei Prozent.", "en": "The government expects growth of two per cent." }]
+    },
+    {
+      "id": "die-ursache",
+      "lemma": "Ursache",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["cause", "reason"] }],
+      "noun": { "gender": "f", "plural": "Ursachen", "genitive": "Ursache", "declension": "strong", "number": "both" },
+      "rektion": [{ "pattern": "die Ursache {0} etw.", "slots": [{ "prep": "für", "case": "Akk", "obj": "thing" }], "en": "the cause of sth.", "example": "Eine Ursache [für] den Rückgang ist der Fachkräftemangel." }],
+      "antonyms": ["die-folge"],
+      "examples": [{ "de": "Die wichtigste [Ursache] für den Anstieg sind höhere Energiepreise.", "en": "The main cause of the rise is higher energy prices." }]
+    },
+    {
+      "id": "verursachen",
+      "lemma": "verursachen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to cause"] }],
+      "derivation": { "from": "die-ursache", "type": "other" },
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "ver",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "verursacht", "praeteritum": "verursachte", "partizip2": "verursacht", "aux": "haben" }
+      },
+      "examples": [{ "de": "Der Verkehr [verursacht] einen großen Teil der Emissionen.", "en": "Traffic causes a large part of emissions." }]
+    },
+    {
+      "id": "fuehren",
+      "lemma": "führen",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [{ "en": ["to lead to", "to result in"], "hint": "+ zu" }, { "en": ["to lead", "to run", "to guide"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "führt", "praeteritum": "führte", "partizip2": "geführt", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "{0} etw. führen", "slots": [{ "prep": "zu", "case": "Dat", "obj": "result" }], "en": "to lead to sth.", "example": "Der Streik führte [zu] langen Verspätungen." }],
+      "synonyms": [{ "id": "verursachen", "contrast": "führen needs zu + Dativ; verursachen takes a direct object", "example": "Der Streik [führte] zu langen Verspätungen." }],
+      "collocations": [{ "de": "ein Gespräch [führen]", "en": "to have a conversation", "type": "funktionsverbgefuege" }],
+      "examples": [{ "de": "Der Streik [führte] zu langen Verspätungen.", "en": "The strike led to long delays." }]
+    },
+    {
+      "id": "zurueckfuehren",
+      "lemma": "zurückführen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to attribute to", "to put down to", "to trace back to"], "hint": "+ auf" }],
+      "derivation": { "from": "fuehren", "type": "prefix-verb" },
+      "verb": {
+        "class": "weak",
+        "separable": true,
+        "prefix": "zurück",
+        "reflexive": "none",
+        "transitive": true,
+        "conjugatesLike": "fuehren",
+        "principal": { "praesens3sg": "führt zurück", "praeteritum": "führte zurück", "partizip2": "zurückgeführt", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "etw. {0} etw. zurückführen", "slots": [{ "prep": "auf", "case": "Akk", "obj": "cause" }], "en": "to attribute sth. to sth.", "example": "Man führt den Rückgang [auf] die Krise zurück." }],
+      "examples": [{ "de": "Fachleute [führen] den Rückgang vor allem auf die Krise [zurück].", "en": "Experts attribute the decline mainly to the crisis." }],
+      "notes": ["Common passive-like form in academic texts: Der Rückgang ist auf die Krise zurückzuführen."]
+    },
+    {
+      "id": "die-folge",
+      "lemma": "Folge",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["consequence", "result", "effect"] }, { "en": ["episode"], "hint": "of a series" }],
+      "noun": { "gender": "f", "plural": "Folgen", "genitive": "Folge", "declension": "strong", "number": "both" },
+      "rektion": [{ "pattern": "die Folgen {0} etw.", "slots": [{ "prep": "für", "case": "Akk", "obj": "affected" }], "en": "the consequences for sth.", "example": "Das hat Folgen [für] die Umwelt." }],
+      "antonyms": ["die-ursache"],
+      "collocations": [{ "de": "[Folgen] haben", "en": "to have consequences", "type": "noun-verb" }, { "de": "zur [Folge] haben", "en": "to result in", "type": "funktionsverbgefuege" }],
+      "examples": [{ "de": "Die [Folgen] des Klimawandels sind deutlich sichtbar.", "en": "The consequences of climate change are clearly visible." }]
+    },
+    {
+      "id": "beitragen",
+      "lemma": "beitragen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to contribute"] }],
+      "derivation": { "from": "tragen", "type": "prefix-verb" },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "bei",
+        "reflexive": "none",
+        "transitive": false,
+        "conjugatesLike": "tragen",
+        "principal": { "praesens3sg": "trägt bei", "praeteritum": "trug bei", "partizip2": "beigetragen", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "{0} etw. beitragen", "slots": [{ "prep": "zu", "case": "Dat", "obj": "result" }], "en": "to contribute to sth.", "example": "Die hohen Preise haben [zu] dem Rückgang beigetragen." }],
+      "examples": [{ "de": "Die hohen Benzinpreise [haben] zum Rückgang des Verkehrs [beigetragen].", "en": "High petrol prices have contributed to the decline in traffic." }]
+    },
+    {
+      "id": "der-beitrag",
+      "lemma": "Beitrag",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["contribution"] }, { "en": ["article", "post"], "hint": "in a newspaper or online" }, { "en": ["fee", "subscription"] }],
+      "derivation": { "from": "beitragen", "type": "nominalisation" },
+      "noun": { "gender": "m", "plural": "Beiträge", "genitive": "Beitrags", "declension": "strong", "number": "both" },
+      "rektion": [{ "pattern": "der Beitrag {0} etw.", "slots": [{ "prep": "zu", "case": "Dat", "obj": "thing" }], "en": "the contribution to sth.", "example": "Das ist ein wichtiger Beitrag [zu] mehr Klimaschutz." }],
+      "collocations": [{ "de": "einen [Beitrag] leisten", "en": "to make a contribution", "type": "funktionsverbgefuege" }],
+      "examples": [{ "de": "Jeder kann einen [Beitrag] zum Klimaschutz leisten.", "en": "Everyone can make a contribution to protecting the climate." }]
+    },
+    {
+      "id": "der-faktor",
+      "lemma": "Faktor",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["factor"] }],
+      "noun": { "gender": "m", "plural": "Faktoren", "genitive": "Faktors", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Das Wetter ist ein wichtiger [Faktor] für den Tourismus.", "en": "The weather is an important factor for tourism." }],
+      "notes": ["Plural shifts the stress: der Faktor, die Faktoren."]
+    },
+    {
+      "id": "der-einfluss",
+      "lemma": "Einfluss",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["influence", "effect", "impact"] }],
+      "noun": { "gender": "m", "plural": "Einflüsse", "genitive": "Einflusses", "declension": "strong", "number": "both" },
+      "rektion": [{ "pattern": "der Einfluss {0} etw.", "slots": [{ "prep": "auf", "case": "Akk", "obj": "thing" }], "en": "the influence on sth.", "example": "Das Wetter hat großen Einfluss [auf] den Verkehr." }],
+      "collocations": [{ "de": "[Einfluss] nehmen auf", "en": "to exert influence on", "type": "funktionsverbgefuege" }],
+      "examples": [{ "de": "Das Einkommen hat großen [Einfluss] auf die Wohnsituation.", "en": "Income has a big influence on people's housing situation." }]
+    },
+    {
+      "id": "beeinflussen",
+      "lemma": "beeinflussen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to influence", "to affect"] }],
+      "derivation": { "from": "der-einfluss", "type": "other" },
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "be",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": { "praesens3sg": "beeinflusst", "praeteritum": "beeinflusste", "partizip2": "beeinflusst", "aux": "haben" }
+      },
+      "synonyms": [{ "id": "beitragen", "contrast": "beeinflussen takes a direct object; beitragen needs zu (trägt zu etw. bei)", "example": "Das Einkommen [beeinflusst] die Wahl des Wohnorts." }],
+      "examples": [{ "de": "Das Einkommen [beeinflusst] die Wahl des Wohnorts.", "en": "Income influences the choice of where to live." }]
+    }
+  ],
+  "text": {
+    "id": "mehr-bahnfahrer",
+    "title": "Warum fahren mehr Menschen Bahn?",
+    "paragraphs": [
+      "Seit 2022 nutzen deutlich mehr Menschen in Deutschland Busse und Bahnen. Fachleute führen diesen Anstieg vor allem auf das günstige Deutschlandticket zurück.",
+      "Doch es gibt auch andere Ursachen. Die hohen Benzinpreise haben ebenfalls dazu beigetragen, dass viele Menschen das Auto stehen lassen. Ein weiterer Faktor ist der Klimaschutz: Viele Fahrgäste möchten weniger CO₂-Emissionen verursachen.",
+      "Für die kommenden Jahre prognostizieren Experten weiter steigende Fahrgastzahlen. Das wird voraussichtlich aber auch Folgen haben: Man rechnet mit volleren Zügen und mehr Verspätungen, wenn nicht mehr Geld in das Schienennetz fließt."
+    ],
+    "uses": ["zurueckfuehren", "die-ursache", "beitragen", "der-faktor", "verursachen", "prognostizieren", "voraussichtlich", "die-folge", "rechnen", "der-experte"],
+    "questions": [
+      { "type": "rfn", "prompt": "Laut Fachleuten ist das Deutschlandticket der wichtigste Grund für den Anstieg.", "answer": "richtig" },
+      { "type": "rfn", "prompt": "Die Benzinpreise spielen für diese Entwicklung keine Rolle.", "answer": "falsch" },
+      { "type": "rfn", "prompt": "Das Deutschlandticket kostet 49 Euro im Monat.", "answer": "nicht_im_text" },
+      { "type": "mc", "prompt": "Welche Folge erwarten Experten, wenn nicht mehr investiert wird?", "options": ["weniger Fahrgäste", "vollere Züge und mehr Verspätungen", "niedrigere Ticketpreise"], "answer": 1 }
+    ]
+  }
+}

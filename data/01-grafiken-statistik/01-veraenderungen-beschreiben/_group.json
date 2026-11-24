@@ -2,5 +2,6 @@
   "$schema": "../../../app/schema/group.schema.json",
   "schemaVersion": 1,
   "id": "veraenderungen-beschreiben",
-  "name": "Veränderungen beschreiben"
+  "name": "Veränderungen beschreiben",
+  "description": "Describing changes: rising, falling, fluctuating, reaching values"
 }

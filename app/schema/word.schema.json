@@ -33,6 +33,7 @@
     },
     "level": {
       "enum": [
+        "A1",
         "A2",
         "B1",
         "B2",
@@ -141,10 +142,8 @@
                   ]
                 },
                 "obj": {
-                  "enum": [
-                    "person",
-                    "thing"
-                  ]
+                  "type": "string",
+                  "description": "semantic role of the slot, e.g. person, thing, amount, level"
                 }
               }
             }
@@ -240,7 +239,17 @@
       }
     },
     "notes": {
-      "type": "string"
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
     },
     "aliases": {
       "type": "array",
@@ -267,8 +276,10 @@
           "enum": [
             "m",
             "f",
-            "n"
-          ]
+            "n",
+            null
+          ],
+          "description": "null only for plural-only nouns (die Daten)"
         },
         "plural": {
           "type": [
@@ -429,7 +440,20 @@
           ]
         },
         "irregular": {
-          "type": "boolean"
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "komparativ",
+                  "superlativ"
+                ]
+              }
+            }
+          ]
         }
       }
     },

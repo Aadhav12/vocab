@@ -6,7 +6,7 @@ const hasGap = (s: string) => /\[[^\]]+\]/.test(s);
 export function checkWordLocal(w: Word): string[] {
   const errs: string[] = [];
   const at = `word “${w.id}”`;
-  if (w.pos === 'noun' && !w.noun?.gender) errs.push(`${at}: noun without gender`);
+  if (w.pos === 'noun' && !w.noun?.gender && w.noun?.number !== 'plural-only') errs.push(`${at}: noun without gender`);
   if (w.pos === 'noun' && w.noun && w.noun.plural === undefined) errs.push(`${at}: noun.plural missing (use null if there is none)`);
   if (w.pos === 'verb') {
     const v = w.verb;

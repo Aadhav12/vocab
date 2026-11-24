@@ -1,0 +1,109 @@
+{
+  "$schema": "../../../app/schema/text.schema.json",
+  "schemaVersion": 1,
+  "id": "zahlen-kritisch-lesen",
+  "title": "Zahlen, die die Welt erklären?",
+  "paragraphs": [
+    "Statistiken sind aus unserem Alltag nicht mehr wegzudenken. Ob es um Mieten, Klimadaten oder Wahlergebnisse geht – fast jede Nachricht enthält heute eine Zahl, eine Grafik oder eine Prognose. Einer Untersuchung zufolge enthält inzwischen mehr als die Hälfte aller Zeitungsartikel mindestens eine statistische Angabe.",
+    "Für Leserinnen und Leser ist das zunächst ein Vorteil. Grafiken und Tabellen können in wenigen Sekunden zeigen, wofür ein Text mehrere Absätze bräuchte. Wie stark sich zum Beispiel die Mieten in einer Stadt verändert haben, lässt sich in einem Liniendiagramm sofort ablesen.",
+    "Zahlen wirken objektiv. Sie scheinen keine Meinung zu haben, sondern nur zu zeigen, wie die Dinge sind. Doch Fachleute weisen darauf hin, dass jede Statistik das Ergebnis vieler Entscheidungen ist: Wer wird befragt? In welchem Zeitraum werden die Daten erhoben? Und wie werden die Ergebnisse dargestellt?",
+    "Ein Beispiel zeigt, wie stark diese Entscheidungen das Bild beeinflussen können. Angenommen, die Zahl der Fahrradunfälle in einer Stadt steigt innerhalb von fünf Jahren von 200 auf 260. Das ist ein Anstieg um 30 Prozent – eine Zahl, die dramatisch klingt. Im selben Zeitraum hat sich aber die Zahl der Menschen, die mit dem Rad fahren, verdoppelt. Im Verhältnis zur Zahl der Radfahrer ist das Risiko also deutlich gesunken. Je nachdem, welche Zahl man nennt, entsteht ein ganz anderer Eindruck.",
+    "Auch die Wahl des Zeitraums kann das Ergebnis verändern. Wer die Entwicklung der Arbeitslosigkeit nur von 2005 bis 2019 betrachtet, sieht einen kontinuierlichen Rückgang. Wer dagegen nur das Jahr 2020 abbildet, sieht einen sprunghaften Anstieg. Beide Darstellungen sind korrekt – und erzählen doch völlig unterschiedliche Geschichten.",
+    "Ähnliches gilt für Prognosen. Sie beruhen immer auf Annahmen über die Zukunft, die sich als falsch erweisen können. Viele Vorhersagen aus den 1990er-Jahren rechneten zum Beispiel mit einem drastischen Rückgang der Bevölkerung in Deutschland. Tatsächlich ist die Zahl der Einwohner seitdem leicht gewachsen, vor allem wegen der Zuwanderung. Kaum jemand konnte damals vorhersehen, wie viele Menschen in den folgenden Jahrzehnten nach Deutschland kommen würden.",
+    "Bedeutet das, dass man Statistiken grundsätzlich misstrauen sollte? Die meisten Experten verneinen das. Ohne verlässliche Daten wäre es kaum möglich, Probleme zu erkennen oder die Folgen politischer Entscheidungen zu bewerten. Entscheidend sei vielmehr, Zahlen kritisch zu lesen: Man sollte nach der Quelle fragen, prüfen, worauf sich ein Prozentsatz bezieht, und mehrere Werte miteinander vergleichen.",
+    "Schulen und Hochschulen reagieren zunehmend auf diese Entwicklung. An vielen Universitäten gibt es mittlerweile Kurse, in denen Studierende aller Fächer lernen, Grafiken zu analysieren und typische Fehler zu erkennen. Langfristig, so die Hoffnung, trägt das dazu bei, dass Zahlen wieder das leisten, wofür sie gedacht sind: die Welt ein bisschen verständlicher zu machen."
+  ],
+  "uses": [
+    "die-statistik",
+    "die-grafik",
+    "die-prognose",
+    "zufolge",
+    "die-angabe",
+    "das-ergebnis",
+    "befragen",
+    "der-zeitraum",
+    "die-daten",
+    "erheben",
+    "darstellen",
+    "beeinflussen",
+    "annehmen",
+    "der-anstieg",
+    "sich-verdoppeln",
+    "sinken",
+    "die-annahme",
+    "die-zukunft",
+    "rechnen",
+    "drastisch",
+    "der-rueckgang",
+    "seitdem",
+    "wachsen",
+    "der-experte",
+    "die-folge",
+    "die-quelle",
+    "der-prozentsatz",
+    "sich-beziehen",
+    "der-wert",
+    "vergleichen",
+    "zunehmend",
+    "die-entwicklung",
+    "mittlerweile",
+    "langfristig",
+    "beitragen",
+    "die-tabelle",
+    "sich-veraendern",
+    "das-liniendiagramm",
+    "ablesen",
+    "kontinuierlich",
+    "dagegen",
+    "abbilden",
+    "sprunghaft",
+    "die-darstellung"
+  ],
+  "questions": [
+    {
+      "type": "rfn",
+      "prompt": "Laut einer Untersuchung enthält mehr als die Hälfte aller Zeitungsartikel statistische Angaben.",
+      "answer": "richtig"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Im Beispiel ist das Unfallrisiko für Radfahrer gestiegen.",
+      "answer": "falsch"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Die meisten Fehler in Grafiken entstehen absichtlich.",
+      "answer": "nicht_im_text"
+    },
+    {
+      "type": "mc",
+      "prompt": "Was zeigt das Beispiel mit den Fahrradunfällen?",
+      "options": [
+        "Dass Statistiken grundsätzlich falsch sind.",
+        "Dass dieselbe Situation je nach gewählter Zahl ganz unterschiedlich wirken kann.",
+        "Dass Radfahren in Städten gefährlicher geworden ist."
+      ],
+      "answer": 1
+    },
+    {
+      "type": "mc",
+      "prompt": "Wie stehen die meisten Experten zu Statistiken?",
+      "options": [
+        "Man sollte ihnen grundsätzlich nicht vertrauen.",
+        "Man braucht sie, sollte sie aber kritisch lesen.",
+        "Nur Fachleute sollten Statistiken lesen."
+      ],
+      "answer": 1
+    },
+    {
+      "type": "heading",
+      "paragraph": 6,
+      "options": [
+        "Wenn Vorhersagen danebenliegen",
+        "Ein Kurs für alle Studierenden",
+        "Warum Zahlen objektiv wirken"
+      ],
+      "answer": 0
+    }
+  ]
+}

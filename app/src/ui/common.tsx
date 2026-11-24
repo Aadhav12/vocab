@@ -19,9 +19,9 @@ export const useOpenWord = () => useContext(WordOpenCtx);
 
 // ---------- small bits ----------
 export const ART: Record<Gender, string> = { m: 'der', f: 'die', n: 'das' };
-export const artClass = (g?: Gender) => (g ? `art-${g}` : '');
+export const artClass = (g?: Gender | null) => (g ? `art-${g}` : 'art-f');
 export function Art({ w }: { w: Word }) {
-  return w.noun ? <><span className={artClass(w.noun.gender)}>{ART[w.noun.gender]}</span>{' '}</> : null;
+  return w.noun ? <><span className={artClass(w.noun.gender)}>{ART[w.noun.gender ?? 'f']}</span>{' '}</> : null;
 }
 export const fmtSec = (ms: number | null | undefined) => (typeof ms === 'number' ? `${(ms / 1000).toFixed(2)} s` : '—');
 export const fmtDur = (ms: number) => { const s = Math.round(ms / 1000); return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };

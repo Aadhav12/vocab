@@ -6,14 +6,14 @@ export type Case = 'Nom' | 'Akk' | 'Dat' | 'Gen';
 
 export interface Sense { en: string[]; hint?: string; domain?: string; register?: string }
 export interface Derivation { from: string; type: 'prefix-verb' | 'nominalisation' | 'agent' | 'adjective' | 'adverb' | 'compound' | 'other' }
-export interface RektionSlot { prep: string | null; case: Case; obj?: 'person' | 'thing' }
+export interface RektionSlot { prep: string | null; case: Case; obj?: string }
 export interface Rektion { pattern: string; slots: RektionSlot[]; en: string; example?: string }
 export interface SynonymLink { id: string; contrast: string; example: string }
 export interface Collocation { de: string; en: string; type?: 'noun-verb' | 'funktionsverbgefuege' | 'other' }
 export interface Example { de: string; en: string; sense?: number }
 
 export interface NounBlock {
-  gender: Gender; plural: string | null; genitive?: string;
+  gender: Gender | null; plural: string | null; genitive?: string;
   declension?: 'strong' | 'weak-n' | 'adjectival' | 'mixed';
   number?: 'both' | 'singular-only' | 'plural-only';
   compound?: string[];
@@ -29,7 +29,7 @@ export interface VerbBlock {
   konjunktiv2?: string; imperativ?: { du?: string; ihr?: string };
   irregular?: string[];
 }
-export interface AdjBlock { komparativ?: string; superlativ?: string; noComparison?: boolean; use?: 'both' | 'attributive-only' | 'predicative-only'; irregular?: boolean }
+export interface AdjBlock { komparativ?: string; superlativ?: string; noComparison?: boolean; use?: 'both' | 'attributive-only' | 'predicative-only'; irregular?: boolean | string[] }
 export interface PrepBlock {
   cases: Case[]; contractions?: string[]; position?: 'pre' | 'post';
   fill?: { de: string; en: string }[];
@@ -42,10 +42,10 @@ export interface ConjBlock {
 export interface PhraseBlock { governs?: Case; fixed?: boolean }
 
 export interface Word {
-  id: string; lemma: string; pos: Pos; level?: 'A2' | 'B1' | 'B2' | 'C1';
+  id: string; lemma: string; pos: Pos; level?: 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
   senses: Sense[]; derivation?: Derivation; rektion?: Rektion[];
   synonyms?: SynonymLink[]; antonyms?: string[]; collocations?: Collocation[];
-  examples: Example[]; notes?: string; aliases?: string[]; topics?: string[];
+  examples: Example[]; notes?: string | string[]; aliases?: string[]; topics?: string[];
   noun?: NounBlock; verb?: VerbBlock; adj?: AdjBlock; prep?: PrepBlock; conj?: ConjBlock; phrase?: PhraseBlock;
 }
 

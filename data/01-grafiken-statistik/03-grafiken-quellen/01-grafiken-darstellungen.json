@@ -1,0 +1,835 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "grafiken-darstellungen",
+  "name": "Grafiken und Darstellungen",
+  "words": [
+    {
+      "id": "die-grafik",
+      "lemma": "Grafik",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "graph",
+            "chart",
+            "graphic"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Grafiken",
+        "genitive": "Grafik",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Die [Grafik] zeigt die Entwicklung der Mieten seit 2010.",
+          "en": "The graph shows how rents have developed since 2010."
+        }
+      ]
+    },
+    {
+      "id": "das-diagramm",
+      "lemma": "Diagramm",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "diagram",
+            "chart"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "n",
+        "plural": "Diagramme",
+        "genitive": "Diagramms",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Das [Diagramm] enthält Daten aus zwölf Ländern.",
+          "en": "The chart contains data from twelve countries."
+        }
+      ]
+    },
+    {
+      "id": "das-saeulendiagramm",
+      "lemma": "Säulendiagramm",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "bar chart",
+            "column chart"
+          ],
+          "hint": "vertical bars"
+        }
+      ],
+      "derivation": {
+        "from": "das-diagramm",
+        "type": "compound"
+      },
+      "noun": {
+        "gender": "n",
+        "plural": "Säulendiagramme",
+        "genitive": "Säulendiagramms",
+        "declension": "strong",
+        "number": "both",
+        "compound": [
+          "das-diagramm"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Das [Säulendiagramm] vergleicht die Ausgaben in fünf Jahren.",
+          "en": "The column chart compares spending in five years."
+        }
+      ]
+    },
+    {
+      "id": "das-balkendiagramm",
+      "lemma": "Balkendiagramm",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "bar chart"
+          ],
+          "hint": "horizontal bars"
+        }
+      ],
+      "derivation": {
+        "from": "das-diagramm",
+        "type": "compound"
+      },
+      "noun": {
+        "gender": "n",
+        "plural": "Balkendiagramme",
+        "genitive": "Balkendiagramms",
+        "declension": "strong",
+        "number": "both",
+        "compound": [
+          "das-diagramm"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Im [Balkendiagramm] sind die Länder nach Größe geordnet.",
+          "en": "In the bar chart the countries are ordered by size."
+        }
+      ]
+    },
+    {
+      "id": "das-kreisdiagramm",
+      "lemma": "Kreisdiagramm",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "pie chart"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "das-diagramm",
+        "type": "compound"
+      },
+      "noun": {
+        "gender": "n",
+        "plural": "Kreisdiagramme",
+        "genitive": "Kreisdiagramms",
+        "declension": "strong",
+        "number": "both",
+        "compound": [
+          "das-diagramm"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Das [Kreisdiagramm] zeigt die Verteilung der Ausgaben.",
+          "en": "The pie chart shows how spending is distributed."
+        }
+      ]
+    },
+    {
+      "id": "das-liniendiagramm",
+      "lemma": "Liniendiagramm",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "line graph",
+            "line chart"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "das-diagramm",
+        "type": "compound"
+      },
+      "noun": {
+        "gender": "n",
+        "plural": "Liniendiagramme",
+        "genitive": "Liniendiagramms",
+        "declension": "strong",
+        "number": "both",
+        "compound": [
+          "das-diagramm"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Das [Liniendiagramm] stellt die Entwicklung über zwanzig Jahre dar.",
+          "en": "The line graph shows the development over twenty years."
+        }
+      ]
+    },
+    {
+      "id": "die-tabelle",
+      "lemma": "Tabelle",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "table",
+            "chart"
+          ],
+          "hint": "rows and columns"
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Tabellen",
+        "genitive": "Tabelle",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Die [Tabelle] enthält die genauen Zahlen.",
+          "en": "The table contains the exact figures."
+        }
+      ]
+    },
+    {
+      "id": "die-achse",
+      "lemma": "Achse",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "axis"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Achsen",
+        "genitive": "Achse",
+        "declension": "strong",
+        "number": "both"
+      },
+      "collocations": [
+        {
+          "de": "auf der waagerechten [Achse]",
+          "en": "on the horizontal axis",
+          "type": "other"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Auf der senkrechten [Achse] sind die Werte in Prozent angegeben.",
+          "en": "The values are given in per cent on the vertical axis."
+        }
+      ]
+    },
+    {
+      "id": "abbilden",
+      "lemma": "abbilden",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "to show",
+            "to depict",
+            "to represent"
+          ],
+          "hint": "in a picture or chart"
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "separable": true,
+        "prefix": "ab",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "bildet ab",
+          "praeteritum": "bildete ab",
+          "partizip2": "abgebildet",
+          "aux": "haben"
+        }
+      },
+      "examples": [
+        {
+          "de": "Die Grafik [bildet] die Jahre 2010 bis 2020 [ab].",
+          "en": "The graph shows the years 2010 to 2020."
+        }
+      ]
+    },
+    {
+      "id": "die-abbildung",
+      "lemma": "Abbildung",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "figure",
+            "illustration",
+            "image"
+          ],
+          "hint": "abbreviated Abb."
+        }
+      ],
+      "derivation": {
+        "from": "abbilden",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Abbildungen",
+        "genitive": "Abbildung",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Wie [Abbildung] 2 zeigt, ist der Anteil gesunken.",
+          "en": "As figure 2 shows, the proportion has fallen."
+        }
+      ]
+    },
+    {
+      "id": "stellen",
+      "lemma": "stellen",
+      "pos": "verb",
+      "level": "A1",
+      "senses": [
+        {
+          "en": [
+            "to put",
+            "to place",
+            "to stand"
+          ],
+          "hint": "upright"
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "stellt",
+          "praeteritum": "stellte",
+          "partizip2": "gestellt",
+          "aux": "haben"
+        }
+      },
+      "collocations": [
+        {
+          "de": "eine Frage [stellen]",
+          "en": "to ask a question",
+          "type": "funktionsverbgefuege"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Sie [stellt] die Flaschen auf den Tisch.",
+          "en": "She puts the bottles on the table."
+        }
+      ]
+    },
+    {
+      "id": "darstellen",
+      "lemma": "darstellen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "to show",
+            "to depict",
+            "to represent",
+            "to present"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "stellen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "weak",
+        "separable": true,
+        "prefix": "dar",
+        "reflexive": "none",
+        "transitive": true,
+        "conjugatesLike": "stellen",
+        "principal": {
+          "praesens3sg": "stellt dar",
+          "praeteritum": "stellte dar",
+          "partizip2": "dargestellt",
+          "aux": "haben"
+        }
+      },
+      "synonyms": [
+        {
+          "id": "zeigen",
+          "contrast": "darstellen is separable (stellt … dar); zeigen is not",
+          "example": "Die Grafik [stellt] den Anstieg der Mieten dar."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Grafik [stellt] den Anstieg der Mieten [dar].",
+          "en": "The graph shows the rise in rents."
+        }
+      ]
+    },
+    {
+      "id": "die-darstellung",
+      "lemma": "Darstellung",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "representation",
+            "depiction",
+            "presentation"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "darstellen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Darstellungen",
+        "genitive": "Darstellung",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Die [Darstellung] der Daten ist übersichtlich.",
+          "en": "The data is presented clearly."
+        }
+      ]
+    },
+    {
+      "id": "zeigen",
+      "lemma": "zeigen",
+      "pos": "verb",
+      "level": "A1",
+      "senses": [
+        {
+          "en": [
+            "to show",
+            "to point"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "zeigt",
+          "praeteritum": "zeigte",
+          "partizip2": "gezeigt",
+          "aux": "haben"
+        }
+      },
+      "examples": [
+        {
+          "de": "Das Diagramm [zeigt] die Zahl der Studierenden von 2000 bis 2020.",
+          "en": "The chart shows the number of students from 2000 to 2020."
+        }
+      ]
+    },
+    {
+      "id": "veranschaulichen",
+      "lemma": "veranschaulichen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [
+        {
+          "en": [
+            "to illustrate",
+            "to visualise",
+            "to demonstrate"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "ver",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "veranschaulicht",
+          "praeteritum": "veranschaulichte",
+          "partizip2": "veranschaulicht",
+          "aux": "haben"
+        }
+      },
+      "examples": [
+        {
+          "de": "Die Tabelle [veranschaulicht], wie sich die Preise entwickelt haben.",
+          "en": "The table illustrates how prices have developed."
+        }
+      ]
+    },
+    {
+      "id": "hervorgehen",
+      "lemma": "hervorgehen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [
+        {
+          "en": [
+            "to emerge",
+            "to be clear",
+            "to follow"
+          ],
+          "hint": "aus etw.: a fact follows from a source"
+        }
+      ],
+      "derivation": {
+        "from": "gehen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "hervor",
+        "reflexive": "none",
+        "transitive": false,
+        "conjugatesLike": "gehen",
+        "principal": {
+          "praesens3sg": "geht hervor",
+          "praeteritum": "ging hervor",
+          "partizip2": "hervorgegangen",
+          "aux": "sein"
+        }
+      },
+      "rektion": [
+        {
+          "pattern": "{0} etw. hervorgehen",
+          "slots": [
+            {
+              "prep": "aus",
+              "case": "Dat",
+              "obj": "source"
+            }
+          ],
+          "en": "to be clear from sth.",
+          "example": "[Aus] der Grafik geht hervor, dass die Mieten gestiegen sind."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Aus der Grafik [geht] [hervor], dass die Mieten gestiegen sind.",
+          "en": "It is clear from the graph that rents have risen."
+        }
+      ],
+      "notes": [
+        "Standard phrase for Schreiben: Aus der Grafik geht hervor, dass …"
+      ]
+    },
+    {
+      "id": "ablesen",
+      "lemma": "ablesen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "to read off",
+            "to see",
+            "to tell"
+          ],
+          "hint": "from a chart or meter"
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "ab",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "liest ab",
+          "praeteritum": "las ab",
+          "partizip2": "abgelesen",
+          "aux": "haben"
+        },
+        "praesens": {
+          "du": "liest ab",
+          "er": "liest ab"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "etw. {0} etw. ablesen",
+          "slots": [
+            {
+              "prep": "an",
+              "case": "Dat",
+              "obj": "source"
+            }
+          ],
+          "en": "to read sth. off sth.",
+          "example": "[An] der Kurve kann man den Trend ablesen."
+        }
+      ],
+      "examples": [
+        {
+          "de": "An der Kurve kann man [ablesen], dass die Preise steigen.",
+          "en": "You can see from the curve that prices are rising."
+        }
+      ]
+    },
+    {
+      "id": "geben",
+      "lemma": "geben",
+      "pos": "verb",
+      "level": "A1",
+      "senses": [
+        {
+          "en": [
+            "to give"
+          ]
+        },
+        {
+          "en": [
+            "there is",
+            "there are"
+          ],
+          "hint": "es gibt"
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "gibt",
+          "praeteritum": "gab",
+          "partizip2": "gegeben",
+          "aux": "haben"
+        },
+        "praesens": {
+          "du": "gibst",
+          "er": "gibt"
+        },
+        "konjunktiv2": "gäbe",
+        "imperativ": {
+          "du": "gib",
+          "ihr": "gebt"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "{0} {1} geben",
+          "slots": [
+            {
+              "prep": null,
+              "case": "Dat",
+              "obj": "person"
+            },
+            {
+              "prep": null,
+              "case": "Akk",
+              "obj": "thing"
+            }
+          ],
+          "en": "to give sb. sth.",
+          "example": "Sie gibt dem Studenten das Buch."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Zwischen den Regionen [gibt] es große Unterschiede.",
+          "en": "There are big differences between the regions."
+        }
+      ]
+    },
+    {
+      "id": "angeben",
+      "lemma": "angeben",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to state",
+            "to give",
+            "to indicate",
+            "to specify"
+          ]
+        },
+        {
+          "en": [
+            "to show off",
+            "to boast"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "geben",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "an",
+        "reflexive": "none",
+        "transitive": true,
+        "conjugatesLike": "geben",
+        "principal": {
+          "praesens3sg": "gibt an",
+          "praeteritum": "gab an",
+          "partizip2": "angegeben",
+          "aux": "haben"
+        }
+      },
+      "examples": [
+        {
+          "de": "Die Werte [sind] in Prozent [angegeben].",
+          "en": "The values are given in per cent."
+        }
+      ]
+    },
+    {
+      "id": "die-angabe",
+      "lemma": "Angabe",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "information",
+            "figure",
+            "statement",
+            "detail"
+          ],
+          "hint": "usually plural: Angaben"
+        }
+      ],
+      "derivation": {
+        "from": "angeben",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Angaben",
+        "genitive": "Angabe",
+        "declension": "strong",
+        "number": "both"
+      },
+      "collocations": [
+        {
+          "de": "nach [Angaben] des Ministeriums",
+          "en": "according to the ministry",
+          "type": "other"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Nach [Angaben] der Stadt gibt es 5.000 freie Wohnungen.",
+          "en": "According to the city, there are 5,000 vacant flats."
+        }
+      ]
+    }
+  ],
+  "text": {
+    "id": "grafik-beschreiben",
+    "title": "Wie beschreibt man eine Grafik?",
+    "paragraphs": [
+      "In der TestDaF-Prüfung muss man oft eine Grafik beschreiben. Zuerst sagt man, um welche Art von Darstellung es sich handelt, zum Beispiel um ein Säulendiagramm, ein Kreisdiagramm oder eine Tabelle.",
+      "Dann nennt man das Thema: Die Grafik zeigt, wie sich die Zahl der Studierenden zwischen 2010 und 2020 entwickelt hat. Man erklärt kurz, was auf den Achsen abgebildet ist und in welcher Einheit die Werte angegeben sind, etwa in Prozent oder in Tausend.",
+      "Erst danach beschreibt man, was aus der Grafik hervorgeht. Wichtig ist, nicht jede einzelne Zahl zu nennen, sondern die wichtigsten Tendenzen darzustellen, die man an der Kurve ablesen kann."
+    ],
+    "uses": [
+      "die-grafik",
+      "die-darstellung",
+      "das-saeulendiagramm",
+      "das-kreisdiagramm",
+      "die-tabelle",
+      "zeigen",
+      "die-achse",
+      "abbilden",
+      "angeben",
+      "hervorgehen",
+      "darstellen",
+      "ablesen"
+    ],
+    "questions": [
+      {
+        "type": "rfn",
+        "prompt": "Am Anfang nennt man die Art der Grafik.",
+        "answer": "richtig"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Man sollte jede Zahl aus der Grafik nennen.",
+        "answer": "falsch"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Für die Grafikbeschreibung hat man in der Prüfung 20 Minuten Zeit.",
+        "answer": "nicht_im_text"
+      },
+      {
+        "type": "mc",
+        "prompt": "Was erklärt man, bevor man die Entwicklung beschreibt?",
+        "options": [
+          "die Gründe für die Entwicklung",
+          "was auf den Achsen steht und in welcher Einheit die Werte angegeben sind",
+          "die eigene Meinung zum Thema"
+        ],
+        "answer": 1
+      }
+    ]
+  }
+}

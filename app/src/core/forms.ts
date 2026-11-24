@@ -113,7 +113,8 @@ export function isIrregularVerb(w: Word, idx: WordIndex): boolean {
 export type Num = 'sg' | 'pl';
 export interface NounForms { Nom: [string, string]; Akk: [string, string]; Dat: [string, string]; Gen: [string, string] }
 
-export function articleFor(gender: 'm' | 'f' | 'n' | 'pl', c: Case): string {
+export function articleFor(gender: 'm' | 'f' | 'n' | 'pl' | null, c: Case): string {
+  gender = gender ?? 'pl'; // plural-only nouns (die Daten) have no gender
   const t: Record<string, Record<Case, string>> = {
     m: { Nom: 'der', Akk: 'den', Dat: 'dem', Gen: 'des' },
     f: { Nom: 'die', Akk: 'die', Dat: 'der', Gen: 'der' },
@@ -175,5 +176,5 @@ export function adjForms(w: Word): { komparativ: string; superlativ: string; reg
   return { komparativ: k, superlativ: s, regular };
 }
 export function isIrregularAdj(w: Word): boolean {
-  return w.pos === 'adj' && !!w.adj && !w.adj.noComparison && w.adj.irregular === true;
+  return w.pos === 'adj' && !!w.adj && !w.adj.noComparison && (w.adj.irregular === true || (Array.isArray(w.adj.irregular) && w.adj.irregular.length > 0));
 }

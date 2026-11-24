@@ -356,7 +356,7 @@ export function ResultScreen({ title, results, passMark, attempt, isTest, passed
       )}
       {isTest && weak.length > 0 && (
         <><div className="label" style={{ marginTop: 14 }}>Words to work on</div>
-          <div className="row" style={{ gap: 6, marginTop: 6 }}>{weak.map((id) => { const w = idx.byId.get(id); return w ? <span key={id} className="tag red">{w.noun ? ART[w.noun.gender] + ' ' : ''}{w.lemma}</span> : null; })}</div></>
+          <div className="row" style={{ gap: 6, marginTop: 6 }}>{weak.map((id) => { const w = idx.byId.get(id); return w ? <span key={id} className="tag red">{w.noun ? ART[w.noun.gender ?? 'f'] + ' ' : ''}{w.lemma}</span> : null; })}</div></>
       )}
       <div className="row" style={{ justifyContent: 'space-between', marginTop: 16 }}>
         <button className="btn ghost" onClick={onBack}>Back to path</button>

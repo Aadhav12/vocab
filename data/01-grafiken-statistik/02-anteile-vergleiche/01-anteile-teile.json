@@ -1,0 +1,812 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "anteile-teile",
+  "name": "Anteile und Teile",
+  "words": [
+    {
+      "id": "teilen",
+      "lemma": "teilen",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "to share",
+            "to divide",
+            "to split"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "teilt",
+          "praeteritum": "teilte",
+          "partizip2": "geteilt",
+          "aux": "haben"
+        }
+      },
+      "rektion": [
+        {
+          "pattern": "etw. {0} etw. teilen",
+          "slots": [
+            {
+              "prep": "in",
+              "case": "Akk",
+              "obj": "parts"
+            }
+          ],
+          "en": "to divide sth. into sth.",
+          "example": "Die Befragten wurden [in] drei Gruppen geteilt."
+        }
+      ],
+      "collocations": [
+        {
+          "de": "eine Meinung [teilen]",
+          "en": "to share an opinion",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Viele Studierende [teilen] sich eine Wohnung.",
+          "en": "Many students share a flat."
+        }
+      ]
+    },
+    {
+      "id": "der-teil",
+      "lemma": "Teil",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "part",
+            "portion",
+            "section"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "m",
+        "plural": "Teile",
+        "genitive": "Teils",
+        "declension": "strong",
+        "number": "both"
+      },
+      "collocations": [
+        {
+          "de": "zum großen [Teil]",
+          "en": "largely, for the most part",
+          "type": "other"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Ein großer [Teil] der Kosten entfällt auf Personal.",
+          "en": "A large part of the costs is accounted for by staff."
+        }
+      ],
+      "notes": [
+        "der Teil = a part of a whole; das Teil = a separate piece (Ersatzteil)."
+      ]
+    },
+    {
+      "id": "der-anteil",
+      "lemma": "Anteil",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "share",
+            "proportion",
+            "percentage"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "teilen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Anteile",
+        "genitive": "Anteils",
+        "declension": "strong",
+        "number": "both"
+      },
+      "rektion": [
+        {
+          "pattern": "der Anteil {0} etw.",
+          "slots": [
+            {
+              "prep": "an",
+              "case": "Dat",
+              "obj": "whole"
+            }
+          ],
+          "en": "the share of sth.",
+          "example": "Der Anteil [an] allen Studierenden liegt bei 40 Prozent."
+        }
+      ],
+      "synonyms": [
+        {
+          "id": "der-teil",
+          "contrast": "Anteil = a proportion of a whole, usually as a percentage; Teil = simply a part",
+          "example": "Der [Anteil] der Frauen an den Studierenden liegt bei 52 Prozent."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Der [Anteil] der Frauen an den Studierenden liegt bei 52 Prozent.",
+          "en": "The proportion of women among students is 52 per cent."
+        }
+      ]
+    },
+    {
+      "id": "verteilen",
+      "lemma": "verteilen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to distribute",
+            "to spread",
+            "to hand out"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "teilen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "ver",
+        "reflexive": "optional",
+        "transitive": true,
+        "conjugatesLike": "teilen",
+        "principal": {
+          "praesens3sg": "verteilt",
+          "praeteritum": "verteilte",
+          "partizip2": "verteilt",
+          "aux": "haben"
+        }
+      },
+      "rektion": [
+        {
+          "pattern": "sich {0} etw. verteilen",
+          "slots": [
+            {
+              "prep": "auf",
+              "case": "Akk",
+              "obj": "parts"
+            }
+          ],
+          "en": "to be distributed among sth.",
+          "example": "Die Stimmen verteilen sich [auf] fünf Parteien."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Teilnehmer [verteilen] sich gleichmäßig auf alle Altersgruppen.",
+          "en": "The participants are spread evenly across all age groups."
+        }
+      ]
+    },
+    {
+      "id": "die-verteilung",
+      "lemma": "Verteilung",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "distribution",
+            "allocation"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "verteilen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Verteilungen",
+        "genitive": "Verteilung",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Das Kreisdiagramm zeigt die [Verteilung] der Ausgaben.",
+          "en": "The pie chart shows the distribution of spending."
+        }
+      ]
+    },
+    {
+      "id": "das-prozent",
+      "lemma": "Prozent",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "per cent",
+            "percent",
+            "percentage"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "n",
+        "plural": "Prozente",
+        "genitive": "Prozents",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Rund 40 [Prozent] der Befragten fahren täglich mit dem Rad.",
+          "en": "Around 40 per cent of respondents cycle every day."
+        }
+      ],
+      "notes": [
+        "After a number it stays singular: 40 Prozent, not 40 Prozente."
+      ]
+    },
+    {
+      "id": "der-prozentsatz",
+      "lemma": "Prozentsatz",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "percentage",
+            "rate"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "m",
+        "plural": "Prozentsätze",
+        "genitive": "Prozentsatzes",
+        "declension": "strong",
+        "number": "both",
+        "compound": [
+          "das-prozent"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Ein hoher [Prozentsatz] der Jugendlichen nutzt soziale Medien.",
+          "en": "A high percentage of young people use social media."
+        }
+      ]
+    },
+    {
+      "id": "der-prozentpunkt",
+      "lemma": "Prozentpunkt",
+      "pos": "noun",
+      "level": "C1",
+      "senses": [
+        {
+          "en": [
+            "percentage point"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "m",
+        "plural": "Prozentpunkte",
+        "genitive": "Prozentpunkts",
+        "declension": "strong",
+        "number": "both",
+        "compound": [
+          "das-prozent"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Die Quote stieg von 10 auf 12 Prozent, also um zwei [Prozentpunkte].",
+          "en": "The rate rose from 10 to 12 per cent, i.e. by two percentage points."
+        }
+      ],
+      "notes": [
+        "From 10 % to 12 % = +2 Prozentpunkte, but +20 Prozent."
+      ]
+    },
+    {
+      "id": "die-haelfte",
+      "lemma": "Hälfte",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "half"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Hälften",
+        "genitive": "Hälfte",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Mehr als die [Hälfte] der Befragten ist zufrieden.",
+          "en": "More than half of the respondents are satisfied."
+        }
+      ]
+    },
+    {
+      "id": "das-drittel",
+      "lemma": "Drittel",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "third"
+          ],
+          "hint": "1/3"
+        }
+      ],
+      "noun": {
+        "gender": "n",
+        "plural": "Drittel",
+        "genitive": "Drittels",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Ein [Drittel] der Studierenden arbeitet nebenbei.",
+          "en": "A third of students work alongside their studies."
+        }
+      ]
+    },
+    {
+      "id": "das-viertel",
+      "lemma": "Viertel",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "quarter"
+          ],
+          "hint": "1/4"
+        },
+        {
+          "en": [
+            "district",
+            "neighbourhood"
+          ],
+          "hint": "of a city"
+        }
+      ],
+      "noun": {
+        "gender": "n",
+        "plural": "Viertel",
+        "genitive": "Viertels",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Fast ein [Viertel] der Energie stammt aus Windkraft.",
+          "en": "Almost a quarter of the energy comes from wind power."
+        }
+      ]
+    },
+    {
+      "id": "die-mehrheit",
+      "lemma": "Mehrheit",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "majority"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Mehrheiten",
+        "genitive": "Mehrheit",
+        "declension": "strong",
+        "number": "both"
+      },
+      "antonyms": [
+        "die-minderheit"
+      ],
+      "collocations": [
+        {
+          "de": "die große [Mehrheit]",
+          "en": "the vast majority",
+          "type": "other"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die [Mehrheit] der Befragten lehnt die Reform ab.",
+          "en": "The majority of respondents reject the reform."
+        }
+      ]
+    },
+    {
+      "id": "die-minderheit",
+      "lemma": "Minderheit",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "minority"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Minderheiten",
+        "genitive": "Minderheit",
+        "declension": "strong",
+        "number": "both"
+      },
+      "antonyms": [
+        "die-mehrheit"
+      ],
+      "examples": [
+        {
+          "de": "Nur eine [Minderheit] fährt täglich mit dem Auto zur Uni.",
+          "en": "Only a minority drive to university every day."
+        }
+      ]
+    },
+    {
+      "id": "der-durchschnitt",
+      "lemma": "Durchschnitt",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "average",
+            "mean"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "m",
+        "plural": "Durchschnitte",
+        "genitive": "Durchschnitts",
+        "declension": "strong",
+        "number": "both"
+      },
+      "collocations": [
+        {
+          "de": "im [Durchschnitt]",
+          "en": "on average",
+          "type": "other"
+        },
+        {
+          "de": "über dem [Durchschnitt] liegen",
+          "en": "to be above average",
+          "type": "other"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Im [Durchschnitt] schlafen Studierende sieben Stunden.",
+          "en": "On average, students sleep seven hours."
+        }
+      ]
+    },
+    {
+      "id": "durchschnittlich",
+      "lemma": "durchschnittlich",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "average",
+            "on average"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "der-durchschnitt",
+        "type": "adjective"
+      },
+      "adj": {
+        "noComparison": true,
+        "use": "both"
+      },
+      "examples": [
+        {
+          "de": "Das [durchschnittliche] Einkommen ist gestiegen.",
+          "en": "The average income has risen."
+        }
+      ]
+    },
+    {
+      "id": "die-quote",
+      "lemma": "Quote",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "rate",
+            "ratio",
+            "quota"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Quoten",
+        "genitive": "Quote",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Die [Quote] der Studienabbrecher liegt bei 28 Prozent.",
+          "en": "The dropout rate is 28 per cent."
+        }
+      ]
+    },
+    {
+      "id": "die-rate",
+      "lemma": "Rate",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "rate"
+          ]
+        },
+        {
+          "en": [
+            "instalment"
+          ],
+          "hint": "payment"
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Raten",
+        "genitive": "Rate",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Die [Rate] der Neuinfektionen sinkt.",
+          "en": "The rate of new infections is falling."
+        }
+      ]
+    },
+    {
+      "id": "der-grossteil",
+      "lemma": "Großteil",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "majority",
+            "large part",
+            "bulk"
+          ],
+          "hint": "der Groß…"
+        }
+      ],
+      "derivation": {
+        "from": "der-teil",
+        "type": "compound"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": null,
+        "genitive": "Großteils",
+        "declension": "strong",
+        "number": "singular-only",
+        "compound": [
+          "der-teil"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Der [Großteil] der Daten stammt aus dem Jahr 2023.",
+          "en": "Most of the data comes from 2023."
+        }
+      ]
+    },
+    {
+      "id": "ausmachen",
+      "lemma": "ausmachen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "to make up",
+            "to account for",
+            "to constitute"
+          ],
+          "hint": "a share of a whole",
+          "domain": "statistics"
+        },
+        {
+          "en": [
+            "to switch off"
+          ],
+          "hint": "a light"
+        },
+        {
+          "en": [
+            "to matter",
+            "to mind"
+          ],
+          "hint": "Das macht nichts aus."
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "separable": true,
+        "prefix": "aus",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "macht aus",
+          "praeteritum": "machte aus",
+          "partizip2": "ausgemacht",
+          "aux": "haben"
+        }
+      },
+      "examples": [
+        {
+          "de": "Mieten [machen] rund ein Drittel der Ausgaben [aus].",
+          "en": "Rent accounts for around a third of spending."
+        }
+      ]
+    },
+    {
+      "id": "entfallen",
+      "lemma": "entfallen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [
+        {
+          "en": [
+            "to account for",
+            "to go to",
+            "to be attributable to"
+          ],
+          "hint": "+ auf: a share goes to sth."
+        },
+        {
+          "en": [
+            "to be cancelled",
+            "to be dropped"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "fallen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "ent",
+        "reflexive": "none",
+        "transitive": false,
+        "conjugatesLike": "fallen",
+        "principal": {
+          "praesens3sg": "entfällt",
+          "praeteritum": "entfiel",
+          "partizip2": "entfallen",
+          "aux": "sein"
+        }
+      },
+      "rektion": [
+        {
+          "pattern": "{0} etw. entfallen",
+          "slots": [
+            {
+              "prep": "auf",
+              "case": "Akk",
+              "obj": "category"
+            }
+          ],
+          "en": "to go to / be accounted for by sth.",
+          "example": "30 Prozent der Stimmen entfielen [auf] die Grünen."
+        }
+      ],
+      "synonyms": [
+        {
+          "id": "ausmachen",
+          "contrast": "entfallen auf names who gets the share (Stimmen entfallen auf X); ausmachen names what the share consists of (X macht 30 % aus)",
+          "example": "Ein Viertel der Ausgaben [entfällt] auf Lebensmittel."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Ein Viertel der Ausgaben [entfällt] auf Lebensmittel.",
+          "en": "A quarter of spending goes on food."
+        }
+      ]
+    }
+  ],
+  "text": {
+    "id": "studentenbudget",
+    "title": "Wofür Studierende ihr Geld ausgeben",
+    "paragraphs": [
+      "Eine aktuelle Erhebung zeigt, wie sich die Ausgaben von Studierenden in Deutschland verteilen. Im Durchschnitt haben sie rund 1.000 Euro im Monat zur Verfügung.",
+      "Den größten Anteil machen die Mietkosten aus: Auf das Wohnen entfällt mehr als ein Drittel des Budgets. In Großstädten wie München ist es sogar fast die Hälfte. Ein Viertel der Ausgaben geht für Lebensmittel weg.",
+      "Die Mehrheit der Befragten finanziert ihr Studium zum Teil durch einen Nebenjob. Nur eine Minderheit von etwa elf Prozent erhält ein Stipendium. Im Vergleich zu 2016 ist dieser Prozentsatz um zwei Prozentpunkte gestiegen."
+    ],
+    "uses": [
+      "verteilen",
+      "der-durchschnitt",
+      "der-anteil",
+      "ausmachen",
+      "entfallen",
+      "das-drittel",
+      "die-haelfte",
+      "das-viertel",
+      "die-mehrheit",
+      "der-teil",
+      "die-minderheit",
+      "der-prozentsatz",
+      "der-prozentpunkt"
+    ],
+    "questions": [
+      {
+        "type": "rfn",
+        "prompt": "Für das Wohnen geben Studierende mehr als ein Drittel ihres Geldes aus.",
+        "answer": "richtig"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Die meisten Studierenden bekommen ein Stipendium.",
+        "answer": "falsch"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Studierende in München arbeiten mehr Stunden pro Woche als in anderen Städten.",
+        "answer": "nicht_im_text"
+      },
+      {
+        "type": "mc",
+        "prompt": "Wie hat sich der Anteil der Stipendiaten seit 2016 entwickelt?",
+        "options": [
+          "Er ist um zwei Prozent gesunken.",
+          "Er ist um zwei Prozentpunkte gestiegen.",
+          "Er ist gleich geblieben."
+        ],
+        "answer": 1
+      }
+    ]
+  }
+}

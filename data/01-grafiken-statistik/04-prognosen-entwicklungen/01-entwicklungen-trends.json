@@ -1,0 +1,260 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "entwicklungen-trends",
+  "name": "Entwicklungen und Trends",
+  "words": [
+    {
+      "id": "sich-entwickeln",
+      "lemma": "sich entwickeln",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [{ "en": ["to develop", "to evolve"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "ent",
+        "reflexive": "optional",
+        "transitive": false,
+        "principal": { "praesens3sg": "entwickelt sich", "praeteritum": "entwickelte sich", "partizip2": "entwickelt", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "sich {0} etw. entwickeln", "slots": [{ "prep": "zu", "case": "Dat", "obj": "result" }], "en": "to develop into sth.", "example": "Die Stadt hat sich [zu] einem Zentrum der Forschung entwickelt." }],
+      "examples": [{ "de": "Die Stadt [hat sich] zu einem Zentrum der Forschung [entwickelt].", "en": "The city has developed into a centre of research." }]
+    },
+    {
+      "id": "die-entwicklung",
+      "lemma": "Entwicklung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["development", "trend", "evolution"] }],
+      "derivation": { "from": "sich-entwickeln", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": "Entwicklungen", "genitive": "Entwicklung", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Die Grafik zeigt die [Entwicklung] der Preise seit 2000.", "en": "The graph shows how prices have developed since 2000." }]
+    },
+    {
+      "id": "der-trend",
+      "lemma": "Trend",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["trend"] }],
+      "noun": { "gender": "m", "plural": "Trends", "genitive": "Trends", "declension": "strong", "number": "both" },
+      "rektion": [{ "pattern": "der Trend {0} etw.", "slots": [{ "prep": "zu", "case": "Dat", "obj": "thing" }], "en": "the trend towards sth.", "example": "Der Trend [zu] mehr Homeoffice hält an." }],
+      "collocations": [{ "de": "ein [Trend] hält an", "en": "a trend continues", "type": "noun-verb" }],
+      "examples": [{ "de": "Der [Trend] zum Homeoffice hält an.", "en": "The trend towards working from home continues." }]
+    },
+    {
+      "id": "die-tendenz",
+      "lemma": "Tendenz",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["tendency", "trend"] }],
+      "noun": { "gender": "f", "plural": "Tendenzen", "genitive": "Tendenz", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "[Tendenz] steigend", "en": "and rising", "type": "other" }],
+      "examples": [{ "de": "Die Zahl der Nutzer liegt bei zwei Millionen, [Tendenz] steigend.", "en": "The number of users stands at two million and is rising." }]
+    },
+    {
+      "id": "tendieren",
+      "lemma": "tendieren",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to tend", "to lean towards"] }],
+      "derivation": { "from": "die-tendenz", "type": "other" },
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": false,
+        "principal": { "praesens3sg": "tendiert", "praeteritum": "tendierte", "partizip2": "tendiert", "aux": "haben" }
+      },
+      "rektion": [{ "pattern": "{0} etw. tendieren", "slots": [{ "prep": "zu", "case": "Dat", "obj": "thing" }], "en": "to tend towards sth.", "example": "Die Mehrheit tendiert [zu] einer Lösung im Herbst." }],
+      "examples": [{ "de": "Viele Studierende [tendieren] dazu, länger zu studieren.", "en": "Many students tend to study for longer." }]
+    },
+    {
+      "id": "zunehmend",
+      "lemma": "zunehmend",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [{ "en": ["increasingly", "increasing", "growing"] }],
+      "derivation": { "from": "zunehmen", "type": "adjective" },
+      "adj": { "noComparison": true, "use": "both" },
+      "examples": [{ "de": "Junge Menschen lesen Nachrichten [zunehmend] auf dem Smartphone.", "en": "Young people increasingly read the news on their smartphones." }]
+    },
+    {
+      "id": "verlaufen",
+      "lemma": "verlaufen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [{ "en": ["to run", "to go", "to proceed"], "hint": "a curve, a process" }, { "en": ["to get lost"], "hint": "sich verlaufen" }],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "ver",
+        "reflexive": "optional",
+        "transitive": false,
+        "principal": { "praesens3sg": "verläuft", "praeteritum": "verlief", "partizip2": "verlaufen", "aux": "sein" },
+        "praesens": { "du": "verläufst", "er": "verläuft" },
+        "irregular": ["praesens3sg", "praeteritum", "aux"]
+      },
+      "examples": [{ "de": "Die Kurve [verläuft] zunächst flach und steigt dann stark an.", "en": "The curve is flat at first and then rises sharply." }]
+    },
+    {
+      "id": "der-verlauf",
+      "lemma": "Verlauf",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [{ "en": ["course", "progression", "development"] }],
+      "derivation": { "from": "verlaufen", "type": "nominalisation" },
+      "noun": { "gender": "m", "plural": "Verläufe", "genitive": "Verlaufs", "declension": "strong", "number": "both" },
+      "collocations": [{ "de": "im [Verlauf] des Jahres", "en": "over the course of the year", "type": "other" }],
+      "examples": [{ "de": "Im [Verlauf] des Jahres stiegen die Preise deutlich.", "en": "Over the course of the year prices rose considerably." }]
+    },
+    {
+      "id": "sich-veraendern",
+      "lemma": "sich verändern",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [{ "en": ["to change"] }],
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "ver",
+        "reflexive": "optional",
+        "transitive": false,
+        "principal": { "praesens3sg": "verändert sich", "praeteritum": "veränderte sich", "partizip2": "verändert", "aux": "haben" }
+      },
+      "examples": [{ "de": "Das Konsumverhalten [hat sich] stark [verändert].", "en": "Consumer behaviour has changed a lot." }]
+    },
+    {
+      "id": "die-veraenderung",
+      "lemma": "Veränderung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [{ "en": ["change"] }],
+      "derivation": { "from": "sich-veraendern", "type": "nominalisation" },
+      "noun": { "gender": "f", "plural": "Veränderungen", "genitive": "Veränderung", "declension": "strong", "number": "both" },
+      "examples": [{ "de": "Die größte [Veränderung] gab es zwischen 2019 und 2021.", "en": "The biggest change came between 2019 and 2021." }]
+    },
+    {
+      "id": "der-wandel",
+      "lemma": "Wandel",
+      "pos": "noun",
+      "level": "C1",
+      "senses": [{ "en": ["change", "transformation", "shift"], "hint": "long-term, formal" }],
+      "noun": { "gender": "m", "plural": null, "genitive": "Wandels", "declension": "strong", "number": "singular-only" },
+      "collocations": [{ "de": "der demografische [Wandel]", "en": "demographic change", "type": "other" }],
+      "examples": [{ "de": "Der digitale [Wandel] betrifft alle Branchen.", "en": "Digital transformation affects every industry." }]
+    },
+    {
+      "id": "sich-wandeln",
+      "lemma": "sich wandeln",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [{ "en": ["to change", "to transform"], "hint": "slowly, formal" }],
+      "derivation": { "from": "der-wandel", "type": "other" },
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "reflexive": "akk",
+        "transitive": false,
+        "principal": { "praesens3sg": "wandelt sich", "praeteritum": "wandelte sich", "partizip2": "gewandelt", "aux": "haben" }
+      },
+      "examples": [{ "de": "Die Rolle der Väter [hat sich] deutlich [gewandelt].", "en": "The role of fathers has changed considerably." }]
+    },
+    {
+      "id": "langfristig",
+      "lemma": "langfristig",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [{ "en": ["long-term", "in the long term"] }],
+      "adj": { "noComparison": true, "use": "both" },
+      "antonyms": ["kurzfristig"],
+      "examples": [{ "de": "[Langfristig] wird die Bevölkerung schrumpfen.", "en": "In the long term the population will shrink." }]
+    },
+    {
+      "id": "kurzfristig",
+      "lemma": "kurzfristig",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [{ "en": ["short-term", "in the short term", "at short notice"] }],
+      "adj": { "noComparison": true, "use": "both" },
+      "antonyms": ["langfristig"],
+      "examples": [{ "de": "[Kurzfristig] sind keine großen Veränderungen zu erwarten.", "en": "No big changes are expected in the short term." }]
+    },
+    {
+      "id": "mittelfristig",
+      "lemma": "mittelfristig",
+      "pos": "adj",
+      "level": "C1",
+      "senses": [{ "en": ["medium-term", "in the medium term"] }],
+      "adj": { "noComparison": true, "use": "both" },
+      "examples": [{ "de": "[Mittelfristig] rechnen Experten mit sinkenden Preisen.", "en": "In the medium term experts expect falling prices." }]
+    },
+    {
+      "id": "bisher",
+      "lemma": "bisher",
+      "pos": "adv",
+      "level": "B1",
+      "senses": [{ "en": ["so far", "until now", "up to now"] }],
+      "examples": [{ "de": "[Bisher] gibt es dazu keine genauen Zahlen.", "en": "So far there are no exact figures on this." }]
+    },
+    {
+      "id": "seitdem",
+      "lemma": "seitdem",
+      "pos": "conj",
+      "level": "B1",
+      "senses": [{ "en": ["since then", "ever since"] }],
+      "conj": {
+        "kind": "adverb",
+        "verbPosition": "inverted",
+        "drills": [
+          { "correct": "2015 wurde das Gesetz geändert. Seitdem ist die Zahl der Unfälle gesunken.", "distractors": ["2015 wurde das Gesetz geändert. Seitdem die Zahl der Unfälle ist gesunken.", "2015 wurde das Gesetz geändert. Seitdem die Zahl der Unfälle gesunken ist."] }
+        ]
+      },
+      "examples": [{ "de": "2015 wurde das Gesetz geändert. [Seitdem] ist die Zahl der Unfälle gesunken.", "en": "The law was changed in 2015. Since then the number of accidents has fallen." }],
+      "notes": ["As an adverb (Seitdem ist …) it inverts the verb; as a conjunction (…, seitdem das Gesetz gilt) it sends the verb to the end."]
+    },
+    {
+      "id": "inzwischen",
+      "lemma": "inzwischen",
+      "pos": "adv",
+      "level": "B1",
+      "senses": [{ "en": ["by now", "meanwhile", "in the meantime"] }],
+      "examples": [{ "de": "[Inzwischen] nutzen fast alle Jugendlichen ein Smartphone.", "en": "By now almost all young people use a smartphone." }]
+    },
+    {
+      "id": "mittlerweile",
+      "lemma": "mittlerweile",
+      "pos": "adv",
+      "level": "B2",
+      "senses": [{ "en": ["by now", "meanwhile", "now"] }],
+      "examples": [{ "de": "Der Anteil liegt [mittlerweile] bei über 30 Prozent.", "en": "The proportion is now over 30 per cent." }],
+      "notes": ["Means the same as inzwischen in this sense."]
+    },
+    {
+      "id": "die-zukunft",
+      "lemma": "Zukunft",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [{ "en": ["future"] }],
+      "noun": { "gender": "f", "plural": null, "genitive": "Zukunft", "declension": "strong", "number": "singular-only" },
+      "collocations": [{ "de": "in [Zukunft]", "en": "in future", "type": "other" }],
+      "examples": [{ "de": "In [Zukunft] werden mehr Menschen im Homeoffice arbeiten.", "en": "In future more people will work from home." }]
+    }
+  ],
+  "text": {
+    "id": "homeoffice",
+    "title": "Homeoffice: ein Trend bleibt",
+    "paragraphs": [
+      "Vor der Pandemie arbeiteten in Deutschland nur rund fünf Prozent der Beschäftigten regelmäßig von zu Hause. Seitdem hat sich die Arbeitswelt stark verändert.",
+      "Im Verlauf des Jahres 2020 stieg der Anteil sprunghaft auf über 20 Prozent. Inzwischen liegt er bei etwa einem Viertel. Der Trend zum Homeoffice hat sich also gehalten, auch wenn viele Firmen ihre Mitarbeiter mittlerweile wieder häufiger ins Büro holen.",
+      "Wie wird sich die Arbeit langfristig entwickeln? Bisher gibt es dazu keine klaren Prognosen. Viele Fachleute beobachten aber einen Wandel: Zunehmend setzen Unternehmen auf eine Mischung aus Büro und Homeoffice."
+    ],
+    "uses": ["seitdem", "sich-veraendern", "der-verlauf", "inzwischen", "der-trend", "mittlerweile", "langfristig", "sich-entwickeln", "bisher", "der-wandel", "zunehmend"],
+    "questions": [
+      { "type": "rfn", "prompt": "Vor der Pandemie arbeiteten nur wenige Beschäftigte regelmäßig zu Hause.", "answer": "richtig" },
+      { "type": "rfn", "prompt": "Heute arbeitet etwa die Hälfte der Beschäftigten im Homeoffice.", "answer": "falsch" },
+      { "type": "rfn", "prompt": "Im Homeoffice arbeiten die Beschäftigten produktiver als im Büro.", "answer": "nicht_im_text" },
+      { "type": "mc", "prompt": "Was tun Unternehmen zunehmend?", "options": ["Sie schaffen das Homeoffice ganz ab.", "Sie kombinieren Büro und Homeoffice.", "Sie lassen alle Beschäftigten nur noch zu Hause arbeiten."], "answer": 1 }
+    ]
+  }
+}

@@ -1,0 +1,876 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "vergleiche-unterschiede",
+  "name": "Vergleiche und Unterschiede",
+  "words": [
+    {
+      "id": "vergleichen",
+      "lemma": "vergleichen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to compare"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "vergleicht",
+          "praeteritum": "verglich",
+          "partizip2": "verglichen",
+          "aux": "haben"
+        },
+        "irregular": [
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "etw. {0} etw. vergleichen",
+          "slots": [
+            {
+              "prep": "mit",
+              "case": "Dat",
+              "obj": "thing"
+            }
+          ],
+          "en": "to compare sth. with sth.",
+          "example": "Man kann die Zahlen nicht [mit] denen von 1990 vergleichen."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Grafik [vergleicht] die Einkommen von Männern und Frauen.",
+          "en": "The graph compares the incomes of men and women."
+        }
+      ]
+    },
+    {
+      "id": "der-vergleich",
+      "lemma": "Vergleich",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "comparison"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "vergleichen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Vergleiche",
+        "genitive": "Vergleichs",
+        "declension": "strong",
+        "number": "both"
+      },
+      "collocations": [
+        {
+          "de": "einen [Vergleich] ziehen",
+          "en": "to draw a comparison",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Ein [Vergleich] der beiden Länder zeigt große Unterschiede.",
+          "en": "A comparison of the two countries shows big differences."
+        }
+      ],
+      "notes": [
+        "The noun is der Vergleich; 'die Vergleichung' is archaic."
+      ]
+    },
+    {
+      "id": "vergleichbar",
+      "lemma": "vergleichbar",
+      "pos": "adj",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "comparable"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "vergleichen",
+        "type": "adjective"
+      },
+      "adj": {
+        "noComparison": true,
+        "use": "both"
+      },
+      "rektion": [
+        {
+          "pattern": "{0} etw. vergleichbar",
+          "slots": [
+            {
+              "prep": "mit",
+              "case": "Dat",
+              "obj": "thing"
+            }
+          ],
+          "en": "comparable with sth.",
+          "example": "Die Lage ist [mit] der von 2008 vergleichbar."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Ergebnisse sind nur bedingt [vergleichbar].",
+          "en": "The results are only comparable to a limited extent."
+        }
+      ]
+    },
+    {
+      "id": "im-vergleich-zu",
+      "lemma": "im Vergleich zu",
+      "pos": "phrase",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "compared to",
+            "compared with",
+            "in comparison with"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "der-vergleich",
+        "type": "other"
+      },
+      "phrase": {
+        "governs": "Dat",
+        "fixed": true
+      },
+      "examples": [
+        {
+          "de": "[Im Vergleich zu] 2010 ist die Zahl um ein Drittel gestiegen.",
+          "en": "Compared with 2010, the number has risen by a third."
+        }
+      ]
+    },
+    {
+      "id": "gegenueber",
+      "lemma": "gegenüber",
+      "pos": "prep",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "compared with",
+            "compared to"
+          ],
+          "hint": "in statistics",
+          "domain": "statistics"
+        },
+        {
+          "en": [
+            "opposite",
+            "towards"
+          ]
+        }
+      ],
+      "prep": {
+        "cases": [
+          "Dat"
+        ],
+        "position": "pre"
+      },
+      "examples": [
+        {
+          "de": "[Gegenüber] dem Vorjahr stieg der Umsatz um fünf Prozent.",
+          "en": "Compared with the previous year, turnover rose by five per cent."
+        }
+      ],
+      "notes": [
+        "Can also follow a noun: dem Vorjahr gegenüber. With pronouns it always follows: ihm gegenüber."
+      ]
+    },
+    {
+      "id": "sich-unterscheiden",
+      "lemma": "sich unterscheiden",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to differ",
+            "to be different"
+          ]
+        },
+        {
+          "en": [
+            "to distinguish",
+            "to tell apart"
+          ],
+          "hint": "without sich"
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "optional",
+        "transitive": false,
+        "principal": {
+          "praesens3sg": "unterscheidet sich",
+          "praeteritum": "unterschied sich",
+          "partizip2": "unterschieden",
+          "aux": "haben"
+        },
+        "irregular": [
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "sich {0} etw. unterscheiden",
+          "slots": [
+            {
+              "prep": "von",
+              "case": "Dat",
+              "obj": "thing"
+            }
+          ],
+          "en": "to differ from sth.",
+          "example": "Die Stadt unterscheidet sich stark [von] dem Land."
+        },
+        {
+          "pattern": "sich {0} etw. unterscheiden",
+          "slots": [
+            {
+              "prep": "in",
+              "case": "Dat",
+              "obj": "aspect"
+            }
+          ],
+          "en": "to differ in sth.",
+          "example": "Die Gruppen unterscheiden sich [in] ihrem Alter."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die beiden Gruppen [unterscheiden] sich kaum.",
+          "en": "The two groups hardly differ."
+        }
+      ]
+    },
+    {
+      "id": "der-unterschied",
+      "lemma": "Unterschied",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "difference"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "sich-unterscheiden",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Unterschiede",
+        "genitive": "Unterschieds",
+        "declension": "strong",
+        "number": "both"
+      },
+      "rektion": [
+        {
+          "pattern": "der Unterschied {0} etw. und etw.",
+          "slots": [
+            {
+              "prep": "zwischen",
+              "case": "Dat",
+              "obj": "things"
+            }
+          ],
+          "en": "the difference between sth. and sth.",
+          "example": "Der Unterschied [zwischen] Stadt und Land ist groß."
+        }
+      ],
+      "antonyms": [
+        "die-gemeinsamkeit"
+      ],
+      "examples": [
+        {
+          "de": "Der [Unterschied] zwischen Stadt und Land ist groß.",
+          "en": "The difference between town and country is big."
+        }
+      ]
+    },
+    {
+      "id": "unterschiedlich",
+      "lemma": "unterschiedlich",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "different",
+            "differently",
+            "varying",
+            "various"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "der-unterschied",
+        "type": "adjective"
+      },
+      "adj": {
+        "noComparison": true,
+        "use": "both"
+      },
+      "collocations": [
+        {
+          "de": "[unterschiedlich] ausfallen",
+          "en": "to turn out differently",
+          "type": "other"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Ergebnisse fallen je nach Region [unterschiedlich] aus.",
+          "en": "The results vary by region."
+        }
+      ]
+    },
+    {
+      "id": "die-differenz",
+      "lemma": "Differenz",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "difference",
+            "gap"
+          ],
+          "hint": "between two figures"
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Differenzen",
+        "genitive": "Differenz",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Die [Differenz] zwischen den beiden Werten beträgt 3,5 Punkte.",
+          "en": "The difference between the two values is 3.5 points."
+        }
+      ],
+      "notes": [
+        "Differenz is the numerical gap; Unterschied is any difference. Plural Differenzen can also mean disagreements."
+      ]
+    },
+    {
+      "id": "aehnlich",
+      "lemma": "ähnlich",
+      "pos": "adj",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "similar",
+            "similarly",
+            "alike"
+          ]
+        }
+      ],
+      "adj": {
+        "komparativ": "ähnlicher",
+        "superlativ": "am ähnlichsten",
+        "use": "both"
+      },
+      "rektion": [
+        {
+          "pattern": "{0} ähnlich sein",
+          "slots": [
+            {
+              "prep": null,
+              "case": "Dat",
+              "obj": "thing"
+            }
+          ],
+          "en": "to be similar to sth.",
+          "example": "Die Lage ist der von 2008 ähnlich."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Zahlen sind [ähnlich] wie im Vorjahr.",
+          "en": "The figures are similar to the previous year."
+        }
+      ]
+    },
+    {
+      "id": "die-aehnlichkeit",
+      "lemma": "Ähnlichkeit",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "similarity",
+            "resemblance"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "aehnlich",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Ähnlichkeiten",
+        "genitive": "Ähnlichkeit",
+        "declension": "strong",
+        "number": "both"
+      },
+      "rektion": [
+        {
+          "pattern": "die Ähnlichkeit {0} etw.",
+          "slots": [
+            {
+              "prep": "mit",
+              "case": "Dat",
+              "obj": "thing"
+            }
+          ],
+          "en": "similarity to sth.",
+          "example": "Die Kurve hat große Ähnlichkeit [mit] der von 2015."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Es gibt deutliche [Ähnlichkeiten] zwischen beiden Ländern.",
+          "en": "There are clear similarities between the two countries."
+        }
+      ]
+    },
+    {
+      "id": "entsprechen",
+      "lemma": "entsprechen",
+      "pos": "verb",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "to correspond to",
+            "to equal",
+            "to be equivalent to",
+            "to match"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "reflexive": "none",
+        "transitive": false,
+        "principal": {
+          "praesens3sg": "entspricht",
+          "praeteritum": "entsprach",
+          "partizip2": "entsprochen",
+          "aux": "haben"
+        },
+        "praesens": {
+          "du": "entsprichst",
+          "er": "entspricht"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "{0} entsprechen",
+          "slots": [
+            {
+              "prep": null,
+              "case": "Dat",
+              "obj": "thing"
+            }
+          ],
+          "en": "to correspond to sth.",
+          "example": "Das entspricht einem Anstieg von zehn Prozent."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Das [entspricht] einem Anstieg von zehn Prozent.",
+          "en": "That corresponds to a rise of ten per cent."
+        }
+      ]
+    },
+    {
+      "id": "uebertreffen",
+      "lemma": "übertreffen",
+      "pos": "verb",
+      "level": "C1",
+      "senses": [
+        {
+          "en": [
+            "to exceed",
+            "to surpass",
+            "to outdo"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "über",
+        "reflexive": "none",
+        "transitive": true,
+        "principal": {
+          "praesens3sg": "übertrifft",
+          "praeteritum": "übertraf",
+          "partizip2": "übertroffen",
+          "aux": "haben"
+        },
+        "praesens": {
+          "du": "übertriffst",
+          "er": "übertrifft"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "collocations": [
+        {
+          "de": "alle Erwartungen [übertreffen]",
+          "en": "to exceed all expectations",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Ergebnisse [übertrafen] alle Erwartungen.",
+          "en": "The results exceeded all expectations."
+        }
+      ]
+    },
+    {
+      "id": "waehrend",
+      "lemma": "während",
+      "pos": "conj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "while",
+            "whereas"
+          ],
+          "hint": "contrast between two facts"
+        }
+      ],
+      "conj": {
+        "kind": "subordinating",
+        "verbPosition": "end",
+        "drills": [
+          {
+            "correct": "Die Mieten in München sind hoch, während sie in Leipzig niedrig sind.",
+            "distractors": [
+              "Die Mieten in München sind hoch, während sie sind in Leipzig niedrig.",
+              "Die Mieten in München sind hoch, während sind sie in Leipzig niedrig."
+            ]
+          },
+          {
+            "correct": "Während die Zahl der Frauen stieg, sank die der Männer.",
+            "distractors": [
+              "Während die Zahl der Frauen stieg, die der Männer sank.",
+              "Während stieg die Zahl der Frauen, sank die der Männer."
+            ]
+          }
+        ]
+      },
+      "examples": [
+        {
+          "de": "Die Zahl der Frauen stieg, [während] die der Männer sank.",
+          "en": "The number of women rose, whereas that of men fell."
+        }
+      ],
+      "notes": [
+        "Also a preposition with the genitive: während des Studiums."
+      ]
+    },
+    {
+      "id": "dagegen",
+      "lemma": "dagegen",
+      "pos": "conj",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "by contrast",
+            "on the other hand",
+            "however"
+          ],
+          "hint": "linking adverb"
+        },
+        {
+          "en": [
+            "against it"
+          ]
+        }
+      ],
+      "conj": {
+        "kind": "adverb",
+        "verbPosition": "inverted",
+        "drills": [
+          {
+            "correct": "Die Mieten stiegen stark. Dagegen sanken die Löhne.",
+            "distractors": [
+              "Die Mieten stiegen stark. Dagegen die Löhne sanken.",
+              "Die Mieten stiegen stark, dagegen die Löhne sanken."
+            ]
+          },
+          {
+            "correct": "In Bayern wuchs die Bevölkerung. In Sachsen ging sie dagegen zurück.",
+            "distractors": [
+              "In Bayern wuchs die Bevölkerung. In Sachsen sie ging dagegen zurück.",
+              "In Bayern wuchs die Bevölkerung. In Sachsen dagegen sie ging zurück."
+            ]
+          }
+        ]
+      },
+      "examples": [
+        {
+          "de": "Im Süden stiegen die Preise. Im Norden sanken sie [dagegen].",
+          "en": "In the south prices rose. In the north, by contrast, they fell."
+        }
+      ]
+    },
+    {
+      "id": "im-gegensatz-zu",
+      "lemma": "im Gegensatz zu",
+      "pos": "phrase",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "in contrast to",
+            "unlike",
+            "contrary to"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "der-gegensatz",
+        "type": "other"
+      },
+      "phrase": {
+        "governs": "Dat",
+        "fixed": true
+      },
+      "examples": [
+        {
+          "de": "[Im Gegensatz zu] den Männern fahren Frauen häufiger mit dem Rad.",
+          "en": "Unlike men, women cycle more often."
+        }
+      ]
+    },
+    {
+      "id": "der-gegensatz",
+      "lemma": "Gegensatz",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "contrast",
+            "opposite"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "m",
+        "plural": "Gegensätze",
+        "genitive": "Gegensatzes",
+        "declension": "strong",
+        "number": "both"
+      },
+      "examples": [
+        {
+          "de": "Der [Gegensatz] zwischen Arm und Reich wird größer.",
+          "en": "The contrast between rich and poor is growing."
+        }
+      ]
+    },
+    {
+      "id": "doppelt",
+      "lemma": "doppelt",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "double",
+            "twice"
+          ]
+        }
+      ],
+      "adj": {
+        "noComparison": true,
+        "use": "both"
+      },
+      "collocations": [
+        {
+          "de": "[doppelt] so hoch wie",
+          "en": "twice as high as",
+          "type": "other"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Kosten sind [doppelt] so hoch wie vor zehn Jahren.",
+          "en": "The costs are twice as high as ten years ago."
+        }
+      ]
+    },
+    {
+      "id": "gleich",
+      "lemma": "gleich",
+      "pos": "adj",
+      "level": "A1",
+      "senses": [
+        {
+          "en": [
+            "same",
+            "equal",
+            "identical"
+          ]
+        },
+        {
+          "en": [
+            "immediately",
+            "right away"
+          ],
+          "hint": "time"
+        }
+      ],
+      "adj": {
+        "noComparison": true,
+        "use": "both"
+      },
+      "collocations": [
+        {
+          "de": "[gleich] bleiben",
+          "en": "to stay the same",
+          "type": "other"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Beide Gruppen sind etwa [gleich] groß.",
+          "en": "Both groups are about the same size."
+        }
+      ]
+    },
+    {
+      "id": "die-gemeinsamkeit",
+      "lemma": "Gemeinsamkeit",
+      "pos": "noun",
+      "level": "B2",
+      "senses": [
+        {
+          "en": [
+            "similarity",
+            "common ground",
+            "thing in common"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Gemeinsamkeiten",
+        "genitive": "Gemeinsamkeit",
+        "declension": "strong",
+        "number": "both"
+      },
+      "antonyms": [
+        "der-unterschied"
+      ],
+      "examples": [
+        {
+          "de": "Trotz aller Unterschiede gibt es viele [Gemeinsamkeiten].",
+          "en": "Despite all the differences there is a lot in common."
+        }
+      ]
+    }
+  ],
+  "text": {
+    "id": "stadt-land",
+    "title": "Stadt und Land im Vergleich",
+    "paragraphs": [
+      "Wie unterscheidet sich das Leben in der Stadt vom Leben auf dem Land? Eine neue Studie vergleicht die beiden Lebensräume.",
+      "Der größte Unterschied zeigt sich bei den Wohnkosten: In Großstädten sind die Mieten im Durchschnitt doppelt so hoch wie in ländlichen Regionen. Im Gegensatz zu den Mieten unterscheiden sich die Einkommen weniger stark. Die Differenz beträgt nur etwa 15 Prozent.",
+      "Es gibt aber auch Gemeinsamkeiten. Die Zufriedenheit mit dem eigenen Leben ist in Stadt und Land fast gleich. Während Menschen in der Stadt vor allem die kurzen Wege schätzen, betonen Menschen auf dem Land die Ruhe. Gegenüber früheren Umfragen hat sich daran wenig verändert."
+    ],
+    "uses": [
+      "sich-unterscheiden",
+      "vergleichen",
+      "der-unterschied",
+      "doppelt",
+      "im-gegensatz-zu",
+      "die-differenz",
+      "die-gemeinsamkeit",
+      "gleich",
+      "waehrend",
+      "gegenueber"
+    ],
+    "questions": [
+      {
+        "type": "rfn",
+        "prompt": "In Großstädten zahlt man ungefähr doppelt so viel Miete wie auf dem Land.",
+        "answer": "richtig"
+      },
+      {
+        "type": "rfn",
+        "prompt": "In der Stadt verdienen die Menschen doppelt so viel wie auf dem Land.",
+        "answer": "falsch"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Auf dem Land leben mehr Familien mit Kindern als in der Stadt.",
+        "answer": "nicht_im_text"
+      },
+      {
+        "type": "mc",
+        "prompt": "Was schätzen Menschen auf dem Land laut der Studie besonders?",
+        "options": [
+          "die kurzen Wege",
+          "die Ruhe",
+          "die hohen Einkommen"
+        ],
+        "answer": 1
+      }
+    ]
+  }
+}

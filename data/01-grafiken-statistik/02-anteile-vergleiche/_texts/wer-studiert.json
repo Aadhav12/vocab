@@ -1,0 +1,75 @@
+{
+  "$schema": "../../../../app/schema/text.schema.json",
+  "schemaVersion": 1,
+  "id": "wer-studiert",
+  "title": "Wer studiert was?",
+  "paragraphs": [
+    "Im Wintersemester 2023/24 waren an deutschen Hochschulen rund 2,9 Millionen Studierende eingeschrieben. Doch wie verteilen sie sich auf die verschiedenen Fächer?",
+    "Den größten Anteil machen die Rechts-, Wirtschafts- und Sozialwissenschaften aus: Auf diese Fächergruppe entfällt mehr als ein Drittel aller Studierenden. An zweiter Stelle folgen die Ingenieurwissenschaften mit etwa einem Viertel.",
+    "Ein deutlich geringerer Teil der Studierenden entscheidet sich für Kunst oder Sport. Diese Fächer machen zusammen nur wenige Prozent aus.",
+    "Interessant ist auch der Vergleich zwischen Frauen und Männern. Insgesamt ist das Verhältnis fast ausgeglichen; die Frauen sind mit gut 50 Prozent sogar knapp in der Mehrheit. In den einzelnen Fächern unterscheiden sich die Zahlen jedoch stark. Während Frauen in der Medizin und in den Sprachwissenschaften klar die Mehrheit bilden, sind sie in den Ingenieurwissenschaften mit rund einem Viertel deutlich in der Minderheit.",
+    "Im Vergleich zu 2010 ist der Anteil der Frauen in technischen Fächern um einige Prozentpunkte gestiegen. In der Medizin hat sich an der Verteilung dagegen kaum etwas verändert. Fachleute führen diese Entwicklung auf Programme zurück, mit denen Hochschulen gezielt Schülerinnen für Mathematik, Informatik und Technik gewinnen wollen. Ob der Anteil langfristig weiter steigt, lässt sich bisher aber nicht sicher sagen."
+  ],
+  "uses": [
+    "rund",
+    "verteilen",
+    "der-anteil",
+    "ausmachen",
+    "entfallen",
+    "das-drittel",
+    "das-viertel",
+    "der-vergleich",
+    "insgesamt",
+    "die-mehrheit",
+    "sich-unterscheiden",
+    "waehrend",
+    "die-minderheit",
+    "im-vergleich-zu",
+    "der-prozentpunkt",
+    "die-verteilung",
+    "dagegen",
+    "gering",
+    "der-teil",
+    "das-prozent",
+    "zurueckfuehren",
+    "langfristig",
+    "bisher"
+  ],
+  "questions": [
+    {
+      "type": "rfn",
+      "prompt": "Mehr als ein Drittel der Studierenden studiert Rechts-, Wirtschafts- oder Sozialwissenschaften.",
+      "answer": "richtig"
+    },
+    {
+      "type": "rfn",
+      "prompt": "In den Ingenieurwissenschaften sind Frauen in der Mehrheit.",
+      "answer": "falsch"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Die meisten Studierenden studieren an Fachhochschulen.",
+      "answer": "nicht_im_text"
+    },
+    {
+      "type": "mc",
+      "prompt": "Wie hat sich der Frauenanteil in technischen Fächern seit 2010 entwickelt?",
+      "options": [
+        "Er ist leicht gestiegen.",
+        "Er ist gleich geblieben.",
+        "Er hat sich verdoppelt."
+      ],
+      "answer": 0
+    },
+    {
+      "type": "heading",
+      "paragraph": 4,
+      "options": [
+        "Große Unterschiede zwischen den Fächern",
+        "Mehr Studierende als je zuvor",
+        "Die beliebtesten Hochschulen"
+      ],
+      "answer": 0
+    }
+  ]
+}

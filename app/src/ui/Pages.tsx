@@ -182,7 +182,7 @@ export function Words() {
           return (
             <tr key={w.id} className="click" onClick={() => open(w.id)}>
               <td><MasteryDot p={p} id={w.id} /></td>
-              <td className="de">{w.noun && <span className={`art-${w.noun.gender}`}>{articleFor(w.noun.gender, 'Nom')} </span>}{w.lemma}</td>
+              <td className="de">{w.noun && <span className={`art-${w.noun.gender ?? 'f'}`}>{articleFor(w.noun.gender, 'Nom')} </span>}{w.lemma}</td>
               <td>{w.senses.map((s) => s.en[0]).join(', ')}</td>
               <td className="small muted">{h.topic.name} › Set {h.setOrder + 1}</td><td className="mono small">{w.level ?? ''}</td>
             </tr>

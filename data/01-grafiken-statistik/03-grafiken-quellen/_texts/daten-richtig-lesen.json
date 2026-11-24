@@ -1,0 +1,77 @@
+{
+  "$schema": "../../../../app/schema/text.schema.json",
+  "schemaVersion": 1,
+  "id": "daten-richtig-lesen",
+  "title": "Daten richtig lesen",
+  "paragraphs": [
+    "Grafiken begegnen uns täglich: in Zeitungen, in Berichten und in sozialen Medien. Sie sollen komplizierte Zusammenhänge veranschaulichen. Doch nicht jede Darstellung ist so neutral, wie sie auf den ersten Blick wirkt.",
+    "Ein häufiges Problem ist die senkrechte Achse. Beginnt sie nicht bei null, sondern zum Beispiel bei 90, wirkt ein kleiner Anstieg in einem Säulendiagramm plötzlich dramatisch. Auch der gewählte Zeitraum spielt eine Rolle: Wer nur die Jahre 2019 bis 2021 abbildet, zeigt ein anderes Bild als jemand, der die Entwicklung über zwanzig Jahre darstellt.",
+    "Auch die Wahl der Darstellung kann täuschen. Ein Kreisdiagramm eignet sich zum Beispiel gut, um Anteile an einem Ganzen zu zeigen, aber kaum, um eine Entwicklung über mehrere Jahre abzubilden. Dafür ist ein Liniendiagramm meist besser geeignet.",
+    "Experten raten deshalb, immer auf die Quelle zu achten. Woher stammen die Daten? Wer hat die Umfrage durchgeführt, und wie viele Personen wurden befragt? Seriöse Statistiken geben diese Informationen an, meist in einer kleinen Zeile unter der Abbildung.",
+    "Schließlich sollte man prüfen, worauf sich die Zahlen beziehen. Eine Angabe in Prozent sagt wenig, wenn man nicht weiß, was hundert Prozent sind. Wer diese Fragen stellt, kann aus einer Grafik deutlich mehr ablesen und erkennt schneller, was wirklich aus den Daten hervorgeht.",
+    "Das bedeutet nicht, dass man Grafiken grundsätzlich misstrauen muss. Richtig gelesen sind sie eines der besten Mittel, um große Datenmengen schnell zu verstehen."
+  ],
+  "uses": [
+    "die-grafik",
+    "veranschaulichen",
+    "die-darstellung",
+    "die-achse",
+    "das-saeulendiagramm",
+    "der-zeitraum",
+    "abbilden",
+    "darstellen",
+    "der-experte",
+    "die-quelle",
+    "stammen",
+    "die-daten",
+    "die-umfrage",
+    "befragen",
+    "die-statistik",
+    "angeben",
+    "die-abbildung",
+    "sich-beziehen",
+    "die-angabe",
+    "ablesen",
+    "hervorgehen",
+    "das-kreisdiagramm",
+    "der-anteil",
+    "das-liniendiagramm"
+  ],
+  "questions": [
+    {
+      "type": "rfn",
+      "prompt": "Wenn die senkrechte Achse nicht bei null beginnt, können kleine Veränderungen groß aussehen.",
+      "answer": "richtig"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Der gewählte Zeitraum hat keinen Einfluss darauf, wie eine Grafik wirkt.",
+      "answer": "falsch"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Kreisdiagramme werden besonders oft manipuliert.",
+      "answer": "nicht_im_text"
+    },
+    {
+      "type": "mc",
+      "prompt": "Wo findet man bei seriösen Statistiken meist die Quelle?",
+      "options": [
+        "im Titel der Grafik",
+        "unter der Abbildung",
+        "auf der waagerechten Achse"
+      ],
+      "answer": 1
+    },
+    {
+      "type": "heading",
+      "paragraph": 2,
+      "options": [
+        "Tricks mit Achsen und Zeiträumen",
+        "Warum Grafiken immer neutral sind",
+        "Wie man eine Umfrage durchführt"
+      ],
+      "answer": 0
+    }
+  ]
+}
