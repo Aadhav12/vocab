@@ -52,7 +52,8 @@ export function flashChunks(words: Word[], rng: Rng, size = 12): Word[][] {
   return chunk(shuffle(words, rng), per);
 }
 
-function itemsFromDue(idx: DataIndex, p: Progress, ctx: Ctx, limit: number): Item[] {
+function itemsFromDue(idx: DataIndex, p: Progress, ctx0: Ctx, limit: number): Item[] {
+  const ctx: Ctx = { ...ctx0, known: (id) => p.introduced[id] !== undefined };
   const items: Item[] = [];
   const treeSeen = new Set<string>();
   for (const d of dueCards(p).slice(0, limit)) {
@@ -70,7 +71,7 @@ function reviewExtras(fmt: Format | 'flash', beforeOrder: number, count: number,
   const cand = idx.words.filter((w) => (idx.home.get(w.id)?.setOrder ?? 0) < beforeOrder && p.introduced[w.id] !== undefined && applicable(fmt, w, idx));
   if (!cand.length) return [];
   const chosen = sampleWords(cand, Math.min(cand.length, count + 2), p, ctx.rng);
-  return itemsForFormat(fmt, chosen, ctx).slice(0, Math.max(1, count));
+  return itemsForFormat(fmt, chosen, { ...ctx, known: (id) => p.introduced[id] !== undefined }).slice(0, Math.max(1, count));
 }
 
 const BASE_COUNTS: Record<string, number> = {
@@ -123,7 +124,7 @@ export function buildRun(node: PathNode, idx: DataIndex, p: Progress, rng: Rng):
       for (const k of ins.cards ?? []) {
         const [wid, card] = splitKey(k);
         const w = idx.byId.get(wid); if (!w) continue;
-        const it = itemForCard(w, card, ctx); if (it) items.push(it);
+        const it = itemForCard(w, card, { ...ctx, known: (id) => p.introduced[id] !== undefined }); if (it) items.push(it);
       }
       for (const id of ins.wordIds ?? []) {
         const w = idx.byId.get(id); if (!w) continue;
@@ -139,7 +140,8 @@ export function buildRun(node: PathNode, idx: DataIndex, p: Progress, rng: Rng):
     }
     case 'fmt': {
       const f = node.format!;
-      const base = itemsForFormat(f, set?.words ?? [], ctx);
+      const own = new Set((set?.words ?? []).map((w) => w.id));
+      const base = itemsForFormat(f, set?.words ?? [], { ...ctx, known: (id) => own.has(id) || p.introduced[id] !== undefined });
       const info = idx.sets.find((x) => x.set.id === set?.id);
       const extras = reviewExtras(f, info?.order ?? 0, Math.round(base.length * p.settings.reviewMix / Math.max(0.01, 1 - p.settings.reviewMix)), idx, p, ctx);
       return { kind: 'items', title: FORMAT_NAMES[f], passMark: 1, items: shuffle([...base, ...extras], rng), words: set?.words ?? [] };

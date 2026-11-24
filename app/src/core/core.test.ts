@@ -313,6 +313,28 @@ describe('node runs and test scoring', () => {
   });
 });
 
+describe('review never shows words that are not introduced yet', () => {
+  it('family trees in warm-ups only use introduced words', () => {
+    const path = buildPath(idx);
+    const p = emptyProgress();
+    // only nehmen, zunehmen and die Zunahme are introduced; abnehmen / die Abnahme are not
+    for (const id of ['nehmen', 'zunehmen', 'die-zunahme']) { p.introduced[id] = 0; }
+    p.setCount = 1;
+    p.cards['zunehmen|family'] = { step: 0, due: 0, reps: 1, misses: 0, promotedAt: 0 };
+    p.cards['die-zunahme|de-en'] = { step: 0, due: 0, reps: 1, misses: 0, promotedAt: 0 };
+    let trees = 0;
+    for (let k = 0; k < 20; k++) {
+      const run = buildRun(path.byId.get('set:schwankungen-wendepunkte:warmup')!, idx, p, rng);
+      for (const it of run.items.filter((i) => i.tree)) {
+        const shown = [it.main, ...it.fields!.map((f) => f.expected)].join(' ');
+        expect(shown).not.toMatch(/abnehmen|Abnahme/);
+        trees++;
+      }
+    }
+    expect(trees).toBeGreaterThan(0);
+  });
+});
+
 describe('data validation', () => {
   it('sample data is clean', () => { expect(bundle.problems).toEqual([]); });
 });

@@ -16,7 +16,8 @@ export function shuffle<T>(a: readonly T[], rng: Rng = defaultRng): T[] {
 }
 export const pick = <T,>(a: readonly T[], rng: Rng = defaultRng): T => a[Math.floor(rng() * a.length)];
 
-export interface Ctx { idx: DataIndex; rng: Rng }
+/** known: words the learner may already see (introduced, or in the current set). Unknown words never appear in review trees. */
+export interface Ctx { idx: DataIndex; rng: Rng; known?: (id: string) => boolean }
 
 let counter = 0;
 const nid = (p: string) => `${p}#${++counter}`;
@@ -231,7 +232,17 @@ function formationItem(w: Word, ctx: Ctx): Item {
 export function treeItem(w: Word, ctx: Ctx, pool: Set<string>): Item | null {
   const rootId = familyRoot(ctx.idx, w.id);
   const root = ctx.idx.byId.get(rootId)!;
-  const tree = familyTree(ctx.idx, rootId);
+  const known = ctx.known ?? (() => true);
+  if (!known(rootId)) return null;
+  // a member counts only if it and every ancestor up to the root are known
+  const chainKnown = (id: string): boolean => {
+    for (let cur = ctx.idx.byId.get(id), n = 0; cur && n < 20; n++) {
+      if (!known(cur.id)) return false;
+      cur = cur.derivation ? ctx.idx.byId.get(cur.derivation.from) : undefined;
+    }
+    return true;
+  };
+  const tree = familyTree(ctx.idx, rootId).filter((n) => chainKnown(n.id));
   const typed = tree.filter((n) => n.depth > 0 && pool.has(n.id));
   if (typed.length < 2) return null;
   const keep = tree.filter((n) => n.depth > 0 && (pool.has(n.id) || tree.some((m) => pool.has(m.id) && isAncestor(ctx.idx, n.id, m.id))));
