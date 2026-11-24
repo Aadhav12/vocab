@@ -70,7 +70,7 @@ export interface Settings {
   leechThreshold: number; reviewMix: number; tts: boolean;
 }
 export const DEFAULT_SETTINGS: Settings = {
-  recogThreshold: 1.0, prodThreshold: 1.5, passTest: 0.9, backlogLimit: 150, leechThreshold: 6, reviewMix: 0.25, tts: true,
+  recogThreshold: 1.5, prodThreshold: 2.0, passTest: 0.9, backlogLimit: 150, leechThreshold: 6, reviewMix: 0.25, tts: true,
 };
 
 export interface CardState { step: number; due: number; reps: number; misses: number; promotedAt: number; leechClearedAt?: number }
