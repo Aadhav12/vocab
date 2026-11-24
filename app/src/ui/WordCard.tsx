@@ -114,7 +114,7 @@ export function WordHistory({ w }: { w: Word }) {
   const hist = wordHistory(w.id);
   const keys = [...new Set([...hist.keys(), ...Object.keys(p.cards).filter((k) => k.startsWith(w.id + '|')).map((k) => k.slice(w.id.length + 1))])];
   if (!keys.length) return <div className="small muted" style={{ marginTop: 14 }}>No answers recorded yet.</div>;
-  const NAME: Record<string, string> = { 'de-en': 'German → English', 'en-de': 'English → German', article: 'Article', plural: 'Plural', declension: 'Declension', principal: 'Principal parts', comparison: 'Comparison', rektion: 'Rektion', case: 'Case government', cloze: 'Cloze', collocation: 'Collocation', family: 'Family', formation: 'Word formation', synonym: 'Near-synonym', connector: 'Connector', opposite: 'Opposites' };
+  const NAME: Record<string, string> = { 'de-en': 'German → English', 'en-de': 'English → German', article: 'Article', plural: 'Plural', declension: 'Declension', principal: 'Principal parts', comparison: 'Comparison', rektion: 'Rektion', case: 'Case government', collocation: 'Collocation', family: 'Family', formation: 'Word formation', synonym: 'Near-synonym', connector: 'Connector', opposite: 'Opposites' };
   return (
     <table className="tbl" style={{ marginTop: 14 }}>
       <thead><tr><th>Card</th><th>Last answers</th><th>Avg first key</th><th>Interval</th><th>Next due</th><th>Misses</th></tr></thead>

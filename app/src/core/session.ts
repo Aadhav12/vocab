@@ -75,7 +75,7 @@ function reviewExtras(fmt: Format | 'flash', beforeOrder: number, count: number,
 
 const BASE_COUNTS: Record<string, number> = {
   translation: 16, article: 5, plural: 4, declension: 2, match: 1, opposites: 2, principal: 3, comparison: 2, rektion: 3, case: 2,
-  cloze: 4, collocation: 2, tree: 1, formation: 3, synonyms: 2, connectors: 2,
+  collocation: 2, tree: 1, formation: 3, synonyms: 2, connectors: 2,
 };
 
 /** Mixed quiz/test over a scope. */

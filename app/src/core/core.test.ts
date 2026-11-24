@@ -230,11 +230,6 @@ describe('exercise generation', () => {
     expect(gradeFields(en, ['der Anstieg']).correct).toBe(true);
     expect(gradeFields(en, ['Anstieg']).correct).toBe(false);
   });
-  it('cloze sentences have gaps and graded fields', () => {
-    const it = itemsForFormat('cloze', [W('zunehmen')], ctx)[0];
-    expect(it.sentence).toContain('___');
-    expect(gradeFields(it, it.fields!.map((f) => f.expected)).correct).toBe(true);
-  });
   it('principal parts grade and show du where it changes', () => {
     const it = itemsForFormat('principal', [W('wachsen')], ctx)[0];
     expect(it.fields!.map((f) => f.key)).toEqual(['du', 'p3', 'pret', 'p2', 'aux']);
@@ -283,11 +278,11 @@ describe('node runs and test scoring', () => {
   });
   it('format nodes require every answer; retakes draw fresh questions', () => {
     const p = emptyProgress();
-    const node = path.byId.get('set:zunahme-abnahme:fmt:cloze')!;
+    const node = path.byId.get('set:zunahme-abnahme:fmt:article')!;
     expect(buildRun(node, idx, p, rng).passMark).toBe(1);
-    const a = buildRun(node, idx, p, rng).items.map((i) => i.sentence).join('|');
+    const a = buildRun(node, idx, p, rng).items.map((i) => i.wordId).join('|');
     let differs = false;
-    for (let k = 0; k < 6 && !differs; k++) differs = buildRun(node, idx, p, rng).items.map((i) => i.sentence).join('|') !== a;
+    for (let k = 0; k < 6 && !differs; k++) differs = buildRun(node, idx, p, rng).items.map((i) => i.wordId).join('|') !== a;
     expect(differs).toBe(true);
   });
   it('group tests are 1.5x, topic tests 2x', () => {

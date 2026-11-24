@@ -74,7 +74,6 @@ export function applicable(f: Format | 'flash', w: Word, idx: DataIndex): boolea
     case 'comparison': return isIrregularAdj(w) && !!adjForms(w);
     case 'rektion': return !!w.rektion?.some((r) => r.slots.length > 0);
     case 'case': return (w.pos === 'prep' && !!w.prep?.cases?.length) || (w.pos === 'phrase' && !!w.phrase?.governs);
-    case 'cloze': return w.examples.some((e) => hasGap(e.de));
     case 'collocation': return !!w.collocations?.some((c) => hasGap(c.de));
     case 'tree': return familySize(idx, w) >= 3;
     case 'formation': return !!w.derivation && ['nominalisation', 'agent', 'adjective', 'adverb', 'prefix-verb'].includes(w.derivation.type) && !!idx.byId.get(w.derivation.from);
@@ -208,15 +207,6 @@ function caseItems(w: Word, ctx: Ctx): Item[] {
   }
   return items;
 }
-function clozeItem(w: Word, ctx: Ctx): Item {
-  const ex = pick(w.examples.filter((e) => hasGap(e.de)), ctx.rng);
-  const segs = parseBrackets(ex.de);
-  return {
-    id: nid('cloze'), format: 'cloze', wordId: w.id, card: 'cloze', mode: 'fields', label: 'Fill the gaps',
-    sentence: segs.map((s) => (s.gap ? '___' : s.text)).join(''), translation: ex.en, hint: `word: ${senseEn(w)}`,
-    fields: segs.filter((s) => s.gap).map((s, i) => ({ key: `g${i}`, label: `Gap ${i + 1}`, expected: s.text, check: 'word' as const })),
-  };
-}
 function collocationItem(w: Word, ctx: Ctx): Item {
   const c = pick(w.collocations!.filter((x) => hasGap(x.de)), ctx.rng);
   const segs = parseBrackets(c.de);
@@ -327,7 +317,6 @@ export function itemsForFormat(f: Format | 'flash', words: Word[], ctx: Ctx): It
     case 'comparison': return ok.map(comparisonItem);
     case 'rektion': return ok.map((w) => rektionItem(w, ctx));
     case 'case': return ok.flatMap((w) => caseItems(w, ctx));
-    case 'cloze': return ok.map((w) => clozeItem(w, ctx));
     case 'collocation': return ok.map((w) => collocationItem(w, ctx));
     case 'tree': {
       const pool = new Set(words.map((w) => w.id));
@@ -364,7 +353,6 @@ export function itemForCard(w: Word, card: CardType, ctx: Ctx, pool?: Set<string
     case 'comparison': return applicable('comparison', w, ctx.idx) ? comparisonItem(w) : null;
     case 'rektion': return applicable('rektion', w, ctx.idx) ? rektionItem(w, ctx) : null;
     case 'case': return applicable('case', w, ctx.idx) ? caseItems(w, ctx)[0] : null;
-    case 'cloze': return applicable('cloze', w, ctx.idx) ? clozeItem(w, ctx) : null;
     case 'collocation': return applicable('collocation', w, ctx.idx) ? collocationItem(w, ctx) : null;
     case 'family': return applicable('tree', w, ctx.idx) ? treeItem(w, ctx, pool ?? new Set(familyTree(ctx.idx, familyRoot(ctx.idx, w.id)).map((n) => n.id))) : null;
     case 'formation': return applicable('formation', w, ctx.idx) ? formationItem(w, ctx) : null;
@@ -374,6 +362,7 @@ export function itemForCard(w: Word, card: CardType, ctx: Ctx, pool?: Set<string
     }
     case 'connector': return applicable('connectors', w, ctx.idx) ? connectorItem(w, ctx) : null;
     case 'opposite': return applicable('opposites', w, ctx.idx) ? oppositeItem(w, ctx) : null;
+    default: return null; // cards of removed formats in old records
   }
 }
 
@@ -381,7 +370,7 @@ export function itemForCard(w: Word, card: CardType, ctx: Ctx, pool?: Set<string
 export function readingItems(text: TextFile, section = 'Reading'): Item[] {
   const passage = { title: text.title, paragraphs: text.paragraphs, textId: text.id };
   return text.questions.map((q, i) => {
-    const base = { id: nid('reading'), format: 'reading' as const, wordId: `text:${text.id}`, card: 'cloze' as CardType, section, passage, keyed: true };
+    const base = { id: nid('reading'), format: 'reading' as const, wordId: `text:${text.id}`, card: 'de-en' as CardType, section, passage, keyed: true };
     if (q.type === 'rfn') {
       const choices = ['richtig', 'falsch', 'nicht im Text'];
       return { ...base, mode: 'choice' as const, label: `Question ${i + 1}`, main: undefined, sentence: q.prompt, choices, answerIdx: ['richtig', 'falsch', 'nicht_im_text'].indexOf(q.answer) };

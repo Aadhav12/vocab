@@ -108,7 +108,7 @@ export interface Attempt {
 // ---------- exercises ----------
 export const FORMATS = [
   'article', 'plural', 'declension', 'match', 'opposites', 'principal', 'comparison', 'rektion', 'case',
-  'cloze', 'collocation', 'tree', 'formation', 'synonyms', 'connectors',
+  'collocation', 'tree', 'formation', 'synonyms', 'connectors',
 ] as const;
 export type Format = typeof FORMATS[number];
 export type AnyFormat = Format | 'flash' | 'reading';
@@ -116,13 +116,13 @@ export type AnyFormat = Format | 'flash' | 'reading';
 export const FORMAT_NAMES: Record<AnyFormat, string> = {
   flash: 'Flashcards', article: 'Article blitz', plural: 'Plural', declension: 'Declension', match: 'Match the following',
   opposites: 'Opposites', principal: 'Principal parts', comparison: 'Comparison', rektion: 'Rektion', case: 'Case government',
-  cloze: 'Cloze sentences', collocation: 'Collocations', tree: 'Build the tree', formation: 'Word formation',
+  collocation: 'Collocations', tree: 'Build the tree', formation: 'Word formation',
   synonyms: 'Near-synonyms', connectors: 'Connectors', reading: 'Reading',
 };
 
 export type CardType =
   | 'de-en' | 'en-de' | 'article' | 'plural' | 'declension' | 'principal' | 'comparison' | 'rektion' | 'case'
-  | 'cloze' | 'collocation' | 'family' | 'formation' | 'synonym' | 'connector' | 'opposite';
+  | 'collocation' | 'family' | 'formation' | 'synonym' | 'connector' | 'opposite';
 export const CORE_CARDS: CardType[] = ['de-en', 'en-de', 'article', 'plural', 'principal', 'rektion'];
 
 export type CheckKind = 'en' | 'noun' | 'word' | 'plural' | 'prep' | 'choice';
