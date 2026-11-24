@@ -44,3 +44,4 @@ a.btn { text-decoration: none; display: inline-block; }
 .seg.v { display: flex; flex-direction: column; }
 .seg.v span { border-right: none; border-bottom: var(--line-soft); }
 .seg.v span:last-child { border-bottom: none; }
+.stack > .seg { align-self: flex-start; }

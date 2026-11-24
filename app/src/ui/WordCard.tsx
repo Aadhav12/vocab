@@ -127,7 +127,7 @@ export function WordHistory({ w }: { w: Word }) {
               <td>{NAME[c] ?? c}</td>
               <td><span className="dots">{(e?.answers.slice(-5) ?? []).map((a, i) => <i key={i} className={a ? 'ok' : 'bad'} />)}</span></td>
               <td className="mono">{avg === null ? '—' : fmtSec(avg)}</td>
-              <td className="mono">{st ? `${[1, 3, 7, 15, 30, 60, 120][st.step]} sets` : '—'}</td>
+              <td className="mono">{st ? `${[1, 3, 7, 15, 30, 60, 120][st.step]} set${st.step === 0 ? '' : 's'}` : '—'}</td>
               <td className="mono">{st ? `set ${st.due}` : '—'}</td>
               <td className="mono" style={{ color: (st?.misses ?? e?.misses ?? 0) > 1 ? 'var(--red-ink)' : undefined }}>{st?.misses ?? e?.misses ?? 0}</td>
             </tr>
