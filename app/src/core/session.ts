@@ -7,6 +7,9 @@ import { applicable, itemForCard, itemsForFormat, readingItems, shuffle, transla
 import { dueCards, splitKey } from './srs';
 import type { PathNode } from './path';
 
+/** Warm-ups pass at 90% (all other practice nodes need every answer correct). */
+export const WARMUP_PASS = 0.9;
+
 export type RunKind = 'warmup' | 'intro' | 'flash' | 'items' | 'reading';
 export interface Run {
   kind: RunKind; title: string; passMark: number; items: Item[]; words: Word[]; chunks?: Word[][]; text?: TextFile;
@@ -115,7 +118,7 @@ export function buildRun(node: PathNode, idx: DataIndex, p: Progress, rng: Rng):
   switch (node.type) {
     case 'warmup': {
       const items = itemsFromDue(idx, p, ctx, p.settings.backlogLimit);
-      return { kind: 'warmup', title: 'Warm-up', passMark: 1, items: shuffle(items, rng), words: [], empty: items.length === 0 };
+      return { kind: 'warmup', title: 'Warm-up', passMark: WARMUP_PASS, items: shuffle(items, rng), words: [], empty: items.length === 0 };
     }
     case 'catchup': return { kind: 'items', title: 'Catch-up review', passMark: 1, items: shuffle(itemsFromDue(idx, p, ctx, p.settings.backlogLimit), rng), words: [] };
     case 'leech': {

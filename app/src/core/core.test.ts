@@ -308,6 +308,9 @@ describe('node runs and test scoring', () => {
     for (let i = 0; i < 40; i++) if (sampleWords(ws, 3, p, rng).includes(ws[0])) hits++;
     expect(hits).toBeGreaterThan(25);
   });
+  it('warm-ups pass at 90%', () => {
+    expect(buildRun(path.byId.get('set:zunahme-abnahme:warmup')!, idx, emptyProgress(), rng).passMark).toBe(0.9);
+  });
   it('warm-up has nothing when nothing is due', () => {
     expect(buildRun(path.byId.get('set:zunahme-abnahme:warmup')!, idx, emptyProgress(), rng).empty).toBe(true);
   });
