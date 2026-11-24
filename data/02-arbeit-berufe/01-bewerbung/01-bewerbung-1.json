@@ -1,0 +1,777 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "bewerbung-1",
+  "name": "Bewerbung I",
+  "words": [
+    {
+      "id": "werben",
+      "lemma": "werben",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to advertise",
+            "to recruit"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "wirbt",
+          "praeteritum": "warb",
+          "partizip2": "geworben",
+          "aux": "haben"
+        },
+        "praesens": {
+          "du": "wirbst"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "um {0} werben",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to court / try to win sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Firma [wirbt] im Internet um neue Kunden.",
+          "en": "The company advertises on the internet to win new customers."
+        }
+      ]
+    },
+    {
+      "id": "sich-bewerben",
+      "lemma": "sich bewerben",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to apply"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "werben",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "be",
+        "reflexive": "akk",
+        "transitive": false,
+        "conjugatesLike": "werben"
+      },
+      "rektion": [
+        {
+          "pattern": "sich {0} jdm. {1} etw. bewerben",
+          "slots": [
+            {
+              "prep": "bei",
+              "case": "Dat",
+              "obj": "person"
+            },
+            {
+              "prep": "um",
+              "case": "Akk",
+              "obj": "thing"
+            }
+          ],
+          "en": "to apply to sb. for sth.",
+          "example": "Sie bewirbt sich [bei] einer Bank [um] eine Stelle."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Sie [bewirbt] sich bei einer Bank um eine Stelle.",
+          "en": "She applies to a bank for a job."
+        }
+      ]
+    },
+    {
+      "id": "die-bewerbung",
+      "lemma": "Bewerbung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "application"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "sich-bewerben",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Bewerbungen"
+      },
+      "rektion": [
+        {
+          "pattern": "die Bewerbung {0} etw.",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "application for sth."
+        }
+      ],
+      "collocations": [
+        {
+          "de": "eine Bewerbung [schicken]",
+          "en": "to send an application",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Ihre [Bewerbung] ist gestern eingegangen.",
+          "en": "Your application arrived yesterday."
+        }
+      ]
+    },
+    {
+      "id": "der-bewerber",
+      "lemma": "Bewerber",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "applicant"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "sich-bewerben",
+        "type": "agent"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Bewerber",
+        "genitive": "Bewerbers",
+        "declension": "strong"
+      },
+      "examples": [
+        {
+          "de": "Der [Bewerber] hat zwei Jahre Erfahrung.",
+          "en": "The applicant has two years of experience."
+        }
+      ]
+    },
+    {
+      "id": "die-stelle",
+      "lemma": "Stelle",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "job",
+            "position",
+            "post"
+          ],
+          "hint": "work"
+        },
+        {
+          "en": [
+            "place",
+            "spot"
+          ],
+          "hint": "location"
+        }
+      ],
+      "derivation": {
+        "from": "stellen",
+        "type": "other"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Stellen"
+      },
+      "collocations": [
+        {
+          "de": "eine Stelle [ausschreiben]",
+          "en": "to advertise a position",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die [Stelle] ist ab sofort frei.",
+          "en": "The position is available immediately."
+        }
+      ]
+    },
+    {
+      "id": "die-stellenanzeige",
+      "lemma": "Stellenanzeige",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "job advertisement",
+            "job ad"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "die-stelle",
+        "type": "compound"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Stellenanzeigen",
+        "compound": [
+          "die-stelle"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Ich habe die [Stellenanzeige] in der Zeitung gelesen.",
+          "en": "I read the job ad in the newspaper."
+        }
+      ]
+    },
+    {
+      "id": "der-lebenslauf",
+      "lemma": "Lebenslauf",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "CV",
+            "résumé"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "m",
+        "plural": "Lebensläufe",
+        "genitive": "Lebenslaufs",
+        "declension": "strong"
+      },
+      "collocations": [
+        {
+          "de": "den Lebenslauf [beifügen]",
+          "en": "to attach the CV",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Bitte schicken Sie uns Ihren [Lebenslauf].",
+          "en": "Please send us your CV."
+        }
+      ]
+    },
+    {
+      "id": "das-anschreiben",
+      "lemma": "Anschreiben",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "cover letter"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "n",
+        "plural": "Anschreiben",
+        "genitive": "Anschreibens"
+      },
+      "examples": [
+        {
+          "de": "Im [Anschreiben] erklären Sie Ihre Motivation.",
+          "en": "In the cover letter you explain your motivation."
+        }
+      ]
+    },
+    {
+      "id": "die-unterlagen",
+      "lemma": "Unterlagen",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "documents",
+            "papers"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Unterlagen",
+        "number": "plural-only"
+      },
+      "examples": [
+        {
+          "de": "Bitte reichen Sie alle [Unterlagen] ein.",
+          "en": "Please submit all documents."
+        }
+      ]
+    },
+    {
+      "id": "das-zeugnis",
+      "lemma": "Zeugnis",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "certificate",
+            "reference",
+            "report card"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "n",
+        "plural": "Zeugnisse",
+        "genitive": "Zeugnisses",
+        "declension": "strong"
+      },
+      "examples": [
+        {
+          "de": "Das [Zeugnis] liegt der Bewerbung bei.",
+          "en": "The certificate is enclosed with the application."
+        }
+      ]
+    },
+    {
+      "id": "die-erfahrung",
+      "lemma": "Erfahrung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "experience"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Erfahrungen"
+      },
+      "collocations": [
+        {
+          "de": "Erfahrungen [sammeln]",
+          "en": "to gain experience",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Sie hat viel [Erfahrung] im Verkauf.",
+          "en": "She has a lot of experience in sales."
+        }
+      ]
+    },
+    {
+      "id": "die-voraussetzung",
+      "lemma": "Voraussetzung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "requirement",
+            "prerequisite"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "voraussetzen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Voraussetzungen"
+      },
+      "collocations": [
+        {
+          "de": "Voraussetzungen [erfüllen]",
+          "en": "to meet the requirements",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Gute Deutschkenntnisse sind eine wichtige [Voraussetzung].",
+          "en": "Good German skills are an important requirement."
+        }
+      ]
+    },
+    {
+      "id": "voraussetzen",
+      "lemma": "voraussetzen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to presuppose",
+            "to require"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "separable": true,
+        "prefix": "voraus"
+      },
+      "examples": [
+        {
+          "de": "Diese Stelle [setzt] gute Englischkenntnisse [voraus].",
+          "en": "This job requires good English skills."
+        }
+      ]
+    },
+    {
+      "id": "die-qualifikation",
+      "lemma": "Qualifikation",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "qualification"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Qualifikationen"
+      },
+      "examples": [
+        {
+          "de": "Seine [Qualifikation] passt zur Stelle.",
+          "en": "His qualification suits the position."
+        }
+      ]
+    },
+    {
+      "id": "qualifiziert",
+      "lemma": "qualifiziert",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "qualified",
+            "skilled"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "die-qualifikation",
+        "type": "adjective"
+      },
+      "examples": [
+        {
+          "de": "Wir suchen [qualifizierte] Mitarbeiter.",
+          "en": "We are looking for qualified employees."
+        }
+      ]
+    },
+    {
+      "id": "einstellen",
+      "lemma": "einstellen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to hire",
+            "to employ"
+          ]
+        },
+        {
+          "en": [
+            "to stop",
+            "to discontinue"
+          ],
+          "hint": "production"
+        },
+        {
+          "en": [
+            "to adjust",
+            "to set"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "stellen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "weak",
+        "separable": true,
+        "prefix": "ein",
+        "conjugatesLike": "stellen"
+      },
+      "examples": [
+        {
+          "de": "Die Firma [stellt] neue Mitarbeiter [ein].",
+          "en": "The company hires new employees."
+        }
+      ]
+    },
+    {
+      "id": "die-einstellung",
+      "lemma": "Einstellung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "hiring",
+            "recruitment"
+          ],
+          "hint": "job"
+        },
+        {
+          "en": [
+            "attitude"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "einstellen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Einstellungen"
+      },
+      "examples": [
+        {
+          "de": "Die [Einstellung] neuer Mitarbeiter ist geplant.",
+          "en": "The hiring of new employees is planned."
+        }
+      ]
+    },
+    {
+      "id": "sich-vorstellen",
+      "lemma": "sich vorstellen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to introduce oneself"
+          ],
+          "hint": "Akk: sich vorstellen"
+        },
+        {
+          "en": [
+            "to imagine"
+          ],
+          "hint": "Dat: sich (Dat) etw. vorstellen"
+        }
+      ],
+      "derivation": {
+        "from": "stellen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "weak",
+        "separable": true,
+        "prefix": "vor",
+        "reflexive": "akk",
+        "conjugatesLike": "stellen"
+      },
+      "rektion": [
+        {
+          "pattern": "sich {0} jdm. vorstellen",
+          "slots": [
+            {
+              "prep": "bei",
+              "case": "Dat",
+              "obj": "person"
+            }
+          ],
+          "en": "to go for an interview at sb.",
+          "example": "Er stellt sich [bei] der Firma vor."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Er [stellt] sich morgen bei der Firma [vor].",
+          "en": "He is introducing himself at the company tomorrow."
+        }
+      ]
+    },
+    {
+      "id": "die-vorstellung",
+      "lemma": "Vorstellung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "introduction",
+            "idea",
+            "performance"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "sich-vorstellen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Vorstellungen"
+      },
+      "examples": [
+        {
+          "de": "Seine [Vorstellung] vom Beruf war unrealistisch.",
+          "en": "His idea of the profession was unrealistic."
+        }
+      ]
+    },
+    {
+      "id": "das-vorstellungsgespraech",
+      "lemma": "Vorstellungsgespräch",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "job interview"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "die-vorstellung",
+        "type": "compound"
+      },
+      "noun": {
+        "gender": "n",
+        "plural": "Vorstellungsgespräche",
+        "genitive": "Vorstellungsgesprächs",
+        "declension": "strong",
+        "compound": [
+          "die-vorstellung"
+        ]
+      },
+      "collocations": [
+        {
+          "de": "ein Vorstellungsgespräch [führen]",
+          "en": "to hold an interview",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Zum [Vorstellungsgespräch] trägt er einen Anzug.",
+          "en": "He wears a suit to the job interview."
+        }
+      ]
+    },
+    {
+      "id": "der-kollege",
+      "lemma": "Kollege",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "colleague"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "m",
+        "plural": "Kollegen",
+        "genitive": "Kollegen",
+        "declension": "weak-n"
+      },
+      "examples": [
+        {
+          "de": "Ich habe mit dem [Kollegen] gesprochen.",
+          "en": "I spoke with the colleague."
+        }
+      ]
+    }
+  ],
+  "text": {
+    "id": "die-erste-bewerbung",
+    "title": "Die erste Bewerbung",
+    "paragraphs": [
+      "Wer sich um eine Stelle bewerben möchte, liest zuerst die Stellenanzeige genau. Dort steht, welche Voraussetzungen und Qualifikationen die Firma erwartet. Dann schreibt man ein kurzes Anschreiben und fügt den Lebenslauf bei.",
+      "Zu den Unterlagen gehören außerdem das letzte Zeugnis und, wenn vorhanden, Nachweise über Erfahrung im Beruf. Viele Firmen wünschen sich eine Bewerbung per E-Mail.",
+      "Passt der Bewerber gut zur Stelle, wird er zum Vorstellungsgespräch eingeladen. Dort sollte er sich freundlich vorstellen und Fragen der Kollegen ruhig beantworten. Nach dem Gespräch entscheidet die Firma, wen sie einstellt."
+    ],
+    "uses": [
+      "sich-bewerben",
+      "die-stelle",
+      "die-stellenanzeige",
+      "die-voraussetzung",
+      "die-qualifikation",
+      "das-anschreiben",
+      "der-lebenslauf",
+      "die-unterlagen",
+      "das-zeugnis",
+      "die-erfahrung",
+      "die-bewerbung",
+      "der-bewerber",
+      "das-vorstellungsgespraech",
+      "sich-vorstellen",
+      "einstellen"
+    ],
+    "questions": [
+      {
+        "type": "rfn",
+        "prompt": "Man liest zuerst die Stellenanzeige.",
+        "answer": "richtig"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Die Bewerbung muss immer per Post geschickt werden.",
+        "answer": "falsch"
+      },
+      {
+        "type": "heading",
+        "paragraph": 3,
+        "options": [
+          "Das Vorstellungsgespräch",
+          "Die Suche nach einer Wohnung",
+          "Der erste Arbeitstag"
+        ],
+        "answer": 0
+      },
+      {
+        "type": "rfn",
+        "prompt": "Die Firma bezahlt die Reisekosten zum Gespräch.",
+        "answer": "nicht_im_text"
+      }
+    ]
+  }
+}

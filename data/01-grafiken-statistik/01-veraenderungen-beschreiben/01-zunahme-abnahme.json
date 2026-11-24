@@ -1,0 +1,947 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "zunahme-abnahme",
+  "name": "Zunahme und Abnahme",
+  "words": [
+    {
+      "id": "nehmen",
+      "lemma": "nehmen",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "to take"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "nimmt",
+          "praeteritum": "nahm",
+          "partizip2": "genommen",
+          "aux": "haben"
+        },
+        "praesens": {
+          "du": "nimmst"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Sie [nimmt] jeden Morgen den Zug.",
+          "en": "She takes the train every morning."
+        }
+      ]
+    },
+    {
+      "id": "zunehmen",
+      "lemma": "zunehmen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to increase",
+            "to grow"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "nehmen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "zu",
+        "conjugatesLike": "nehmen"
+      },
+      "rektion": [
+        {
+          "pattern": "um {0} zunehmen",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to increase by sth.",
+          "example": "Die Zahl nimmt um zehn Prozent [zu]."
+        }
+      ],
+      "synonyms": [
+        {
+          "id": "steigen",
+          "contrast": "zunehmen takes haben (hat zugenommen); steigen, ansteigen and wachsen take sein",
+          "example": "Die Zahl der Studierenden hat in den letzten Jahren stark [zugenommen]."
+        },
+        {
+          "id": "ansteigen",
+          "contrast": "zunehmen takes haben (hat zugenommen); steigen, ansteigen and wachsen take sein",
+          "example": "Die Zahl der Studierenden hat in den letzten Jahren stark [zugenommen]."
+        },
+        {
+          "id": "wachsen",
+          "contrast": "zunehmen takes haben (hat zugenommen); steigen, ansteigen and wachsen take sein",
+          "example": "Die Zahl der Studierenden hat in den letzten Jahren stark [zugenommen]."
+        }
+      ],
+      "antonyms": [
+        "abnehmen"
+      ],
+      "examples": [
+        {
+          "de": "Der Verkehr [nimmt] jedes Jahr [zu].",
+          "en": "Traffic increases every year."
+        },
+        {
+          "de": "Die Zahl der Studierenden hat in den letzten Jahren stark [zugenommen].",
+          "en": "The number of students has increased strongly in recent years."
+        }
+      ]
+    },
+    {
+      "id": "die-zunahme",
+      "lemma": "Zunahme",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "increase",
+            "growth"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "zunehmen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Zunahmen"
+      },
+      "rektion": [
+        {
+          "pattern": "die Zunahme {0} etw.",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "an increase by sth.",
+          "example": "Die [Zunahme] um fünf Prozent war erwartet."
+        }
+      ],
+      "antonyms": [
+        "die-abnahme"
+      ],
+      "collocations": [
+        {
+          "de": "eine Zunahme [verzeichnen]",
+          "en": "to record an increase",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Es gab eine deutliche [Zunahme] der Arbeitslosigkeit.",
+          "en": "There was a clear increase in unemployment."
+        }
+      ]
+    },
+    {
+      "id": "abnehmen",
+      "lemma": "abnehmen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to decrease",
+            "to decline"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "nehmen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "ab",
+        "conjugatesLike": "nehmen"
+      },
+      "rektion": [
+        {
+          "pattern": "um {0} abnehmen",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to decrease by sth."
+        }
+      ],
+      "synonyms": [
+        {
+          "id": "sinken",
+          "contrast": "abnehmen takes haben (hat abgenommen); sinken and zurückgehen take sein; sich verringern needs sich",
+          "example": "Der Anteil der Raucher hat stark [abgenommen]."
+        },
+        {
+          "id": "zurueckgehen",
+          "contrast": "abnehmen takes haben (hat abgenommen); sinken and zurückgehen take sein; sich verringern needs sich",
+          "example": "Der Anteil der Raucher hat stark [abgenommen]."
+        },
+        {
+          "id": "sich-verringern",
+          "contrast": "abnehmen takes haben (hat abgenommen); sinken and zurückgehen take sein; sich verringern needs sich",
+          "example": "Der Anteil der Raucher hat stark [abgenommen]."
+        }
+      ],
+      "antonyms": [
+        "zunehmen"
+      ],
+      "examples": [
+        {
+          "de": "Die Zahl der Raucher [nimmt] seit Jahren [ab].",
+          "en": "The number of smokers has been decreasing for years."
+        },
+        {
+          "de": "Der Anteil der Raucher hat stark [abgenommen].",
+          "en": "The share of smokers has decreased strongly."
+        }
+      ]
+    },
+    {
+      "id": "die-abnahme",
+      "lemma": "Abnahme",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "decrease",
+            "decline"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "abnehmen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Abnahmen"
+      },
+      "antonyms": [
+        "die-zunahme"
+      ],
+      "examples": [
+        {
+          "de": "Die [Abnahme] der Geburten ist deutlich.",
+          "en": "The decrease in births is clear."
+        }
+      ]
+    },
+    {
+      "id": "steigen",
+      "lemma": "steigen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to rise",
+            "to climb"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "steigt",
+          "praeteritum": "stieg",
+          "partizip2": "gestiegen",
+          "aux": "sein"
+        },
+        "irregular": [
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "um {0} steigen",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to rise by sth."
+        },
+        {
+          "pattern": "auf {0} steigen",
+          "slots": [
+            {
+              "prep": "auf",
+              "case": "Akk"
+            }
+          ],
+          "en": "to rise to sth."
+        }
+      ],
+      "antonyms": [
+        "sinken"
+      ],
+      "examples": [
+        {
+          "de": "Die Preise [steigen] seit Monaten.",
+          "en": "Prices have been rising for months."
+        }
+      ]
+    },
+    {
+      "id": "ansteigen",
+      "lemma": "ansteigen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to rise",
+            "to go up"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "steigen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "an",
+        "conjugatesLike": "steigen"
+      },
+      "rektion": [
+        {
+          "pattern": "um {0} ansteigen",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to rise by sth."
+        },
+        {
+          "pattern": "auf {0} ansteigen",
+          "slots": [
+            {
+              "prep": "auf",
+              "case": "Akk"
+            }
+          ],
+          "en": "to rise to sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Zahl der Besucher [steigt] im Sommer stark [an].",
+          "en": "The number of visitors rises sharply in summer."
+        }
+      ]
+    },
+    {
+      "id": "der-anstieg",
+      "lemma": "Anstieg",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "rise",
+            "increase"
+          ],
+          "hint": "noun, der …",
+          "domain": "statistics"
+        }
+      ],
+      "derivation": {
+        "from": "ansteigen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Anstiege",
+        "genitive": "Anstiegs",
+        "declension": "strong",
+        "number": "both"
+      },
+      "rektion": [
+        {
+          "pattern": "der Anstieg {0} etw.",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "a rise by sth."
+        }
+      ],
+      "antonyms": [
+        "der-rueckgang"
+      ],
+      "collocations": [
+        {
+          "de": "einen Anstieg [verzeichnen]",
+          "en": "to record a rise",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Der [Anstieg] der Preise betrug drei Prozent.",
+          "en": "The rise in prices was three per cent."
+        }
+      ]
+    },
+    {
+      "id": "sinken",
+      "lemma": "sinken",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to fall",
+            "to sink",
+            "to decrease"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "sinkt",
+          "praeteritum": "sank",
+          "partizip2": "gesunken",
+          "aux": "sein"
+        },
+        "irregular": [
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "auf {0} sinken",
+          "slots": [
+            {
+              "prep": "auf",
+              "case": "Akk"
+            }
+          ],
+          "en": "to fall to sth."
+        },
+        {
+          "pattern": "um {0} sinken",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to fall by sth."
+        }
+      ],
+      "antonyms": [
+        "steigen"
+      ],
+      "examples": [
+        {
+          "de": "Die Zahl der Unfälle [ist] auf 120 [gesunken].",
+          "en": "The number of accidents has fallen to 120."
+        }
+      ]
+    },
+    {
+      "id": "gehen",
+      "lemma": "gehen",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "to go",
+            "to walk"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "geht",
+          "praeteritum": "ging",
+          "partizip2": "gegangen",
+          "aux": "sein"
+        },
+        "irregular": [
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Wir [gehen] zu Fuß zur Universität.",
+          "en": "We walk to university."
+        }
+      ]
+    },
+    {
+      "id": "zurueckgehen",
+      "lemma": "zurückgehen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to decline",
+            "to fall",
+            "to go back"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "gehen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "zurück",
+        "conjugatesLike": "gehen"
+      },
+      "rektion": [
+        {
+          "pattern": "um {0} zurückgehen",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to fall by sth."
+        },
+        {
+          "pattern": "auf {0} zurückgehen",
+          "slots": [
+            {
+              "prep": "auf",
+              "case": "Akk"
+            }
+          ],
+          "en": "to fall to sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Zahl der Arbeitslosen [geht] seit Jahren [zurück].",
+          "en": "The number of unemployed has been falling for years."
+        }
+      ]
+    },
+    {
+      "id": "der-rueckgang",
+      "lemma": "Rückgang",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "decline",
+            "fall"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "zurueckgehen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Rückgänge",
+        "genitive": "Rückgangs",
+        "declension": "strong"
+      },
+      "antonyms": [
+        "der-anstieg"
+      ],
+      "collocations": [
+        {
+          "de": "einen Rückgang [verzeichnen]",
+          "en": "to record a decline",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Der [Rückgang] der Geburtenrate ist deutlich.",
+          "en": "The decline in the birth rate is clear."
+        }
+      ]
+    },
+    {
+      "id": "wachsen",
+      "lemma": "wachsen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to grow"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "wächst",
+          "praeteritum": "wuchs",
+          "partizip2": "gewachsen",
+          "aux": "sein"
+        },
+        "praesens": {
+          "du": "wächst"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "um {0} wachsen",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to grow by sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Weltbevölkerung [wächst] weiter.",
+          "en": "The world population continues to grow."
+        }
+      ]
+    },
+    {
+      "id": "das-wachstum",
+      "lemma": "Wachstum",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "growth"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "wachsen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "n",
+        "plural": null,
+        "genitive": "Wachstums",
+        "declension": "strong",
+        "number": "singular-only"
+      },
+      "collocations": [
+        {
+          "de": "das Wachstum [fördern]",
+          "en": "to promote growth",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Das [Wachstum] der Stadt verläuft schnell.",
+          "en": "The growth of the city is rapid."
+        }
+      ]
+    },
+    {
+      "id": "sich-verdoppeln",
+      "lemma": "sich verdoppeln",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to double"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "reflexive": "akk",
+        "transitive": false
+      },
+      "examples": [
+        {
+          "de": "Die Zahl der Nutzer hat [sich] innerhalb eines Jahres [verdoppelt].",
+          "en": "The number of users doubled within a year."
+        }
+      ]
+    },
+    {
+      "id": "sich-verringern",
+      "lemma": "sich verringern",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to decrease",
+            "to diminish"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "weak",
+        "reflexive": "akk",
+        "transitive": false
+      },
+      "rektion": [
+        {
+          "pattern": "sich {0} verringern",
+          "slots": [
+            {
+              "prep": "um",
+              "case": "Akk"
+            }
+          ],
+          "en": "to decrease by sth.",
+          "example": "Die Kosten verringern sich [um] zehn Prozent."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Zahl der Unfälle hat [sich] um zehn Prozent [verringert].",
+          "en": "The number of accidents decreased by ten per cent."
+        }
+      ]
+    },
+    {
+      "id": "die-verringerung",
+      "lemma": "Verringerung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "decrease",
+            "reduction"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "sich-verringern",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Verringerungen"
+      },
+      "examples": [
+        {
+          "de": "Eine [Verringerung] der Kosten ist geplant.",
+          "en": "A reduction in costs is planned."
+        }
+      ]
+    },
+    {
+      "id": "deutlich",
+      "lemma": "deutlich",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "clear",
+            "clearly",
+            "distinct",
+            "significant"
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Preise sind [deutlich] gestiegen.",
+          "en": "Prices have risen significantly."
+        }
+      ]
+    },
+    {
+      "id": "leicht",
+      "lemma": "leicht",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "light"
+          ],
+          "hint": "not heavy"
+        },
+        {
+          "en": [
+            "slight",
+            "slightly"
+          ],
+          "hint": "small (change)",
+          "domain": "statistics"
+        },
+        {
+          "en": [
+            "easy"
+          ],
+          "hint": "not difficult"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Zahl ist nur [leicht] gestiegen.",
+          "en": "The number rose only slightly."
+        }
+      ]
+    },
+    {
+      "id": "der-hoechststand",
+      "lemma": "Höchststand",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "peak",
+            "record high"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "hoch",
+        "type": "compound"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Höchststände",
+        "genitive": "Höchststands",
+        "declension": "strong"
+      },
+      "collocations": [
+        {
+          "de": "einen Höchststand [erreichen]",
+          "en": "to reach a peak",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Arbeitslosigkeit erreichte 2009 ihren [Höchststand].",
+          "en": "Unemployment reached its peak in 2009."
+        }
+      ]
+    },
+    {
+      "id": "hoch",
+      "lemma": "hoch",
+      "pos": "adj",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "high",
+            "tall"
+          ]
+        }
+      ],
+      "adj": {
+        "komparativ": "höher",
+        "superlativ": "am höchsten",
+        "irregular": true
+      },
+      "examples": [
+        {
+          "de": "Die Kosten sind sehr [hoch].",
+          "en": "The costs are very high."
+        }
+      ]
+    }
+  ],
+  "text": {
+    "id": "mehr-studierende-weniger-raucher",
+    "title": "Mehr Studierende, weniger Raucher",
+    "paragraphs": [
+      "In den letzten zwanzig Jahren hat sich die Zahl der Studierenden in Deutschland deutlich verändert. Im Jahr 2000 gab es rund 1,8 Millionen Studierende, heute sind es fast drei Millionen. Der Anstieg verlief nicht gleichmäßig: Zwischen 2000 und 2005 nahm die Zahl nur leicht zu, danach wuchs sie viel schneller.",
+      "Gleichzeitig ist der Anteil der Raucher unter jungen Menschen gesunken. Im Jahr 2001 rauchten noch fast 28 Prozent der Jugendlichen, 2020 waren es nur noch etwa sieben Prozent. Experten erklären den Rückgang vor allem mit höheren Preisen und strengeren Gesetzen.",
+      "Ob sich diese Entwicklung fortsetzt, ist offen. Fest steht: Die Zahl der Studierenden wird in den nächsten Jahren voraussichtlich weiter zunehmen, auch wenn sie nicht mehr so schnell wächst wie früher."
+    ],
+    "uses": [
+      "zunehmen",
+      "der-anstieg",
+      "sinken",
+      "der-rueckgang",
+      "deutlich",
+      "leicht",
+      "wachsen"
+    ],
+    "questions": [
+      {
+        "type": "rfn",
+        "prompt": "Im Jahr 2000 gab es weniger Studierende als heute.",
+        "answer": "richtig"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Der Anteil der rauchenden Jugendlichen ist gestiegen.",
+        "answer": "falsch"
+      },
+      {
+        "type": "mc",
+        "prompt": "Wie erklären Experten den Rückgang beim Rauchen?",
+        "options": [
+          "Mit weniger Freizeit",
+          "Mit höheren Preisen und strengeren Gesetzen",
+          "Mit mehr Sportangeboten"
+        ],
+        "answer": 1
+      },
+      {
+        "type": "rfn",
+        "prompt": "Die meisten Studierenden wohnen bei ihren Eltern.",
+        "answer": "nicht_im_text"
+      }
+    ]
+  }
+}

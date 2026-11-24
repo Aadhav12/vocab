@@ -1,0 +1,7 @@
+{
+  "$schema": "../../app/schema/topic.schema.json",
+  "schemaVersion": 1,
+  "id": "arbeit-berufe",
+  "name": "Arbeit & Berufe",
+  "description": "Everyday vocabulary around work and applying for jobs."
+}

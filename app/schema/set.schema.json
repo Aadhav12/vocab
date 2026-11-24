@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "set.schema.json",
+  "title": "Set file",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "words"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "words": {
+      "type": "array",
+      "items": {
+        "$ref": "word.schema.json"
+      }
+    },
+    "text": {
+      "$ref": "text.schema.json"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "../../app/schema/topic.schema.json",
+  "schemaVersion": 1,
+  "id": "grafiken-statistik",
+  "name": "Grafiken & Statistik",
+  "description": "Describing graphs, surveys and statistics (TestDaF Teil 3/4)."
+}

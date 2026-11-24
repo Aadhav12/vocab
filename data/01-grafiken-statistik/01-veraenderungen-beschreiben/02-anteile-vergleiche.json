@@ -1,0 +1,796 @@
+{
+  "$schema": "../../../app/schema/set.schema.json",
+  "schemaVersion": 1,
+  "id": "anteile-vergleiche",
+  "name": "Anteile und Vergleiche",
+  "words": [
+    {
+      "id": "teilen",
+      "lemma": "teilen",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "to divide",
+            "to share"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "weak"
+      },
+      "rektion": [
+        {
+          "pattern": "etw. {0} etw. teilen",
+          "slots": [
+            {
+              "prep": "durch",
+              "case": "Akk"
+            }
+          ],
+          "en": "to divide sth. by sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Wir [teilen] die Kosten durch zwei.",
+          "en": "We divide the costs by two."
+        }
+      ]
+    },
+    {
+      "id": "der-anteil",
+      "lemma": "Anteil",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "share",
+            "proportion"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "teilen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Anteile",
+        "genitive": "Anteils",
+        "declension": "strong"
+      },
+      "rektion": [
+        {
+          "pattern": "der Anteil {0} etw.",
+          "slots": [
+            {
+              "prep": "an",
+              "case": "Dat"
+            }
+          ],
+          "en": "the share in sth.",
+          "example": "Der [Anteil] an der Bevölkerung wächst."
+        }
+      ],
+      "collocations": [
+        {
+          "de": "einen Anteil von 20 Prozent [ausmachen]",
+          "en": "to make up a share of 20 per cent",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Der [Anteil] der Frauen liegt bei 52 Prozent.",
+          "en": "The share of women is 52 per cent."
+        }
+      ]
+    },
+    {
+      "id": "verteilen",
+      "lemma": "verteilen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to distribute",
+            "to spread"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "teilen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "weak",
+        "separable": false,
+        "prefix": "ver"
+      },
+      "rektion": [
+        {
+          "pattern": "etw. {0} etw. verteilen",
+          "slots": [
+            {
+              "prep": "auf",
+              "case": "Akk"
+            }
+          ],
+          "en": "to distribute sth. among sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Aufgaben [werden] gleichmäßig [verteilt].",
+          "en": "The tasks are distributed evenly."
+        }
+      ]
+    },
+    {
+      "id": "die-verteilung",
+      "lemma": "Verteilung",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "distribution"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "verteilen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Verteilungen"
+      },
+      "examples": [
+        {
+          "de": "Die [Verteilung] der Einkommen ist ungleich.",
+          "en": "The distribution of incomes is unequal."
+        }
+      ]
+    },
+    {
+      "id": "vergleichen",
+      "lemma": "vergleichen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to compare"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "vergleicht",
+          "praeteritum": "verglich",
+          "partizip2": "verglichen",
+          "aux": "haben"
+        },
+        "irregular": [
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "etw. {0} etw. vergleichen",
+          "slots": [
+            {
+              "prep": "mit",
+              "case": "Dat"
+            }
+          ],
+          "en": "to compare sth. with sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die Studie [vergleicht] die Einkommen in Ost und West.",
+          "en": "The study compares incomes in East and West."
+        }
+      ]
+    },
+    {
+      "id": "der-vergleich",
+      "lemma": "Vergleich",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "comparison"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "vergleichen",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "m",
+        "plural": "Vergleiche",
+        "genitive": "Vergleichs",
+        "declension": "strong"
+      },
+      "rektion": [
+        {
+          "pattern": "der Vergleich {0} etw.",
+          "slots": [
+            {
+              "prep": "mit",
+              "case": "Dat"
+            }
+          ],
+          "en": "the comparison with sth."
+        }
+      ],
+      "collocations": [
+        {
+          "de": "einen Vergleich [anstellen]",
+          "en": "to make a comparison",
+          "type": "funktionsverbgefuege"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Der [Vergleich] zeigt große Unterschiede.",
+          "en": "The comparison shows big differences."
+        }
+      ]
+    },
+    {
+      "id": "vergleichbar",
+      "lemma": "vergleichbar",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "comparable"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "vergleichen",
+        "type": "adjective"
+      },
+      "rektion": [
+        {
+          "pattern": "mit {0} vergleichbar",
+          "slots": [
+            {
+              "prep": "mit",
+              "case": "Dat"
+            }
+          ],
+          "en": "comparable with sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die beiden Werte sind nicht [vergleichbar].",
+          "en": "The two values are not comparable."
+        }
+      ]
+    },
+    {
+      "id": "im-vergleich-zu",
+      "lemma": "im Vergleich zu",
+      "pos": "phrase",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "compared to",
+            "in comparison with"
+          ]
+        }
+      ],
+      "phrase": {
+        "governs": "Dat",
+        "fixed": true
+      },
+      "examples": [
+        {
+          "de": "[Im Vergleich zu] 2010 ist die Zahl gestiegen.",
+          "en": "Compared to 2010, the number has risen."
+        },
+        {
+          "de": "Im Vergleich zu [den] Vorjahren ist die Zahl gestiegen.",
+          "en": "Compared to previous years, the number has risen."
+        }
+      ]
+    },
+    {
+      "id": "tragen",
+      "lemma": "tragen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to carry",
+            "to bear"
+          ]
+        },
+        {
+          "en": [
+            "to wear"
+          ],
+          "hint": "clothing"
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "trägt",
+          "praeteritum": "trug",
+          "partizip2": "getragen",
+          "aux": "haben"
+        },
+        "praesens": {
+          "du": "trägst"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "examples": [
+        {
+          "de": "Sie [trägt] eine schwere Tasche.",
+          "en": "She is carrying a heavy bag."
+        }
+      ]
+    },
+    {
+      "id": "betragen",
+      "lemma": "betragen",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to amount to",
+            "to total"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "tragen",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": false,
+        "prefix": "be",
+        "conjugatesLike": "tragen"
+      },
+      "examples": [
+        {
+          "de": "Der Anteil [beträgt] 20 Prozent.",
+          "en": "The share amounts to 20 per cent."
+        }
+      ]
+    },
+    {
+      "id": "die-mehrheit",
+      "lemma": "Mehrheit",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "majority"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Mehrheiten"
+      },
+      "antonyms": [
+        "die-minderheit"
+      ],
+      "collocations": [
+        {
+          "de": "die Mehrheit [bilden]",
+          "en": "to form the majority",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Die [Mehrheit] der Befragten ist dafür.",
+          "en": "The majority of respondents are in favour."
+        }
+      ]
+    },
+    {
+      "id": "die-minderheit",
+      "lemma": "Minderheit",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "minority"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Minderheiten"
+      },
+      "antonyms": [
+        "die-mehrheit"
+      ],
+      "examples": [
+        {
+          "de": "Nur eine [Minderheit] arbeitet in Teilzeit.",
+          "en": "Only a minority works part-time."
+        }
+      ]
+    },
+    {
+      "id": "der-durchschnitt",
+      "lemma": "Durchschnitt",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "average"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "m",
+        "plural": "Durchschnitte",
+        "genitive": "Durchschnitts",
+        "declension": "strong"
+      },
+      "collocations": [
+        {
+          "de": "über dem [Durchschnitt] liegen",
+          "en": "to be above average",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Im [Durchschnitt] verdienen sie 2000 Euro.",
+          "en": "On average they earn 2,000 euros."
+        }
+      ]
+    },
+    {
+      "id": "durchschnittlich",
+      "lemma": "durchschnittlich",
+      "pos": "adj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "average",
+            "on average"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "der-durchschnitt",
+        "type": "adjective"
+      },
+      "adj": {
+        "noComparison": true
+      },
+      "examples": [
+        {
+          "de": "Die [durchschnittliche] Dauer beträgt zwei Jahre.",
+          "en": "The average duration is two years."
+        }
+      ]
+    },
+    {
+      "id": "die-haelfte",
+      "lemma": "Hälfte",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "half"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "f",
+        "plural": "Hälften"
+      },
+      "examples": [
+        {
+          "de": "Die [Hälfte] der Studierenden jobbt neben dem Studium.",
+          "en": "Half of the students have a job alongside their studies."
+        }
+      ]
+    },
+    {
+      "id": "das-drittel",
+      "lemma": "Drittel",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "third"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "n",
+        "plural": "Drittel",
+        "genitive": "Drittels"
+      },
+      "examples": [
+        {
+          "de": "Ein [Drittel] der Befragten lehnt das ab.",
+          "en": "A third of the respondents reject it."
+        }
+      ]
+    },
+    {
+      "id": "das-prozent",
+      "lemma": "Prozent",
+      "pos": "noun",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "per cent",
+            "percentage"
+          ]
+        }
+      ],
+      "noun": {
+        "gender": "n",
+        "plural": "Prozente"
+      },
+      "examples": [
+        {
+          "de": "Der Anteil stieg um zehn [Prozent].",
+          "en": "The share rose by ten per cent."
+        }
+      ]
+    },
+    {
+      "id": "geben",
+      "lemma": "geben",
+      "pos": "verb",
+      "level": "A2",
+      "senses": [
+        {
+          "en": [
+            "to give"
+          ]
+        }
+      ],
+      "verb": {
+        "class": "strong",
+        "principal": {
+          "praesens3sg": "gibt",
+          "praeteritum": "gab",
+          "partizip2": "gegeben",
+          "aux": "haben"
+        },
+        "praesens": {
+          "du": "gibst"
+        },
+        "irregular": [
+          "praesens3sg",
+          "praeteritum",
+          "partizip2"
+        ]
+      },
+      "rektion": [
+        {
+          "pattern": "{0} jdm. {1} etw. geben",
+          "slots": [
+            {
+              "prep": null,
+              "case": "Dat",
+              "obj": "person"
+            },
+            {
+              "prep": null,
+              "case": "Akk",
+              "obj": "thing"
+            }
+          ],
+          "en": "to give sb. sth."
+        }
+      ],
+      "examples": [
+        {
+          "de": "Sie [gibt] ihm das Buch.",
+          "en": "She gives him the book."
+        }
+      ]
+    },
+    {
+      "id": "angeben",
+      "lemma": "angeben",
+      "pos": "verb",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "to state",
+            "to indicate"
+          ]
+        },
+        {
+          "en": [
+            "to show off",
+            "to boast"
+          ],
+          "register": "informal"
+        }
+      ],
+      "derivation": {
+        "from": "geben",
+        "type": "prefix-verb"
+      },
+      "verb": {
+        "class": "strong",
+        "separable": true,
+        "prefix": "an",
+        "conjugatesLike": "geben"
+      },
+      "examples": [
+        {
+          "de": "Die Befragten [geben] ihr Alter [an].",
+          "en": "The respondents state their age."
+        }
+      ]
+    },
+    {
+      "id": "die-angabe",
+      "lemma": "Angabe",
+      "pos": "noun",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "information",
+            "statement",
+            "figure"
+          ]
+        }
+      ],
+      "derivation": {
+        "from": "angeben",
+        "type": "nominalisation"
+      },
+      "noun": {
+        "gender": "f",
+        "plural": "Angaben"
+      },
+      "collocations": [
+        {
+          "de": "Angaben zur Person [machen]",
+          "en": "to give personal details",
+          "type": "noun-verb"
+        }
+      ],
+      "examples": [
+        {
+          "de": "Alle [Angaben] sind ohne Gewähr.",
+          "en": "All information is without guarantee."
+        }
+      ]
+    },
+    {
+      "id": "waehrend",
+      "lemma": "während",
+      "pos": "conj",
+      "level": "B1",
+      "senses": [
+        {
+          "en": [
+            "while",
+            "whereas"
+          ]
+        }
+      ],
+      "conj": {
+        "kind": "subordinating",
+        "verbPosition": "end",
+        "drills": [
+          {
+            "correct": "Während die Mieten steigen, sinken die Löhne.",
+            "distractors": [
+              "Während die Mieten steigen, die Löhne sinken.",
+              "Während steigen die Mieten, sinken die Löhne."
+            ]
+          },
+          {
+            "correct": "Der Absatz stieg, während die Kosten sanken.",
+            "distractors": [
+              "Der Absatz stieg, während sanken die Kosten.",
+              "Der Absatz stieg, während die sanken Kosten."
+            ]
+          }
+        ]
+      },
+      "examples": [
+        {
+          "de": "Der Umsatz stieg, [während] die Kosten sanken.",
+          "en": "Sales rose while costs fell."
+        }
+      ]
+    }
+  ],
+  "text": {
+    "id": "wofuer-studierende-geld-ausgeben",
+    "title": "Wofür Studierende ihr Geld ausgeben",
+    "paragraphs": [
+      "Eine aktuelle Studie vergleicht die Ausgaben von Studierenden in verschiedenen Städten. Im Durchschnitt beträgt das monatliche Budget etwa 950 Euro. Der größte Anteil, nämlich fast die Hälfte, geht für die Miete weg.",
+      "Für Essen und Trinken gibt die Mehrheit der Befragten rund ein Fünftel ihres Geldes aus. Etwa ein Drittel der Studierenden gibt an, neben dem Studium zu arbeiten, während nur eine kleine Minderheit von zehn Prozent keinerlei Unterstützung von den Eltern erhält.",
+      "Die Verteilung der Ausgaben unterscheidet sich je nach Stadt. Im Vergleich zu München sind die Mieten in Leipzig deutlich niedriger. Die Angaben der Studierenden zeigen aber: Die Aufteilung auf Essen, Freizeit und Kleidung ist überall ähnlich."
+    ],
+    "uses": [
+      "der-anteil",
+      "vergleichen",
+      "betragen",
+      "die-haelfte",
+      "das-drittel",
+      "die-mehrheit",
+      "die-minderheit",
+      "der-durchschnitt",
+      "angeben",
+      "die-angabe",
+      "die-verteilung",
+      "im-vergleich-zu",
+      "waehrend"
+    ],
+    "questions": [
+      {
+        "type": "heading",
+        "paragraph": 1,
+        "options": [
+          "Das Budget und die Miete",
+          "Studieren im Ausland",
+          "Wie man Geld spart"
+        ],
+        "answer": 0
+      },
+      {
+        "type": "rfn",
+        "prompt": "Fast die Hälfte des Budgets wird für die Miete ausgegeben.",
+        "answer": "richtig"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Die Mieten in Leipzig sind höher als in München.",
+        "answer": "falsch"
+      },
+      {
+        "type": "rfn",
+        "prompt": "Die meisten Studierenden leben in einer Wohngemeinschaft.",
+        "answer": "nicht_im_text"
+      }
+    ]
+  }
+}

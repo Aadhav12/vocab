@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../app/schema/text.schema.json",
+  "schemaVersion": 1,
+  "id": "daten-lesen-und-verstehen",
+  "title": "Daten lesen und verstehen",
+  "paragraphs": [
+    "Im Alltag begegnen uns ständig Zahlen: in der Zeitung, im Fernsehen und im Internet. Doch wer Daten richtig lesen will, muss einige Grundregeln kennen. Zuerst sollte man immer fragen, woher die Daten stammen. Die Quelle einer Statistik verrät viel über ihre Qualität. Eine Erhebung eines öffentlichen Amtes ist meist zuverlässiger als eine kleine Umfrage auf einer privaten Internetseite.",
+    "Wichtig ist außerdem der Zeitraum, auf den sich die Zahlen beziehen. Ein Anstieg innerhalb eines Jahres kann ganz anders aussehen als eine Entwicklung über zwanzig Jahre. Wenn die Zahl der Studierenden zwischen 2000 und 2020 stark zugenommen hat, bedeutet das nicht, dass sie jedes Jahr gleich stark gewachsen ist. Manche Jahre zeigen einen deutlichen Anstieg, andere nur eine leichte Veränderung oder sogar einen Rückgang.",
+    "Auch die Darstellung der Daten beeinflusst unser Urteil. Eine Grafik, in der die senkrechte Achse erst bei 90 Prozent beginnt, lässt einen kleinen Unterschied sehr groß erscheinen. Deshalb lohnt es sich, Diagramme und Tabellen genau zu prüfen. Aus einer guten Darstellung geht hervor, wie viele Personen befragt wurden, wann die Befragung stattfand und wie groß der Anteil der Befragten ist, die geantwortet haben.",
+    "Schließlich muss man das Ergebnis richtig deuten. Wenn eine Umfrage ergibt, dass die Mehrheit der Befragten mit ihrer Arbeit zufrieden ist, sagt das noch nichts über die Minderheit aus. Man sollte also nicht nur auf den Durchschnitt achten, sondern auch auf die Verteilung der Antworten. Im Vergleich zu früheren Erhebungen kann man oft erkennen, ob sich eine Meinung verändert hat. Vergleiche sind jedoch nur sinnvoll, wenn die Fragen gleich gestellt wurden.",
+    "Wer diese Regeln beachtet, kann Daten besser einschätzen und selbst Feststellungen treffen, die einer Prüfung standhalten. In der Prüfung zum TestDaF verlangt man genau das: Sie sollen eine Grafik beschreiben, die wichtigsten Angaben nennen und die Entwicklung in eigenen Worten darstellen. Wer die Wörter für Zunahme und Abnahme, für Anteile und Vergleiche sicher beherrscht, hat dabei einen großen Vorteil."
+  ],
+  "uses": [
+    "die-quelle",
+    "die-erhebung",
+    "der-zeitraum",
+    "der-anstieg",
+    "zunehmen",
+    "wachsen",
+    "deutlich",
+    "leicht",
+    "der-rueckgang",
+    "die-grafik",
+    "das-diagramm",
+    "die-tabelle",
+    "die-darstellung",
+    "hervorgehen",
+    "befragen",
+    "der-anteil",
+    "das-ergebnis",
+    "ergeben",
+    "die-mehrheit",
+    "die-minderheit",
+    "der-durchschnitt",
+    "die-verteilung",
+    "im-vergleich-zu",
+    "die-feststellung",
+    "angeben",
+    "darstellen",
+    "die-angabe"
+  ],
+  "questions": [
+    {
+      "type": "heading",
+      "paragraph": 3,
+      "options": [
+        "Der Einfluss der Darstellung",
+        "Die Geschichte der Statistik",
+        "Berufe mit Zahlen"
+      ],
+      "answer": 0
+    },
+    {
+      "type": "rfn",
+      "prompt": "Eine Erhebung eines öffentlichen Amtes ist meist zuverlässiger als eine kleine private Umfrage.",
+      "answer": "richtig"
+    },
+    {
+      "type": "rfn",
+      "prompt": "Die Zahl der Studierenden ist von 2000 bis 2020 jedes Jahr gleich stark gewachsen.",
+      "answer": "falsch"
+    },
+    {
+      "type": "mc",
+      "prompt": "Wann sind Vergleiche mit früheren Erhebungen sinnvoll?",
+      "options": [
+        "Wenn die Fragen gleich gestellt wurden.",
+        "Wenn die Umfrage im Internet stattfand.",
+        "Wenn mehr als 1000 Personen befragt wurden."
+      ],
+      "answer": 0
+    },
+    {
+      "type": "rfn",
+      "prompt": "In der Prüfung zum TestDaF darf man ein Wörterbuch benutzen.",
+      "answer": "nicht_im_text"
+    }
+  ]
+}

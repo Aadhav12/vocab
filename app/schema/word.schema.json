@@ -1,0 +1,558 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "word.schema.json",
+  "title": "Word entry",
+  "type": "object",
+  "required": [
+    "id",
+    "lemma",
+    "pos",
+    "senses",
+    "examples"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lemma": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pos": {
+      "enum": [
+        "noun",
+        "verb",
+        "adj",
+        "adv",
+        "prep",
+        "conj",
+        "phrase"
+      ]
+    },
+    "level": {
+      "enum": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ]
+    },
+    "senses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "en"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "en": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "hint": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "register": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "derivation": {
+      "type": "object",
+      "required": [
+        "from",
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "prefix-verb",
+            "nominalisation",
+            "agent",
+            "adjective",
+            "adverb",
+            "compound",
+            "other"
+          ]
+        }
+      }
+    },
+    "rektion": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "pattern",
+          "slots",
+          "en"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "minLength": 1
+          },
+          "en": {
+            "type": "string",
+            "minLength": 1
+          },
+          "example": {
+            "type": "string"
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "prep",
+                "case"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "prep": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "case": {
+                  "enum": [
+                    "Nom",
+                    "Akk",
+                    "Dat",
+                    "Gen"
+                  ]
+                },
+                "obj": {
+                  "enum": [
+                    "person",
+                    "thing"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "synonyms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "contrast",
+          "example"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contrast": {
+            "type": "string",
+            "minLength": 1
+          },
+          "example": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "antonyms": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "collocations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "de",
+          "en"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "de": {
+            "type": "string",
+            "minLength": 1
+          },
+          "en": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "noun-verb",
+              "funktionsverbgefuege",
+              "other"
+            ]
+          }
+        }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "de",
+          "en"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "de": {
+            "type": "string",
+            "minLength": 1
+          },
+          "en": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sense": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "noun": {
+      "type": "object",
+      "required": [
+        "gender"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "gender": {
+          "enum": [
+            "m",
+            "f",
+            "n"
+          ]
+        },
+        "plural": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "genitive": {
+          "type": "string"
+        },
+        "declension": {
+          "enum": [
+            "strong",
+            "weak-n",
+            "adjectival",
+            "mixed"
+          ]
+        },
+        "number": {
+          "enum": [
+            "both",
+            "singular-only",
+            "plural-only"
+          ]
+        },
+        "compound": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "forms": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "verb": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "class": {
+          "enum": [
+            "strong",
+            "weak",
+            "mixed",
+            "modal",
+            "irregular"
+          ]
+        },
+        "separable": {
+          "type": "boolean"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "reflexive": {
+          "enum": [
+            "none",
+            "akk",
+            "dat",
+            "optional"
+          ]
+        },
+        "transitive": {
+          "type": "boolean"
+        },
+        "conjugatesLike": {
+          "type": "string"
+        },
+        "principal": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "praesens3sg": {
+              "type": "string",
+              "minLength": 1
+            },
+            "praeteritum": {
+              "type": "string",
+              "minLength": 1
+            },
+            "partizip2": {
+              "type": "string",
+              "minLength": 1
+            },
+            "aux": {
+              "enum": [
+                "haben",
+                "sein",
+                "haben/sein"
+              ]
+            }
+          }
+        },
+        "praesens": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "du": {
+              "type": "string"
+            },
+            "er": {
+              "type": "string"
+            }
+          }
+        },
+        "konjunktiv2": {
+          "type": "string"
+        },
+        "imperativ": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "du": {
+              "type": "string"
+            },
+            "ihr": {
+              "type": "string"
+            }
+          }
+        },
+        "irregular": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "praesens3sg",
+              "praeteritum",
+              "partizip2",
+              "aux",
+              "du"
+            ]
+          }
+        }
+      }
+    },
+    "adj": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "komparativ": {
+          "type": "string"
+        },
+        "superlativ": {
+          "type": "string"
+        },
+        "noComparison": {
+          "type": "boolean"
+        },
+        "use": {
+          "enum": [
+            "both",
+            "attributive-only",
+            "predicative-only"
+          ]
+        },
+        "irregular": {
+          "type": "boolean"
+        }
+      }
+    },
+    "prep": {
+      "type": "object",
+      "required": [
+        "cases"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "Nom",
+              "Akk",
+              "Dat",
+              "Gen"
+            ]
+          }
+        },
+        "contractions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "position": {
+          "enum": [
+            "pre",
+            "post"
+          ]
+        },
+        "fill": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "de",
+              "en"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "de": {
+                "type": "string",
+                "minLength": 1
+              },
+              "en": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "conj": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "subordinating",
+            "coordinating",
+            "adverb",
+            "two-part"
+          ]
+        },
+        "verbPosition": {
+          "enum": [
+            "end",
+            "second",
+            "inverted"
+          ]
+        },
+        "pair": {
+          "type": "string"
+        },
+        "drills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "correct",
+              "distractors"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "correct": {
+                "type": "string",
+                "minLength": 1
+              },
+              "distractors": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "phrase": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "governs": {
+          "enum": [
+            "Nom",
+            "Akk",
+            "Dat",
+            "Gen"
+          ]
+        },
+        "fixed": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
