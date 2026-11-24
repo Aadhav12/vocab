@@ -57,10 +57,8 @@ export function Overview() {
 
 // ------------------------------------------------------------------ topic page / path
 function nodeState(n: PathNode, p: Progress, pos: Position, attempts: Attempt[]): 'done' | 'cur' | 'lock' | 'fail' | 'review' {
-  if (n.inserted) return attempts.length && !attempts[attempts.length - 1].passed ? 'fail' : 'review';
+  if (n.inserted) return 'review';
   if (p.passed[n.id]) return 'done';
-  const last = attempts[attempts.length - 1];
-  if (pos.node?.id === n.id && last && !last.passed) return 'fail';
   if (pos.node?.id === n.id && pos.inserts.length === 0) return 'cur';
   if (pos.node?.id === n.id) return 'lock';
   return 'lock';
@@ -200,18 +198,19 @@ export function History({ id }: { id: string }) {
   useStore((s) => s.attempts);
   const atts = attemptsFor(id);
   const node = path.byId.get(id);
-  const [openN, setOpenN] = useState<number | null>(atts.length ? atts.length - 1 : null);
+  const [openN, setOpenN] = useState<number | null>(null);
   const title = node ? `${node.name}${node.level === 'set' ? ' · ' + (idx.setById.get(node.scopeId)?.name ?? '') : ''}` : id;
   return (
     <div className="card" style={{ marginTop: 24 }}>
       <div className="screen-head"><h3>Node history · {title}</h3><span className="counter">{atts.length} attempt{atts.length === 1 ? '' : 's'}</span></div>
       {!atts.length ? <p className="muted">No attempts yet.</p> : (
-        <table className="tbl"><thead><tr><th>#</th><th>Date</th><th>Set</th><th>Score</th><th>Time</th><th /></tr></thead><tbody>
+        <table className="tbl"><thead><tr><th>#</th><th>Date</th><th>Set</th><th>Score</th><th>Time</th><th /><th /></tr></thead><tbody>
           {atts.map((a, i) => (
-            <tr key={i} className="click" onClick={() => setOpenN(openN === i ? null : i)}>
+            <tr key={i} className={openN === i ? 'click sel-row' : ''}>
               <td className="mono">{a.nodeId.startsWith('recheck') ? 'R' : a.attempt}</td><td className="mono">{fmtDate(a.startedAt)}</td><td className="mono">{a.setCount}</td>
               <td className="mono" style={{ color: a.passed ? 'var(--green-ink)' : 'var(--red-ink)' }}>{pct(a.score)}</td><td className="mono">{fmtDur(a.durationMs)}</td>
               <td><span className={`tag ${a.passed ? 'green' : 'red'}`}>{a.passed ? 'passed' : 'failed'}</span>{a.nodeId.startsWith('recheck') && <> <span className="tag cyan">recheck</span></>}{a.replay && <> <span className="tag">replay</span></>}</td>
+              <td style={{ textAlign: 'right' }}><button className="btn" style={{ padding: '2px 10px', fontSize: 13 }} onClick={() => setOpenN(openN === i ? null : i)}>{openN === i ? 'Hide answers' : 'Show answers'}</button></td>
             </tr>
           ))}
         </tbody></table>
