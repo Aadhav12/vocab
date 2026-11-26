@@ -7,7 +7,7 @@ import { activeInserts, dueCards, leechCards } from './srs';
 
 export type NodeType =
   | 'warmup' | 'intro' | 'flash' | 'fmt' | 'reading' | 'test'
-  | 'gflash' | 'gquiz' | 'greading' | 'gtest' | 'tflash' | 'tquiz' | 'treading' | 'ttest'
+  | 'gquiz' | 'greading' | 'gtest' | 'tflash' | 'tquiz' | 'treading' | 'ttest'
   | 'recheck' | 'leech' | 'catchup';
 export type Level = 'set' | 'group' | 'topic';
 
@@ -44,7 +44,6 @@ export function buildPath(idx: DataIndex): Path {
         push({ ...base, id: `set:${s.id}:test`, type: 'test', name: 'Set test', sub: '90% to pass', glyph: '★', boss: true });
       }
       const gs = { level: 'group' as const, scopeId: group.id, topicId: topic.id, groupId: group.id, section: `${group.name} · Group round` };
-      push({ ...gs, id: `group:${group.id}:flash`, type: 'gflash', name: 'Group flashcards', sub: 'chunks of ~12 words', glyph: '⌨', boss: false });
       push({ ...gs, id: `group:${group.id}:quiz`, type: 'gquiz', name: 'Group quizzes', sub: 'all formats mixed', glyph: '◆', boss: false });
       for (const t of group.texts) push({ ...gs, id: `group:${group.id}:reading:${t.id}`, type: 'greading', name: 'Group reading', sub: t.title, glyph: '¶', boss: false, textId: t.id });
       push({ ...gs, id: `group:${group.id}:test`, type: 'gtest', name: 'Group test', sub: '90% to pass', glyph: '★', boss: true });

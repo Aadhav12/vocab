@@ -145,7 +145,7 @@ describe('path', () => {
     expect(fmts).toEqual(FORMATS.filter((f) => fmts.includes(f)));
   });
   it('group and topic rounds follow the last set', () => {
-    const i = path.nodes.findIndex((n) => n.id === 'group:veraenderungen-beschreiben:flash');
+    const i = path.nodes.findIndex((n) => n.id === 'group:veraenderungen-beschreiben:quiz');
     expect(path.nodes[i - 1].id).toBe('set:werte-staende:test');
     expect(path.nodes.map((n) => n.id)).toContain('topic:grafiken-statistik:test');
     expect(path.nodes.filter((n) => n.type === 'greading').length).toBe(4);

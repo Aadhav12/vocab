@@ -137,7 +137,7 @@ export function buildRun(node: PathNode, idx: DataIndex, p: Progress, rng: Rng):
     }
     case 'intro': return { kind: 'intro', title: 'Introduce', passMark: 1, items: [], words: set?.words ?? [] };
     case 'flash': return { kind: 'flash', title: 'Flashcards', passMark: 1, items: [], words: set?.words ?? [], chunks: [set?.words ?? []] };
-    case 'gflash': case 'tflash': {
+    case 'tflash': {
       const ws = scopeWords(idx, node.level, node.scopeId);
       return { kind: 'flash', title: node.name, passMark: 1, items: [], words: ws, chunks: flashChunks(ws, rng) };
     }
