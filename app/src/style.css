@@ -120,3 +120,9 @@ html, .modal-bg, .modal { scrollbar-width: thin; scrollbar-color: var(--g-200) t
 .nb-view table.tbl { width: auto; min-width: 50%; }   /* the site's table style */
 .nb-view table.tbl td { font-size: 14.5px; }
 @media (max-width: 800px) { .nb-page { grid-template-columns: 1fr; } .nb-side { position: static; } }
+
+/* [[showwords]] regions: same dotted underline as the reading texts */
+.nb-view .tok { cursor: pointer; }
+.nb-view .tok:hover { background: var(--cyan-10); border-bottom: 1px solid var(--cyan); }
+.nb-view .nb-marker { display: flex; align-items: center; gap: 10px; min-height: 24px; }
+.nb-view .nb-marker i { flex: 1; border-top: 1px dashed var(--g-300); }

@@ -46,3 +46,6 @@ The editor is live-preview: the block you are typing in shows its markdown, ever
 * `↑` / `↓` / `←` / `→` at the edge of a block move to the neighbouring block; `Backspace` at the start joins it with the one above; `Esc` renders everything.
 * `Ctrl+B` / `Ctrl+I` bold / italic, `Tab` / `Shift+Tab` indent list items, `Ctrl+Z` / `Ctrl+Shift+Z` undo and redo across the whole notebook.
 * Click a rendered block to edit it (the caret lands where you clicked); click a checkbox to tick it; `Ctrl`-click a link to open it. Raw HTML is shown as text, never run.
+
+### `[[showwords]]` in notebooks
+Wrap any part of a notebook in `[[showwords]]` … `[[/showwords]]` and every vocabulary word inside (found the same way as in the reading texts: lemma, plural, case and verb forms) gets the dotted underline. Click one to open its word card. The region can span paragraphs, lists and tables; an unclosed `[[showwords]]` runs to the end of the notebook. Code, links and the markers inside code blocks are left alone. `Ctrl`/`Cmd`/`Alt`-click an underlined word to edit the text instead of opening the card. A line holding only a marker is shown as a small "show words" bar so it can still be clicked and edited.

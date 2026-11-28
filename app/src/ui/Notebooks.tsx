@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { blockKind, closeFences, handleEnter, indentLines, joinBlocks, mapClickToSource, renderBlock, splitBlocks, toggleCheckbox, wrapSelection } from '../notebooks/markdown';
-import { fmtDate, go } from './common';
+import { blockKind, closeFences, handleEnter, indentLines, joinBlocks, mapClickToSource, splitBlocks, toggleCheckbox, wrapSelection } from '../notebooks/markdown';
+import { renderWithWords, type Rendered } from '../notebooks/showwords';
+import { useStore } from '../store';
+import { fmtDate, go, useOpenWord } from './common';
 
 interface Meta { id: string; title: string; created: string; updated: string }
 interface Snap { blocks: string[]; active: number | null; caret: number }
@@ -25,6 +27,8 @@ interface EditorApi { focusFirst(): void }
 function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md: string) => void; apiRef: React.MutableRefObject<EditorApi | null> }) {
   const [blocks, setBlocks] = useState<string[]>(() => { const b = splitBlocks(initial); return b.length ? b : ['']; });
   const [active, setActive] = useState<number | null>(() => (initial.trim() ? null : 0));
+  const idx = useStore((x) => x.idx)!;
+  const openWord = useOpenWord();
   const root = useRef<HTMLDivElement>(null);
   const ta = useRef<HTMLTextAreaElement>(null);
   const caretReq = useRef<[number, number] | null>(initial.trim() ? null : [0, 0]);
@@ -219,6 +223,10 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
   const clickBlock = (i: number, e: React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const target = e.target as HTMLElement;
+    // an underlined word (inside [[showwords]]) opens its card; Ctrl/Cmd/Alt-click edits the text instead
+    const wordEl = target.closest('[data-w]') as HTMLElement | null;
+    if (wordEl && !(e.ctrlKey || e.metaKey || e.altKey)) { openWord(wordEl.dataset.w!); return; }
+    if (target.closest('.nb-marker')) { goto(i, 'end'); return; }
     if (target.matches('input[data-nbcheck]')) {
       const boxes = [...el.querySelectorAll('input[data-nbcheck]')];
       const n = boxes.indexOf(target as HTMLInputElement);
@@ -251,12 +259,17 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
     else commit([...blocks.map((b, k) => (k === active ? closeFences(b) : b)), ''], blocks.length, 0);
   };
 
-  const cache = useRef(new Map<string, string>());
-  const rendered = (b: string) => {
-    let h = cache.current.get(b);
-    if (h === undefined) { h = renderBlock(b); if (cache.current.size > 500) cache.current.clear(); cache.current.set(b, h); }
-    return h;
-  };
+  // rendering: blocks are rendered once and cached; each knows whether a [[showwords]] region is open when it starts
+  const cache = useMemo(() => new Map<string, Rendered>(), [idx]);
+  const views: Rendered[] = [];
+  let regionOpen = false;
+  for (const b of blocks) {
+    const key = `${regionOpen ? 1 : 0}\u0000${b}`;
+    let v = cache.get(key);
+    if (!v) { v = renderWithWords(b, regionOpen, idx); if (cache.size > 800) cache.clear(); cache.set(key, v); }
+    views.push(v);
+    regionOpen = v.endOpen;
+  }
 
   return (
     <div className="nb-editor" ref={root}>
@@ -274,7 +287,7 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
         if (!b.trim()) return null;
         return (
           <div key={i} className={`nb-block nb-view k-${kind || 'p'}`} onClick={(e) => clickBlock(i, e)}
-            dangerouslySetInnerHTML={{ __html: rendered(b) }} />
+            dangerouslySetInnerHTML={{ __html: views[i].html }} />
         );
       })}
       <div className="nb-tail" onClick={clickTail} title="Click to add text at the end" />
@@ -436,7 +449,7 @@ export function Notebooks({ id }: { id?: string }) {
               <Editor key={cur.id} initial={cur.body} apiRef={editorApi}
                 onChange={(body) => { setCur((c) => (c ? { ...c, body } : c)); save({ id: cur.id, body }); }} />
             </div>
-            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo</div>
+            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo<br />[[showwords]] … [[/showwords]] underlines the vocabulary inside: click a word for its meaning, Ctrl+click to edit the text.</div>
           </div>
         ) : list !== null && !list.length ? (
           <div className="card" style={{ marginTop: 6 }}>
