@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { Format, ItemResult, Item } from '../core/types';
 import { FORMATS, FORMAT_NAMES } from '../core/types';
 import { buildPractice } from '../core/session';
@@ -8,8 +8,10 @@ import { go } from './common';
 
 export function Practice() {
   const idx = useStore((s) => s.idx)!;
-  const [level, setLevel] = useState<'all' | 'topic' | 'group' | 'set'>('all');
-  const [scopeId, setScopeId] = useState('');
+  const q = useMemo(() => new URLSearchParams(location.hash.split('?')[1] ?? ''), []);   // #/practice?level=set&id=… (from notebook links)
+  const qLevel = q.get('level') as 'topic' | 'group' | 'set' | null;
+  const [level, setLevel] = useState<'all' | 'topic' | 'group' | 'set'>(qLevel && ['topic', 'group', 'set'].includes(qLevel) ? qLevel : 'all');
+  const [scopeId, setScopeId] = useState(q.get('id') ?? '');
   const [formats, setFormats] = useState<(Format | 'flash')[]>(['flash']);
   const [count, setCount] = useState(20);
   const [started, setStarted] = useState(true);

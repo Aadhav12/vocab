@@ -54,3 +54,29 @@ Directives are written in the markdown itself. The marker lines are invisible on
 * `[[indent]]` … `[[/indent]]` — everything inside is indented; regions nest for deeper levels.
 * `[[embed:der Anstieg]]` — the word card, in place (links inside it still work; click its background to edit the line). The word is found by article + lemma, lemma alone, or id, ignoring case and `ae/oe/ue/ss` spellings. An embed has to be on its own line (several embed lines in one block are fine).
 * `[[embed:der Anstieg#Notes]]` — just one section of the card. Sections: `header`, `home`, `senses`, `plural`, `declension`, `forms` (also `conjugation`), `comparison`, `case`, `conjunction`, `governs`, `rektion`, `examples`, `collocations`, `synonyms`, `opposites` (also `antonyms`), `notes`, `family` (also `tree`). A missing word, an unknown section or a section the word does not have shows a short message instead.
+
+### Your data in notebooks
+These directives pull live information from the app into a note. Each one goes on its own line; they update as you learn. Click a German word in any table to open its word card; click the background of a block to edit its line. A **scope** says which words:
+
+| Scope | Meaning |
+| --- | --- |
+| `set 3`, `set Zunahme und Abnahme`, `group Veränderungen`, `topic Grafiken` | where the words live (number, id or name; case and umlaut spelling don't matter; a bare `3` or a bare name also works) |
+| `started` · `new` · `learning` · `familiar` · `solid` · `mastered` | what state they are in (see the Guide page) |
+| `due` · `weak` | cards due now · words you have missed (worst first; adds a Misses column) |
+
+Combine with `+` (containers add up, states narrow it down: `set 3 + weak`) and end with `| 10` to show only the first 10 rows.
+
+| Directive | Shows |
+| --- | --- |
+| `[[words:set 3 + weak \| 10]]` | German with article, English, set, level |
+| `[[nouns:set 3]]` | article, plural, genitive, English |
+| `[[verbs:set 3]]` · `[[irregular:set 3]]` | er/sie/es, Präteritum, Partizip II, Hilfsverb; irregular forms in red (`irregular` leaves out regular verbs) |
+| `[[rektion:set 3]]` | verbs/nouns with their prepositions and cases |
+| `[[synonyms:set 3]]` · `[[opposites:set 3]]` | near-synonym pairs with the difference · antonym pairs |
+| `[[mistakes]]` · `[[mistakes:15]]` · `[[mistakes:set 3 \| 15]]` | your most recent wrong answers (default 10) with what you wrote and the answer |
+| `[[progress]]` | sets done, words started, cards due, XP, streak, mastery bar and the health of each topic |
+| `[[reading:Arbeitsmarkt]]` | a reading text from the app (title or id), vocabulary underlined and clickable |
+| `[[practice:set 3]]` | a button that opens Practice with that set, group or topic selected |
+| `[[word:der Anstieg]]` · `[[word:der Anstieg\|Anstiege]]` | an inline chip inside a sentence, with an optional label; click for the word card |
+
+(In the notebook the limit is a plain `|`, for example `[[words:set 3 | 10]]`; the backslashes above only keep this table intact.)

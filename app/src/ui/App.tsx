@@ -25,8 +25,9 @@ export function App() {
 
   const setsDone = path.nodes.filter((n) => n.type === 'test' && p.passed[n.id]).length;
   const due = dueCards(p).length;
-  const [, a, b] = hash.split('/');
-  const rest = hash.split('/').slice(2).join('/');
+  const route = hash.split('?')[0];   // a query (#/practice?level=set&id=…) is not part of the route
+  const [, a, b] = route.split('/');
+  const rest = route.split('/').slice(2).join('/');
   const section = a || '';
   const nav = [['', 'Path', '#/'], ['practice', 'Practice', '#/practice'], ['words', 'Words', '#/words'], ['notebooks', 'Notebooks', '#/notebooks'], ['guide', 'Guide', '#/guide'], ['settings', 'Settings', '#/settings']] as const;
   const activeKey = ['topic', 'node', 'history', ''].includes(section) ? '' : section;
@@ -36,7 +37,7 @@ export function App() {
   if (section === 'topic') page = <TopicPage id={decodeURIComponent(b ?? '')} />;
   else if (section === 'node') page = <div style={{ marginTop: 24 }}><NodeScreen key={decodeURIComponent(rest)} id={decodeURIComponent(rest)} /></div>;
   else if (section === 'history') page = <History id={decodeURIComponent(rest)} />;
-  else if (section === 'practice') page = <div style={{ marginTop: 24 }}><Practice /></div>;
+  else if (section === 'practice') page = <div style={{ marginTop: 24 }}><Practice key={hash} /></div>;
   else if (section === 'words') page = <Words />;
   else if (section === 'settings') page = <SettingsPage />;
   else if (section === 'guide') page = <Guide />;

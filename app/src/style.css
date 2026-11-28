@@ -133,3 +133,15 @@ html, .modal-bg, .modal { scrollbar-width: thin; scrollbar-color: var(--g-200) t
 .nb-embeds:hover .nb-embed { border-color: var(--g-400); }
 .nb-embed .wc-row:first-child { border-top: 0; }
 .nb-embed:has(> .callout:only-child) { border: 0; padding: 0; background: none; }
+
+/* data directives */
+.nb-embed .tbl { width: 100%; }
+.nb-embed .tbl td.irr { color: var(--red-ink); background: var(--red-10); }
+.nb-embed .tbl td.muted { color: var(--g-600); }
+.nb-ref { cursor: pointer; border-bottom: 1px dotted var(--g-500); }
+.nb-ref:hover { background: var(--cyan-10); border-bottom: 1px solid var(--cyan); }
+.nb-embed .reading p { font: 16px/1.7 var(--serif); margin: 0 0 10px; }
+.nb-embed .reading p:last-child { margin-bottom: 0; }
+.nb-view .nb-word { cursor: pointer; }
+.nb-view .nb-missing { color: var(--red-ink); border-bottom: 1px dotted var(--red); }
+.nb-embed .tbl td.mono { white-space: nowrap; }

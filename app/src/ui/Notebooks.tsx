@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { blockKind, closeFences, handleEnter, indentLines, joinBlocks, mapClickToSource, splitBlocks, toggleCheckbox, wrapSelection } from '../notebooks/markdown';
-import { indentPadding, renderBlockEx, START, type EmbedRef, type Rendered, type State } from '../notebooks/directives';
-import { findWordByText } from '../core/lookup';
-import { WORD_SECTIONS, WordCard, sectionId } from './WordCard';
+import { indentPadding, renderBlockEx, START, type Rendered, type State } from '../notebooks/directives';
+import { DirectiveView } from './NotebookData';
 import { useStore } from '../store';
 import { fmtDate, go, useOpenWord } from './common';
 
@@ -18,18 +17,6 @@ const api = async <T,>(url: string, method = 'GET', body?: unknown): Promise<T> 
 const LAST = 'testdaf-last-notebook';
 const remember = (id: string) => { try { localStorage.setItem(LAST, id); } catch { /* optional */ } };
 const recall = () => { try { return localStorage.getItem(LAST); } catch { return null; } };
-
-// ====================================================================== embeds
-/** [[embed:der Anstieg]] / [[embed:der Anstieg#Notes]]: the real word card, in the notebook. */
-function Embed({ r }: { r: EmbedRef }) {
-  const idx = useStore((x) => x.idx)!;
-  const w = findWordByText(idx, r.word);
-  if (!w) return <div className="callout red">No word “{r.word}” in the vocabulary.</div>;
-  if (!r.section) return <WordCard w={w} />;
-  const sec = sectionId(r.section);
-  if (!sec) return <div className="callout red">Unknown section “{r.section}”. Available: {Object.values(WORD_SECTIONS).map((n) => n[0]).join(', ')}.</div>;
-  return <WordCard w={w} only={sec} />;
-}
 
 // ====================================================================== editor
 interface EditorApi { focusFirst(): void }
@@ -304,10 +291,10 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
           );
         }
         if (!b.trim()) return null;
-        if (v.embeds) {
+        if (v.directives) {
           return (
-            <div key={i} className="nb-block nb-view nb-embeds" style={pad} onClick={(e) => clickEmbed(i, e)} title="Click to edit the embed">
-              {v.embeds.map((r, k) => <div key={k} className="nb-embed"><Embed r={r} /></div>)}
+            <div key={i} className="nb-block nb-view nb-embeds" style={pad} onClick={(e) => clickEmbed(i, e)} title="Click the background to edit this line">
+              {v.directives.map((d, k) => <div key={k} className="nb-embed"><DirectiveView d={d} /></div>)}
             </div>
           );
         }
@@ -478,7 +465,7 @@ export function Notebooks({ id }: { id?: string }) {
               <Editor key={cur.id} initial={cur.body} apiRef={editorApi}
                 onChange={(body) => { setCur((c) => (c ? { ...c, body } : c)); save({ id: cur.id, body }); }} />
             </div>
-            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo<br />[[showwords]] … [[/showwords]] underlines vocabulary (click a word for its meaning, Ctrl+click to edit) · [[indent]] … [[/indent]] indents · [[embed:der Anstieg]] or [[embed:der Anstieg#Notes]] embeds a word card.</div>
+            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo<br />[[showwords]] … [[/showwords]] underlines vocabulary (click a word for its meaning, Ctrl+click to edit) · [[indent]] … [[/indent]] indents · [[embed:der Anstieg#Notes]] embeds a word card · [[word:der Anstieg]] inline word · [[words:set 3 + weak]], [[verbs:…]], [[mistakes]], [[progress]], [[reading:…]], [[practice:set 3]] pull in your data (see the README).</div>
           </div>
         ) : list !== null && !list.length ? (
           <div className="card" style={{ marginTop: 6 }}>
