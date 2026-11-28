@@ -8,6 +8,7 @@
     "dev": "concurrently -k \"tsx watch server/index.ts\" \"vite\"",
     "build": "vite build",
     "validate": "tsx server/validate.ts",
+    "recover": "tsx server/recover.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },

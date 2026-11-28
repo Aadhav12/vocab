@@ -5,14 +5,14 @@ import { emptyProgress } from './core/types';
 import { buildIndex, type DataIndex } from './core/index';
 import { buildPath, insertNode, isTestType, syncInserts, type Path, type PathNode } from './core/path';
 import { applyAnswer, bookRechecks, clearLeech, introduceWord, markWeak } from './core/srs';
-import { applicable } from './core/generate';
+import { applyToProgress, coreCardsFor } from './core/apply';
 import { promptText } from './core/grade';
 
 export interface State {
   loaded: boolean; error?: string; bundle: DataBundle | null; idx: DataIndex | null; path: Path | null;
-  progress: Progress; attempts: Attempt[]; histVersion: number;
+  progress: Progress; attempts: Attempt[]; histVersion: number; saveError: string | null;
 }
-let state: State = { loaded: false, bundle: null, idx: null, path: null, progress: emptyProgress(), attempts: [], histVersion: 0 };
+let state: State = { loaded: false, bundle: null, idx: null, path: null, progress: emptyProgress(), attempts: [], histVersion: 0, saveError: null };
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach((l) => l());
 const set = (patch: Partial<State>) => { state = { ...state, ...patch }; emit(); };
@@ -71,11 +71,41 @@ function listenEvents() {
 }
 
 // ---------- persistence ----------
+// Never use fetch `keepalive` here: browsers reject keepalive bodies over 64 KiB, and progress.json grows past that.
+// Saves go one at a time, always send the latest state, and retry until the server confirms.
 let timer: ReturnType<typeof setTimeout> | undefined;
+let retryTimer: ReturnType<typeof setTimeout> | undefined;
+let saving = false, dirty = false, retryMs = 2000;
+async function flush(): Promise<void> {
+  if (saving) { dirty = true; return; }
+  saving = true; dirty = false;
+  try {
+    const r = await fetch('/api/progress', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(state.progress) });
+    if (!r.ok) throw new Error(`server answered ${r.status}`);
+    retryMs = 2000;
+    if (state.saveError) set({ saveError: null });
+  } catch (e: any) {
+    set({ saveError: e?.message ?? 'save failed' });
+    clearTimeout(retryTimer);
+    retryTimer = setTimeout(() => { void flush(); }, retryMs);
+    retryMs = Math.min(retryMs * 2, 30000);
+  } finally {
+    saving = false;
+    if (dirty) void flush();
+  }
+}
 export function persist(now = false) {
   clearTimeout(timer);
-  const run = () => { fetch('/api/progress', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(state.progress), keepalive: true }).catch(() => {}); };
-  if (now) run(); else timer = setTimeout(run, 250);
+  if (now) void flush(); else timer = setTimeout(() => { void flush(); }, 250);
+}
+/** Append-only attempt log: retried until stored. */
+function send(url: string, method: string, body: unknown, wait = 2000): void {
+  fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+    .then((r) => { if (!r.ok) throw new Error(`server answered ${r.status}`); })
+    .catch((e) => { set({ saveError: e?.message ?? 'save failed' }); setTimeout(() => send(url, method, body, Math.min(wait * 2, 30000)), wait); });
+}
+if (typeof window !== 'undefined') {
+  addEventListener('beforeunload', (e) => { if (state.saveError || saving || dirty) { e.preventDefault(); e.returnValue = ''; } });
 }
 
 export function mutateProgress(fn: (p: Progress) => void) {
@@ -116,14 +146,7 @@ export function attemptsFor(nodeId: string): Attempt[] {
 }
 
 // ---------- finishing an attempt ----------
-export const coreCardsFor = (w: Word, idx: DataIndex): CardType[] => {
-  const out: CardType[] = ['de-en', 'en-de'];
-  if (applicable('article', w, idx)) out.push('article');
-  if (applicable('plural', w, idx)) out.push('plural');
-  if (applicable('principal', w, idx)) out.push('principal');
-  if (applicable('rektion', w, idx)) out.push('rektion');
-  return out;
-};
+export { coreCardsFor };
 
 export interface Commit {
   node: PathNode | null;          // null = practice
@@ -147,73 +170,30 @@ export function commitAttempt(c: Commit): Outcome {
   const s = state;
   const idx = s.idx!, path = s.path!;
   const p: Progress = structuredClone(s.progress);
-  const node = c.node;
-  const isPractice = !node;
-  const insertId = node?.inserted ? node.id : null;
-  const alreadyPassed = !isPractice && !insertId && !!p.passed[c.nodeId];
-  const replay = isPractice || alreadyPassed;
-  const startSet = p.setCount;
-
   const total = c.results.length;
   const correct = c.results.filter((r) => r.correct).length;
   const score = c.scoreOverride ?? (total ? correct / total : 1);
-  const passed = score + 1e-9 >= c.passMark;
   const prevAttempts = s.attempts.filter((a) => a.nodeId === c.nodeId).length;
+  const startSet = p.setCount;
+  const now = new Date();
 
-  // introduce
-  if (c.introWords) for (const id of c.introWords) { const w = idx.byId.get(id); if (w) introduceWord(p, w.id, coreCardsFor(w, idx)); }
-  // cards
-  for (const r of c.results) {
-    if (r.wordId.startsWith('text:')) continue;
-    applyAnswer(p, r.wordId, r.card, r.correct);
-  }
-  for (const w of c.clickedWords ?? []) markWeak(p, w);
-
-  // xp
-  let xp = 0;
-  if (!replay) {
-    xp += c.xpItems ?? correct;
-  }
-  let firstPass = false, setCountUp = false;
+  const ap = applyToProgress(p, idx, path, {
+    node: c.node, nodeId: c.nodeId, results: c.results, score, passMark: c.passMark, prevAttempts,
+    clickedWords: c.clickedWords, introWords: c.introWords, xpItems: c.xpItems, at: now,
+  });
   const att: Attempt = {
-    nodeId: c.nodeId, attempt: prevAttempts + 1, startedAt: new Date(c.startedAt).toISOString(), endedAt: new Date().toISOString(),
-    durationMs: Date.now() - c.startedAt, setCount: startSet, replay, score, passMark: c.passMark, passed,
+    nodeId: c.nodeId, attempt: prevAttempts + 1, startedAt: new Date(c.startedAt).toISOString(), endedAt: now.toISOString(),
+    durationMs: now.getTime() - c.startedAt, setCount: startSet, replay: ap.replay, score, passMark: c.passMark, passed: ap.passed,
     items: c.results.map((r): AttemptItem => ({
       format: r.item.format, wordId: r.wordId, card: r.card, prompt: r.item.mode === 'match' ? `${r.item.label}: ${r.item.board!.left.find((l) => l.id === r.wordId)?.text}` : promptText(r.item),
       expected: r.expected, given: r.given, correct: r.correct, ...(r.note ? { note: r.note } : {}), firstKeyMs: r.firstKeyMs, ...(r.item.section ? { section: r.item.section } : {}),
     })),
     ...(c.clickedWords?.length ? { clickedWords: c.clickedWords } : {}), ...(c.rounds ? { rounds: c.rounds } : {}), ...(c.sections ? { sections: c.sections } : {}),
   };
-
-  if (passed && !isPractice) {
-    if (insertId) {
-      const ins = p.inserts.find((i) => i.id === insertId);
-      p.inserts = p.inserts.filter((i) => i.id !== insertId);
-      if (ins?.kind === 'leech') for (const w of ins.wordIds ?? []) clearLeech(p, w);
-      if (!replay) xp += 10 + (ins?.kind === 'recheck' ? 40 : 0);
-    } else if (!alreadyPassed) {
-      firstPass = true;
-      p.passed[c.nodeId] = { bestScore: score, attempts: prevAttempts + 1, firstPassedAt: new Date().toISOString() };
-      xp += 10 + (node && isTestType(node.type) ? 40 : 0);
-      if (node?.type === 'test') { p.setCount += 1; setCountUp = true; bookRechecks(p, 'set', node.scopeId); }
-      if (node?.type === 'gtest') bookRechecks(p, 'group', node.scopeId);
-      if (node?.type === 'ttest') bookRechecks(p, 'topic', node.scopeId);
-    }
-  }
-  if (alreadyPassed && p.passed[c.nodeId]) {
-    p.passed[c.nodeId].attempts = prevAttempts + 1;
-    p.passed[c.nodeId].bestScore = Math.max(p.passed[c.nodeId].bestScore, score);
-  }
-  p.xp += xp;
-  if (passed) {
-    const t = today();
-    if (p.streak.last !== t) { p.streak = { last: t, count: p.streak.last === yesterday() ? p.streak.count + 1 : 1 }; }
-  }
-  syncInserts(idx, path, p);
   set({ progress: p, attempts: [...s.attempts, att], histVersion: s.histVersion + 1 });
   persist(true);
-  fetch('/api/attempts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(att), keepalive: true }).catch(() => {});
-  return { attempt: att, passed, firstPass, replay, setCountUp, xp };
+  send('/api/attempts', 'POST', att);
+  return { attempt: att, passed: ap.passed, firstPass: ap.firstPass, replay: ap.replay, setCountUp: ap.setCountUp, xp: ap.xp };
 }
 
 export function nodeFromId(id: string): PathNode | null {

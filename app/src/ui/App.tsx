@@ -14,6 +14,7 @@ export function App() {
   const bundle = useStore((s) => s.bundle);
   const p = useStore((s) => s.progress);
   const path = useStore((s) => s.path);
+  const saveError = useStore((s) => s.saveError);
   const hash = useHash();
   const [wordId, setWordId] = useState<string | null>(null);
   useEffect(() => { init(); }, []);
@@ -49,6 +50,7 @@ export function App() {
           <span><b>{setsDone}</b> sets done</span><span className="due"><b>{due}</b> due</span><span><b>{p.xp.toLocaleString()}</b> xp</span><span><b>{p.streak.count}</b> day streak</span>
         </div>
       </header>
+      {saveError && <div className="savewarn">Your progress could not be saved ({saveError}). Retrying automatically — keep this tab open and make sure the server is still running.</div>}
       <div className="wrap">{page}</div>
       {w && (
         <Modal onClose={() => setWordId(null)}>

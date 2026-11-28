@@ -9,6 +9,7 @@ import type { Word } from './types';
 import { applicable, itemsForFormat, readingItems, parseBrackets, translationItem } from './generate';
 import { gradeFields, gradeChoice, matchResults } from './grade';
 import { buildRun, sampleWords, scopeWords } from './session';
+import { applyToProgress } from './apply';
 import { loadData } from '../../server/loader';
 import { dataDir } from '../../server/config';
 
@@ -335,6 +336,35 @@ describe('review never shows words that are not introduced yet', () => {
       }
     }
     expect(trees).toBeGreaterThan(0);
+  });
+});
+
+describe('applying attempts to progress (shared by the app and `npm run recover`)', () => {
+  const path = buildPath(idx);
+  const ok = (wordId: string, card: string) => ({ wordId, card, correct: true });
+  it('intro introduces words, a first pass opens the next node, a set test raises the set count', () => {
+    const p = emptyProgress();
+    const warm = path.byId.get('set:zunahme-abnahme:warmup')!, intro = path.byId.get('set:zunahme-abnahme:intro')!;
+    applyToProgress(p, idx, path, { node: warm, nodeId: warm.id, results: [], score: 1, passMark: 0.9, prevAttempts: 0, at: new Date('2026-01-01T10:00:00Z') });
+    const r = applyToProgress(p, idx, path, { node: intro, nodeId: intro.id, results: [], score: 1, passMark: 1, prevAttempts: 0, introWords: idx.setById.get('zunahme-abnahme')!.words.map((w) => w.id), at: new Date('2026-01-01T10:05:00Z') });
+    expect(r.firstPass).toBe(true);
+    expect(Object.keys(p.introduced)).toHaveLength(idx.setById.get('zunahme-abnahme')!.words.length);
+    expect(position(idx, path, p).node!.id).toBe('set:zunahme-abnahme:flash');
+    expect(p.lastAttemptAt).toBe('2026-01-01T10:05:00.000Z');
+    const test = path.byId.get('set:zunahme-abnahme:test')!;
+    const t = applyToProgress(p, idx, path, { node: test, nodeId: test.id, results: [ok('nehmen', 'de-en')], score: 0.95, passMark: 0.9, prevAttempts: 0, at: new Date('2026-01-01T11:00:00Z') });
+    expect(t.setCountUp).toBe(true); expect(p.setCount).toBe(1);
+    expect(p.inserts.filter((i) => i.kind === 'recheck').map((i) => i.dueAt)).toEqual([3, 7, 16]);
+  });
+  it('a failed attempt does not pass the node; a replay changes cards but not the path', () => {
+    const p = emptyProgress();
+    const n = path.byId.get('set:zunahme-abnahme:fmt:article')!;
+    const f = applyToProgress(p, idx, path, { node: n, nodeId: n.id, results: [{ wordId: 'der-anstieg', card: 'article', correct: false }], score: 0, passMark: 1, prevAttempts: 0, at: new Date() });
+    expect(f.passed).toBe(false); expect(p.passed[n.id]).toBeUndefined(); expect(p.cards['der-anstieg|article'].misses).toBe(1);
+    applyToProgress(p, idx, path, { node: n, nodeId: n.id, results: [ok('der-anstieg', 'article')], score: 1, passMark: 1, prevAttempts: 1, at: new Date() });
+    const xp = p.xp;
+    const rp = applyToProgress(p, idx, path, { node: n, nodeId: n.id, results: [ok('der-anstieg', 'article')], score: 1, passMark: 1, prevAttempts: 2, at: new Date() });
+    expect(rp.replay).toBe(true); expect(p.xp).toBe(xp);
   });
 });
 

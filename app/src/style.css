@@ -50,3 +50,4 @@ a.btn { text-decoration: none; display: inline-block; }
 .seg .kn { font: 11px var(--mono); color: var(--g-500); margin-right: 6px; font-style: normal; }
 .seg .sel .kn { color: var(--paper); }
 .choice .kbd { font-style: normal; }
+.savewarn { background: var(--red-10); border-bottom: 1px solid var(--red); color: var(--red-ink); padding: 8px 32px; font-size: 14px; }

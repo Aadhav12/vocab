@@ -87,6 +87,8 @@ export interface Progress {
   inserts: Insert[];
   xp: number; streak: { last: string | null; count: number };
   settings: Settings;
+  /** end time of the newest attempt folded into this file; lets `npm run recover` find attempts that never got saved */
+  lastAttemptAt?: string;
 }
 export function emptyProgress(): Progress {
   return { schemaVersion: 1, setCount: 0, passed: {}, introduced: {}, cards: {}, inserts: [], xp: 0, streak: { last: null, count: 0 }, settings: { ...DEFAULT_SETTINGS } };

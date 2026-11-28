@@ -26,3 +26,13 @@ Every question can be answered without the mouse.
 * **Match the following:** `1`–`7` pick a German word, `A`–`G` pick its meaning, in either order.
 * **Reading node:** `1`–`3` answers a question and jumps to the next; `Enter` on *Check answers*.
 * **Introduce:** `←`/`→` or `Enter`. Result and round screens focus their main button, so `Enter` continues.
+
+## If progress ever looks reset
+`records/attempts.jsonl` is append-only and always complete; `progress.json` is a snapshot of it. If they disagree (the page shows a red "could not be saved" bar when a save fails), run:
+
+```bash
+npm run recover -- --dry-run
+npm run recover
+```
+
+inside `app/`. It replays every attempt newer than `progress.json` using the same code the app uses, and keeps the old file in `records/backups/`.
