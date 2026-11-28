@@ -5,6 +5,7 @@ import { appRoot, dataDir, port, recordsDir } from './config';
 import { loadData } from './loader';
 import { appendAttempt, ensureDirs, readAttempts, readProgress, resetProgress, writeProgress } from './records';
 import type { DataBundle } from '../src/core/types';
+import { notebookRouter } from './notebooks';
 
 const app = express();
 app.use(express.json({ limit: '20mb' }));
@@ -37,6 +38,7 @@ app.post('/api/attempts', (req, res) => {
   appendAttempt(req.body); res.json({ ok: true });
 });
 app.post('/api/reset', (_req, res) => res.json(resetProgress()));
+app.use('/api/notebooks', notebookRouter);
 app.get('/api/events', (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive' });
   res.write(`event: hello\ndata: ${version}\n\n`);

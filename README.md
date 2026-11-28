@@ -36,3 +36,13 @@ npm run recover
 ```
 
 inside `app/`. It replays every attempt newer than `progress.json` using the same code the app uses, and keeps the old file in `records/backups/`.
+
+## Notebooks
+The **Notebooks** page keeps markdown notes. Each notebook is a plain `.md` file in `records/notebooks/` (a small `---` header with the title and dates, then your markdown), so it is portable with the rest of `records/` and can be opened in any editor. Deleting a notebook moves its file to `records/backups/notebooks/`.
+
+The editor is live-preview: the block you are typing in shows its markdown, every other block is rendered. Blocks are separated by blank lines.
+
+* `Enter` starts a new block (lists, task lists, quotes and tables continue; an empty item ends them; a ```` ``` ```` line gets its closing fence). `Shift+Enter` is a line break inside the block.
+* `↑` / `↓` / `←` / `→` at the edge of a block move to the neighbouring block; `Backspace` at the start joins it with the one above; `Esc` renders everything.
+* `Ctrl+B` / `Ctrl+I` bold / italic, `Tab` / `Shift+Tab` indent list items, `Ctrl+Z` / `Ctrl+Shift+Z` undo and redo across the whole notebook.
+* Click a rendered block to edit it (the caret lands where you clicked); click a checkbox to tick it; `Ctrl`-click a link to open it. Raw HTML is shown as text, never run.
