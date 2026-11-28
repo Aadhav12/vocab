@@ -368,6 +368,20 @@ describe('applying attempts to progress (shared by the app and `npm run recover`
   });
 });
 
+describe('the path never contains a step with nothing to ask', () => {
+  it('every format step has questions for a learner who has met all words up to that set', () => {
+    const path = buildPath(idx);
+    const empty: string[] = [];
+    for (const n of path.nodes.filter((x) => x.type === 'fmt')) {
+      const order = idx.sets.find((x) => x.set.id === n.setId)!.order;
+      const p = emptyProgress();
+      for (const w of idx.words) if ((idx.home.get(w.id)?.setOrder ?? 99) <= order) p.introduced[w.id] = 0;
+      if (!buildRun(n, idx, p, rng).items.length) empty.push(n.id);
+    }
+    expect(empty).toEqual([]);
+  });
+});
+
 describe('data validation', () => {
   it('sample data is clean', () => { expect(bundle.problems).toEqual([]); });
 });

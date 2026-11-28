@@ -104,7 +104,17 @@ export function NodeScreen({ id }: { id: string }) {
       setDone({ out, results });
     }} />;
   }
-  if (!run.items.length) return <div className="card"><p>Nothing to practise here yet.</p><button className="btn" onClick={back}>Back</button></div>;
+  if (!run.items.length) {
+    // nothing can be asked here (e.g. not enough words learned for this format): never trap the learner
+    return (
+      <div className="card">
+        <div className="screen-head"><h3>{run.title}</h3><span className="counter">nothing to ask</span></div>
+        <p>There is nothing to test in this step right now, so it counts as done.</p>
+        <div className="row" style={{ justifyContent: 'space-between' }}><button className="btn ghost" onClick={back}>Back to path</button>
+          <button className="btn primary" autoFocus onClick={() => { commit([], Date.now(), { scoreOverride: 1 }); goOn(); }}>Pass and continue</button></div>
+      </div>
+    );
+  }
   return <Runner items={run.items} title={run.title} onBack={back} onDone={(results, startedAt) => {
     const out = commit(results, startedAt);
     setDone({ out, results });

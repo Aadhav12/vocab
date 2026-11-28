@@ -31,12 +31,14 @@ export function buildPath(idx: DataIndex): Path {
       for (const s of group.sets) {
         const info = idx.sets.find((x) => x.set.id === s.id)!;
         const section = `${group.name} · Set ${info.order + 1} · ${s.name}`;
+        // a format step exists only if it can produce questions for a learner who has met every word up to this set
+        const known = (id: string) => (idx.home.get(idx.byId.get(id)?.id ?? id)?.setOrder ?? 0) <= info.order;
         const base = { level: 'set' as const, scopeId: s.id, topicId: topic.id, groupId: group.id, setId: s.id, section };
         push({ ...base, id: `set:${s.id}:warmup`, type: 'warmup', name: 'Warm-up', sub: 'review due cards', glyph: '↺', boss: false });
         push({ ...base, id: `set:${s.id}:intro`, type: 'intro', name: 'Introduce', sub: `${s.words.length} new words`, glyph: '✦', boss: false });
         push({ ...base, id: `set:${s.id}:flash`, type: 'flash', name: 'Flashcards', sub: 'clean + fast', glyph: '⌨', boss: false });
         for (const f of FORMATS) {
-          if (itemsForFormat(f, s.words, { idx, rng: () => 0.5 }).length > 0) {
+          if (itemsForFormat(f, s.words, { idx, rng: () => 0.5, known }).length > 0) {
             push({ ...base, id: `set:${s.id}:fmt:${f}`, type: 'fmt', format: f, name: FORMAT_NAMES[f], sub: 'every answer correct', glyph: '◆', boss: false });
           }
         }
