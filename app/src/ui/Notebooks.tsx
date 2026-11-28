@@ -3,15 +3,20 @@ import { flushSync } from 'react-dom';
 import { blockKind, closeFences, handleEnter, indentLines, joinBlocks, mapClickToSource, renderBlock, splitBlocks, toggleCheckbox, wrapSelection } from '../notebooks/markdown';
 import { indentPadding, renderBlockEx, START, type Rendered, type State } from '../notebooks/directives';
 import { DirectiveView } from './NotebookData';
+import { NotebookTree } from './NotebookTree';
+import { buildTree, depthOf, folderList, joinPath, nameOf, parentOf, remapId, type Meta } from '../notebooks/tree';
 import { useStore } from '../store';
-import { fmtDate, go, useOpenWord } from './common';
+import { go, useOpenWord } from './common';
 
-interface Meta { id: string; title: string; created: string; updated: string }
 interface Snap { blocks: string[]; active: number | null; caret: number }
 
 const api = async <T,>(url: string, method = 'GET', body?: unknown): Promise<T> => {
   const r = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: body === undefined ? undefined : JSON.stringify(body) });
-  if (!r.ok) throw new Error(`server answered ${r.status}`);
+  if (!r.ok) {
+    let msg = `server answered ${r.status}`;
+    try { const j = await r.json(); if (j?.error) msg = j.error; } catch { /* no body */ }
+    throw new Error(msg);
+  }
   return r.json();
 };
 const LAST = 'testdaf-last-notebook';
@@ -320,16 +325,20 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
 
 // ====================================================================== page
 type Status = 'saved' | 'saving' | 'error';
+const idUrl = (id: string) => `/api/notebooks/item?id=${encodeURIComponent(id)}`;
 
 export function Notebooks({ id }: { id?: string }) {
-  const [list, setList] = useState<Meta[] | null>(null);
+  const [data, setData] = useState<{ folders: string[]; notebooks: Meta[] } | null>(null);
   const [cur, setCur] = useState<{ id: string; title: string; body: string } | null>(null);
   const [status, setStatus] = useState<Status>('saved');
   const [confirmDel, setConfirmDel] = useState(false);
   const [err, setErr] = useState('');
+  const [activeFolder, setActiveFolder] = useState('');
   const editorApi = useRef<EditorApi | null>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const focusTitle = useRef(false);
+  const tree = useMemo(() => buildTree(data?.folders ?? [], data?.notebooks ?? []), [data]);
+  const folderChoices = useMemo(() => folderList(tree), [tree]);
 
   // ---- saving: debounced, one request at a time, retried until the server confirms
   const pending = useRef<{ id: string; title?: string; body?: string } | null>(null);
@@ -343,9 +352,9 @@ export function Notebooks({ id }: { id?: string }) {
     setStatus('saving');
     let failed = false;
     try {
-      const r = await api<{ updated: string }>(`/api/notebooks/${job.id}`, 'PUT', { title: job.title, body: job.body });
+      const r = await api<{ updated: string }>(idUrl(job.id), 'PUT', { title: job.title, body: job.body });
       retry.current = 2000;
-      setList((l) => l && [{ ...(l.find((x) => x.id === job.id) ?? { id: job.id, title: '', created: r.updated }), ...(job.title !== undefined ? { title: job.title } : {}), updated: r.updated }, ...l.filter((x) => x.id !== job.id)]);
+      setData((d) => d && { ...d, notebooks: d.notebooks.map((n) => (n.id === job.id ? { ...n, ...(job.title !== undefined ? { title: job.title } : {}), updated: r.updated } : n)) });
       setStatus(pending.current ? 'saving' : 'saved');
     } catch {
       failed = true;
@@ -364,6 +373,8 @@ export function Notebooks({ id }: { id?: string }) {
     clearTimeout(timer.current);
     timer.current = setTimeout(() => { void flush(); }, 700);
   }, [flush]);
+  /** wait until everything typed so far is on disk (before moving or renaming things) */
+  const settle = useCallback(async () => { await flush(); for (let i = 0; i < 50 && (busy.current || pending.current); i++) { await new Promise((r) => setTimeout(r, 40)); if (!busy.current) await flush(); } }, [flush]);
   useEffect(() => {
     const f = (e: BeforeUnloadEvent) => { if (pending.current || busy.current || status === 'error') { e.preventDefault(); e.returnValue = ''; } };
     addEventListener('beforeunload', f);
@@ -371,54 +382,80 @@ export function Notebooks({ id }: { id?: string }) {
   }, [status]);
   useEffect(() => () => { void flush(); }, [flush]);   // leaving the page saves what is pending
 
-  // ---- load the list, then the chosen notebook
+  // ---- load the folders and notebooks, then the chosen notebook
   const refresh = useCallback(async () => {
-    try { setList(await api<Meta[]>('/api/notebooks')); setErr(''); } catch (e: any) { setErr(e.message); setList([]); }
+    try { setData(await api<{ folders: string[]; notebooks: Meta[] }>('/api/notebooks')); setErr(''); } catch (e: any) { setErr(e.message); setData({ folders: [], notebooks: [] }); }
   }, []);
   useEffect(() => { void refresh(); }, [refresh]);
 
   useEffect(() => {
-    if (list === null) return;
+    if (data === null) return;
     if (!id) {
       const want = recall();
-      const target = list.find((n) => n.id === want) ?? list[0];
-      if (target) go(`/notebooks/${target.id}`);
+      const newest = [...data.notebooks].sort((a, b) => b.updated.localeCompare(a.updated))[0];
+      const target = data.notebooks.find((n) => n.id === want) ?? newest;
+      if (target) go(`/notebooks/${encodeURIComponent(target.id)}`);
       else setCur(null);
       return;
     }
     let dead = false;
     void flush().then(async () => {
       try {
-        const n = await api<{ id: string; title: string; body: string }>(`/api/notebooks/${id}`);
-        if (!dead) { setCur(n); remember(id); setConfirmDel(false); }
+        const n = await api<{ id: string; title: string; body: string }>(idUrl(id));
+        if (!dead) { setCur(n); remember(id); setConfirmDel(false); setActiveFolder(id.includes('/') ? id.slice(0, id.lastIndexOf('/')) : ''); }
       } catch { if (!dead) { setCur(null); go('/notebooks'); } }
     });
     return () => { dead = true; };
-  }, [id, list === null]); // eslint-disable-line
+  }, [id, data === null]); // eslint-disable-line
 
   useEffect(() => {
     if (cur && focusTitle.current) { focusTitle.current = false; titleRef.current?.focus(); titleRef.current?.select(); }
   }, [cur?.id]); // eslint-disable-line
 
-  const create = async () => {
-    try {
-      await flush();
-      const n = await api<Meta & { body: string }>('/api/notebooks', 'POST', { title: 'Untitled' });
-      focusTitle.current = true;
-      setList((l) => [n, ...(l ?? [])]);
-      go(`/notebooks/${n.id}`);
-    } catch (e: any) { setErr(e.message); }
-  };
-  const remove = async () => {
+  const open = (nid: string) => go(`/notebooks/${encodeURIComponent(nid)}`);
+  // show=false: the caller (the folder tree) shows the error next to where it happened
+  const guard = async (fn: () => Promise<void>, show = true) => { try { await fn(); setErr(''); } catch (e: any) { if (show) setErr(e.message); throw e; } };
+
+  const create = (folder: string) => guard(async () => {
+    await settle();
+    const n = await api<Meta & { body: string }>('/api/notebooks', 'POST', { title: 'Untitled', folder });
+    focusTitle.current = true;
+    await refresh();
+    open(n.id);
+  });
+  const remove = () => guard(async () => {
     if (!cur) return;
-    try {
-      pending.current = null; clearTimeout(timer.current);
-      await api(`/api/notebooks/${cur.id}`, 'DELETE');
-      const rest = (list ?? []).filter((n) => n.id !== cur.id);
-      setList(rest); setCur(null); setConfirmDel(false);
-      go(rest[0] ? `/notebooks/${rest[0].id}` : '/notebooks');
-    } catch (e: any) { setErr(e.message); }
+    pending.current = null; clearTimeout(timer.current);
+    await api(idUrl(cur.id), 'DELETE');
+    setCur(null); setConfirmDel(false);
+    const d = await api<{ folders: string[]; notebooks: Meta[] }>('/api/notebooks'); setData(d);
+    const next = [...d.notebooks].sort((a, b) => b.updated.localeCompare(a.updated))[0];
+    go(next ? `/notebooks/${encodeURIComponent(next.id)}` : '/notebooks');
+  });
+  const moveNotebook = (nid: string, folder: string, show = false) => guard(async () => {
+    await settle();
+    const r = await api<{ id: string }>('/api/notebooks/move', 'POST', { id: nid, folder });
+    await refresh();
+    if (cur && nid === cur.id) { remember(r.id); open(r.id); }
+    else if (id === nid) open(r.id);
+  }, show);
+  /** after a folder was renamed or moved, the open notebook may have a new id */
+  const followFolder = async (from: string, to: string) => {
+    await refresh();
+    setActiveFolder((a) => remapId(a, from, to));
+    if (id) { const nid = remapId(id, from, to); if (nid !== id) { remember(nid); open(nid); } }
   };
+  const newFolder = (parent: string, name: string) => guard(async () => { await api('/api/notebooks/folders', 'POST', { path: joinPath(parent, name) }); await refresh(); setActiveFolder(joinPath(parent, name)); }, false);
+  const renameFolder = (path: string, name: string) => guard(async () => { await settle(); const to = joinPath(parentOf(path), name); await api('/api/notebooks/folders', 'PUT', { path, to }); await followFolder(path, to); }, false);
+  const moveFolder = (path: string, toParent: string) => guard(async () => { await settle(); const to = joinPath(toParent, nameOf(path)); await api('/api/notebooks/folders', 'PUT', { path, to }); await followFolder(path, to); }, false);
+  const deleteFolder = (path: string) => guard(async () => {
+    await settle();
+    await api(`/api/notebooks/folders?path=${encodeURIComponent(path)}`, 'DELETE');
+    setActiveFolder(parentOf(path));
+    const inside = !!id && (id === path || id.startsWith(path + '/'));
+    await refresh();
+    if (inside) { setCur(null); go('/notebooks'); }
+  }, false);
   const download = () => {
     if (!cur) return;
     const blob = new Blob([cur.body], { type: 'text/markdown' });
@@ -430,55 +467,56 @@ export function Notebooks({ id }: { id?: string }) {
   };
 
   const label = status === 'saved' ? 'saved' : status === 'saving' ? 'saving…' : 'not saved — retrying';
+  const curFolder = cur && cur.id.includes('/') ? cur.id.slice(0, cur.id.lastIndexOf('/')) : '';
 
   return (
     <div className="nb-page">
       <aside className="nb-side">
         <div className="card soft">
-          <div className="card-h"><span className="label">Notebooks</span><span className="small mono muted">{list?.length ?? 0}</span></div>
-          <button className="btn primary nb-new" onClick={create}>+ New notebook</button>
-          <div className="nb-list">
-            {(list ?? []).map((n) => (
-              <a key={n.id} href={`#/notebooks/${n.id}`} className={`choice nb-item ${n.id === id ? 'sel' : ''}`}>
-                <span className="nb-item-t">{n.title || 'Untitled'}</span>
-                <span className="nb-item-d mono">{n.updated ? fmtDate(n.updated) : ''}</span>
-              </a>
-            ))}
-            {list && !list.length && <div className="small muted">No notebooks yet.</div>}
-          </div>
+          <div className="card-h"><span className="label">Notebooks</span><span className="small mono muted">{data?.notebooks.length ?? 0}</span></div>
+          <NotebookTree root={tree} all={data?.notebooks ?? []} currentId={id} activeFolder={activeFolder} onActive={setActiveFolder}
+            onNewNotebook={(f) => { void create(f).catch(() => {}); }} onNewFolder={newFolder} onRenameFolder={renameFolder}
+            onMoveFolder={moveFolder} onDeleteFolder={deleteFolder} onMoveNotebook={moveNotebook} />
         </div>
       </aside>
       <section className="nb-main">
-        {err && <div className="callout red" style={{ marginBottom: 12 }}>Could not reach the server ({err}).</div>}
+        {err && <div className="callout red" style={{ marginBottom: 12 }}>{err}</div>}
         {cur ? (
           <div key={cur.id}>
             <div className="sec-h nb-sech">
               <span className="n">md</span>
               <h2><input ref={titleRef} className="nb-title" value={cur.title} placeholder="Untitled" maxLength={200}
-                onChange={(e) => { const title = e.target.value; setCur({ ...cur, title }); setList((l) => l && l.map((n) => (n.id === cur.id ? { ...n, title } : n))); save({ id: cur.id, title }); }}
+                onChange={(e) => { const title = e.target.value; setCur({ ...cur, title }); setData((d) => d && { ...d, notebooks: d.notebooks.map((n) => (n.id === cur.id ? { ...n, title } : n)) }); save({ id: cur.id, title }); }}
                 onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); editorApi.current?.focusFirst(); } }} /></h2>
               <span className={`note nb-status ${status}`}>{label}</span>
             </div>
             <div className="card nb-doc">
               <div className="card-h">
                 <span className="label">Markdown</span>
-                <span className="row" style={{ gap: 4 }}>
+                <span className="row" style={{ gap: 6 }}>
+                  <label className="row small" style={{ gap: 6 }} title="Move this notebook to another folder">
+                    <span className="muted">Folder</span>
+                    <select className="sel nb-foldersel" value={curFolder} onChange={(e) => { void moveNotebook(cur.id, e.target.value, true).catch(() => {}); }}>
+                      <option value="">Top level</option>
+                      {folderChoices.map((f) => <option key={f} value={f}>{'\u00a0\u00a0'.repeat(depthOf(f) - 1)}{nameOf(f)}</option>)}
+                    </select>
+                  </label>
                   <button className="btn ghost nb-small" onClick={download} title="Download as .md">↓ .md</button>
                   {!confirmDel ? <button className="btn ghost nb-small" onClick={() => setConfirmDel(true)}>Delete</button> : (
-                    <span className="row" style={{ gap: 6 }}><span className="small">Delete this notebook?</span><button className="btn danger nb-small" onClick={remove}>Delete</button><button className="btn nb-small" onClick={() => setConfirmDel(false)}>Keep</button></span>
+                    <span className="row" style={{ gap: 6 }}><span className="small">Delete this notebook?</span><button className="btn danger nb-small" onClick={() => { void remove().catch(() => {}); }}>Delete</button><button className="btn nb-small" onClick={() => setConfirmDel(false)}>Keep</button></span>
                   )}
                 </span>
               </div>
               <Editor key={cur.id} initial={cur.body} apiRef={editorApi}
                 onChange={(body) => { setCur((c) => (c ? { ...c, body } : c)); save({ id: cur.id, body }); }} />
             </div>
-            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo<br />[[showwords]] … [[/showwords]] underlines vocabulary (click a word for its meaning, Ctrl+click to edit) · [[indent]] … [[/indent]] indents · [[embed:der Anstieg#Notes]] embeds a word card · [[word:der Anstieg]] inline word · [[words:set 3 + weak]], [[verbs:…]], [[mistakes]], [[progress]], [[reading:…]], [[practice:set 3]] pull in your data (see the README).</div>
+            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo<br />$x^2$ and $$…$$ are LaTeX · [[showwords]] … [[/showwords]] underlines vocabulary (click a word for its meaning, Ctrl+click to edit) · [[indent]] … [[/indent]] indents · [[embed:der Anstieg#Notes]] embeds a word card · [[word:der Anstieg]] inline word · [[words:set 3 + weak]], [[verbs:…]], [[mistakes]], [[progress]], [[reading:…]], [[practice:set 3]] pull in your data (see the README).</div>
           </div>
-        ) : list !== null && !list.length ? (
+        ) : data !== null && !data.notebooks.length ? (
           <div className="card" style={{ marginTop: 6 }}>
             <div className="screen-head"><h3>Notebooks</h3><span className="counter">markdown</span></div>
-            <p>Write notes in Markdown. Whatever you are typing shows its markdown; everything else is rendered as you go.</p>
-            <button className="btn primary" onClick={create}>Create your first notebook</button>
+            <p>Write notes in Markdown, organised in folders. Whatever you are typing shows its markdown; everything else is rendered as you go.</p>
+            <button className="btn primary" onClick={() => { void create(activeFolder).catch(() => {}); }}>Create your first notebook</button>
           </div>
         ) : <div className="mono muted small">loading…</div>}
       </section>

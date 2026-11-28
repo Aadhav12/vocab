@@ -38,7 +38,10 @@ npm run recover
 inside `app/`. It replays every attempt newer than `progress.json` using the same code the app uses, and keeps the old file in `records/backups/`.
 
 ## Notebooks
-The **Notebooks** page keeps markdown notes. Each notebook is a plain `.md` file in `records/notebooks/` (a small `---` header with the title and dates, then your markdown), so it is portable with the rest of `records/` and can be opened in any editor. Deleting a notebook moves its file to `records/backups/notebooks/`.
+The **Notebooks** page keeps markdown notes, organised in folders. Each notebook is a plain `.md` file (a small `---` header with the title and dates, then your markdown) inside real folders under `records/notebooks/`, so it is portable with the rest of `records/` and can be opened in any editor or file manager. Deleting a notebook or a folder moves it to `records/backups/notebooks/`.
+
+* **Folders** nest as deep as you like. Select a folder in the sidebar to create notebooks and subfolders inside it, rename it or delete it (with everything in it, after a confirmation). Drag a notebook or a folder onto another folder (or onto *All notebooks*) to move it; without a mouse use the **Folder** menu above the editor. The search box finds notebooks by title or folder name. Folder names can contain spaces and umlauts, but not `\ / : * ? " < > |`, not start with a dot or end with a dot or space, and not be a Windows reserved name such as `CON`.
+* **LaTeX:** `$a^2+b^2=c^2$` or `\(…\)` inline, `$$…$$` or `\[…\]` for a displayed formula, and a `$$` line on its own starts a multi-line formula block that ends at the next `$$` line. While you type a block that contains math, a live preview appears below it. `$5 and $10` is money, not math; write `\$` for a literal dollar sign. Broken TeX shows its error in place. (Rendered with KaTeX, bundled with the app, so it works offline.)
 
 The editor is live-preview: the block you are typing in shows its markdown, every other block is rendered. Blocks are separated by blank lines.
 

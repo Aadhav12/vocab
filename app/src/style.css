@@ -9,7 +9,7 @@ input.input { display: block; }
 input.input:focus, .input:focus { outline: none; box-shadow: 0 0 0 3px var(--cyan-20); border-color: var(--cyan); }
 input.input.ok:focus, input.input.bad:focus { box-shadow: none; }
 input[type=number].input { font: 17px var(--serif); }
-.sel { font: 14px var(--sans); padding: 6px 10px; border: var(--line); background: var(--paper); color: var(--ink); }
+select.sel { font: 14px var(--sans); padding: 6px 10px; border: var(--line); background: var(--paper); color: var(--ink); }
 input[type=checkbox] { accent-color: var(--cyan); }
 .btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .btn[disabled] { cursor: default; background: var(--paper); }
@@ -158,3 +158,36 @@ html, .modal-bg, .modal { scrollbar-width: thin; scrollbar-color: var(--g-200) t
 .nb-preview-l { font: 500 10.5px var(--mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--g-400); display: block; margin-bottom: 2px; }
 .nb-preview .katex { font-size: 1.05em; }
 .nb-preview .nb-math-display { display: block; }
+
+/* notebook folders */
+.nb-treebox { display: flex; flex-direction: column; }
+.nb-ctx { display: flex; flex-direction: column; gap: 2px; margin: 8px 0 8px; }
+.nb-ctx-b { display: flex; gap: 4px; margin-left: -8px; }
+.nb-ctx-l { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.nb-mini { padding: 2px 8px; font-size: 12.5px; }
+.nb-prompt { display: flex; gap: 6px; align-items: center; margin-bottom: 8px; }
+.nb-prompt .input { flex: 1; min-width: 0; }
+.nb-confirm { flex-direction: column; align-items: stretch; border: var(--line-soft); border-left: 3px solid var(--red); padding: 8px 10px; background: var(--red-10); }
+.nb-search { margin-bottom: 8px; }
+.nb-list.nb-tree { border-top: var(--line-soft); padding-top: 4px; min-height: 60px; }
+.nb-list.nb-tree.drop { background: var(--cyan-10); }
+.nb-folder { display: flex; align-items: center; gap: 6px; padding: 5px 8px; cursor: pointer; font: 500 14px var(--sans); color: var(--ink); user-select: none; box-shadow: inset 3px 0 0 transparent; }
+.nb-folder:hover { background: var(--g-50); }
+.nb-folder:focus-visible, .nb-item:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+.nb-folder.sel { box-shadow: inset 3px 0 0 var(--cyan); background: var(--cyan-10); }
+.nb-folder.drop { background: var(--cyan-20); outline: 1px dashed var(--cyan); outline-offset: -1px; }
+.nb-rootrow { font-weight: 600; }
+.nb-caret { width: 10px; color: var(--g-500); font-size: 11px; flex-shrink: 0; }
+.nb-folder-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nb-count { font-size: 11.5px; color: var(--g-500); }
+.nb-empty { padding: 2px 0; }
+.nb-tree .choice.nb-item, .nb-list .choice.nb-item { border: 0; border-bottom: 0; padding: 5px 8px; font: 14px var(--sans); box-shadow: inset 3px 0 0 transparent; }
+.nb-tree .choice.nb-item.sel, .nb-list .choice.nb-item.sel { background: var(--cyan-10); box-shadow: inset 3px 0 0 var(--cyan); }
+.nb-tree .choice + .choice, .nb-list .choice + .choice { border-top: 0; }
+.nb-item[draggable="true"] { cursor: grab; }
+.nb-item-path { color: var(--g-500); font-size: 12px; }
+.nb-foldersel { max-width: 180px; padding: 3px 8px; font-size: 13px; }
+.input.nb-search, .nb-prompt .input.sm { font: 14px var(--sans); padding: 5px 8px; }
+.nb-folder:focus, .nb-item:focus { outline: none; }
+.nb-folder:focus-visible, .nb-item:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+.nb-ctx-l { padding-left: 2px; }
