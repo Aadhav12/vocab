@@ -47,14 +47,6 @@ export function sampleWords(words: Word[], n: number, p: Progress, rng: Rng): Wo
   return shuffle(out, rng);
 }
 
-const chunk = <T,>(a: T[], size: number): T[][] => { const r: T[][] = []; for (let i = 0; i < a.length; i += size) r.push(a.slice(i, i + size)); return r; };
-export function flashChunks(words: Word[], rng: Rng, size = 12): Word[][] {
-  if (words.length <= size + 4) return [words];
-  const n = Math.ceil(words.length / size);
-  const per = Math.ceil(words.length / n);
-  return chunk(shuffle(words, rng), per);
-}
-
 function itemsFromDue(idx: DataIndex, p: Progress, ctx0: Ctx, limit: number): Item[] {
   const ctx: Ctx = { ...ctx0, known: (id) => p.introduced[id] !== undefined };
   const items: Item[] = [];
@@ -137,10 +129,6 @@ export function buildRun(node: PathNode, idx: DataIndex, p: Progress, rng: Rng):
     }
     case 'intro': return { kind: 'intro', title: 'Introduce', passMark: 1, items: [], words: set?.words ?? [] };
     case 'flash': return { kind: 'flash', title: 'Flashcards', passMark: 1, items: [], words: set?.words ?? [], chunks: [set?.words ?? []] };
-    case 'tflash': {
-      const ws = scopeWords(idx, node.level, node.scopeId);
-      return { kind: 'flash', title: node.name, passMark: 1, items: [], words: ws, chunks: flashChunks(ws, rng) };
-    }
     case 'fmt': {
       const f = node.format!;
       const own = new Set((set?.words ?? []).map((w) => w.id));
