@@ -398,36 +398,45 @@ export function Notebooks({ id }: { id?: string }) {
   return (
     <div className="nb-page">
       <aside className="nb-side">
-        <button className="btn primary nb-new" onClick={create}>+ New notebook</button>
-        <div className="nb-list">
-          {(list ?? []).map((n) => (
-            <a key={n.id} href={`#/notebooks/${n.id}`} className={`nb-item ${n.id === id ? 'on' : ''}`}>
-              <span className="nb-item-t">{n.title || 'Untitled'}</span>
-              <span className="nb-item-d mono">{n.updated ? fmtDate(n.updated) : ''}</span>
-            </a>
-          ))}
-          {list && !list.length && <div className="small muted" style={{ padding: '8px 2px' }}>No notebooks yet.</div>}
+        <div className="card soft">
+          <div className="card-h"><span className="label">Notebooks</span><span className="small mono muted">{list?.length ?? 0}</span></div>
+          <button className="btn primary nb-new" onClick={create}>+ New notebook</button>
+          <div className="nb-list">
+            {(list ?? []).map((n) => (
+              <a key={n.id} href={`#/notebooks/${n.id}`} className={`choice nb-item ${n.id === id ? 'sel' : ''}`}>
+                <span className="nb-item-t">{n.title || 'Untitled'}</span>
+                <span className="nb-item-d mono">{n.updated ? fmtDate(n.updated) : ''}</span>
+              </a>
+            ))}
+            {list && !list.length && <div className="small muted">No notebooks yet.</div>}
+          </div>
         </div>
       </aside>
       <section className="nb-main">
         {err && <div className="callout red" style={{ marginBottom: 12 }}>Could not reach the server ({err}).</div>}
         {cur ? (
           <div key={cur.id}>
-            <div className="nb-head">
-              <input ref={titleRef} className="nb-title" value={cur.title} placeholder="Untitled" maxLength={200}
+            <div className="sec-h nb-sech">
+              <span className="n">md</span>
+              <h2><input ref={titleRef} className="nb-title" value={cur.title} placeholder="Untitled" maxLength={200}
                 onChange={(e) => { const title = e.target.value; setCur({ ...cur, title }); setList((l) => l && l.map((n) => (n.id === cur.id ? { ...n, title } : n))); save({ id: cur.id, title }); }}
-                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); editorApi.current?.focusFirst(); } }} />
-              <div className="nb-tools">
-                <span className={`mono small nb-status ${status}`}>{label}</span>
-                <button className="btn ghost" onClick={download} title="Download as .md">↓ .md</button>
-                {!confirmDel ? <button className="btn ghost" onClick={() => setConfirmDel(true)}>Delete</button> : (
-                  <span className="row" style={{ gap: 6 }}><span className="small">Delete this notebook?</span><button className="btn danger" onClick={remove}>Delete</button><button className="btn" onClick={() => setConfirmDel(false)}>Keep</button></span>
-                )}
-              </div>
+                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); editorApi.current?.focusFirst(); } }} /></h2>
+              <span className={`note nb-status ${status}`}>{label}</span>
             </div>
-            <Editor key={cur.id} initial={cur.body} apiRef={editorApi}
-              onChange={(body) => { setCur((c) => (c ? { ...c, body } : c)); save({ id: cur.id, body }); }} />
-            <div className="nb-hint mono small muted">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo</div>
+            <div className="card nb-doc">
+              <div className="card-h">
+                <span className="label">Markdown</span>
+                <span className="row" style={{ gap: 4 }}>
+                  <button className="btn ghost nb-small" onClick={download} title="Download as .md">↓ .md</button>
+                  {!confirmDel ? <button className="btn ghost nb-small" onClick={() => setConfirmDel(true)}>Delete</button> : (
+                    <span className="row" style={{ gap: 6 }}><span className="small">Delete this notebook?</span><button className="btn danger nb-small" onClick={remove}>Delete</button><button className="btn nb-small" onClick={() => setConfirmDel(false)}>Keep</button></span>
+                  )}
+                </span>
+              </div>
+              <Editor key={cur.id} initial={cur.body} apiRef={editorApi}
+                onChange={(body) => { setCur((c) => (c ? { ...c, body } : c)); save({ id: cur.id, body }); }} />
+            </div>
+            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo</div>
           </div>
         ) : list !== null && !list.length ? (
           <div className="card" style={{ marginTop: 6 }}>

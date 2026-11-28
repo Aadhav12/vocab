@@ -121,9 +121,15 @@ export function handleEnter(value: string, start: number, end: number): EnterRes
     const prefix = qm[0].endsWith(' ') ? qm[0] : qm[0] + ' ';
     return { kind: 'edit', value: `${value.slice(0, start)}\n${prefix}${value.slice(start)}`, caret: start + 1 + prefix.length };
   }
-  // tables: Enter at the end of a row starts the next row; an empty row ends the table
+  // tables: after a header row Enter adds the separator; later rows continue the table; an empty row ends it
   if (/^\s*\|/.test(line) && atEnd) {
     if (TABLE_EMPTY.test(line)) return exitBlock(value, ls, le);
+    // Enter after a lone header row writes the |---| separator and starts the first body row
+    const cells = line.trim().replace(/^\||\|$/g, '').split('|').length;
+    if (ls === 0 && !value.includes('\n') && cells >= 1 && line.trim().length > 1) {
+      const add = `\n|${'---|'.repeat(cells)}\n| `;
+      return { kind: 'edit', value: value + add, caret: value.length + add.length };
+    }
     return { kind: 'edit', value: `${value.slice(0, start)}\n| ${value.slice(start)}`, caret: start + 3 };
   }
   return { kind: 'split', before: value.slice(0, start), after: value.slice(start) };
@@ -199,5 +205,6 @@ md.use({
 
 export function renderBlock(src: string): string {
   if (!src.trim()) return '';
-  return md.parse(src, { async: false }) as string;
+  // tables reuse the site's table style (.tbl)
+  return (md.parse(src, { async: false }) as string).replace(/<table>/g, '<table class="tbl">');
 }

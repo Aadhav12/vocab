@@ -60,9 +60,11 @@ describe('Enter', () => {
     expect(handleEnter('```js\nlet a;', 12, 12)).toEqual({ kind: 'default' });
     expect(handleEnter('```js\nlet a;\n```', 16, 16)).toEqual({ kind: 'split', before: '```js\nlet a;\n```', after: '' });
   });
-  it('tables: Enter adds a row, an empty row ends the table', () => {
-    expect(handleEnter('| a | b |', 9, 9)).toEqual({ kind: 'edit', value: '| a | b |\n| ', caret: 12 });
-    expect(handleEnter('| a | b |\n| ', 12, 12)).toEqual({ kind: 'split', before: '| a | b |', after: '' });
+  it('tables: a header row gets its separator, body rows continue, an empty row ends the table', () => {
+    expect(handleEnter('| a | b |', 9, 9)).toEqual({ kind: 'edit', value: '| a | b |\n|---|---|\n| ', caret: 22 });
+    expect(handleEnter('| a | b |\n|---|---|\n| 1 | 2 |', 29, 29)).toEqual({ kind: 'edit', value: '| a | b |\n|---|---|\n| 1 | 2 |\n| ', caret: 32 });
+    expect(handleEnter('| a | b |\n|---|---|\n| ', 22, 22)).toEqual({ kind: 'split', before: '| a | b |\n|---|---|', after: '' });
+    expect(renderBlock('| a | b |\n|---|---|\n| 1 | 2 |')).toContain('<td>1</td>');
   });
   it('replaces a selection', () => {
     expect(handleEnter('abcdef', 2, 4)).toEqual({ kind: 'split', before: 'ab', after: 'ef' });
@@ -101,7 +103,7 @@ describe('rendering', () => {
     expect(renderBlock('# Hi')).toContain('<h1>Hi</h1>');
     expect(renderBlock('**b** and *i*')).toContain('<strong>b</strong>');
     expect(renderBlock('- [x] done')).toContain('data-nbcheck checked');
-    expect(renderBlock('| a | b |\n|---|---|\n| 1 | 2 |')).toContain('<table>');
+    expect(renderBlock('| a | b |\n|---|---|\n| 1 | 2 |')).toContain('<table class="tbl">');
     expect(renderBlock('line1\nline2')).toContain('<br>');
   });
   it('never executes raw HTML or javascript links', () => {
