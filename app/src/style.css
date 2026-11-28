@@ -60,3 +60,6 @@ html, .modal-bg, .modal { scrollbar-width: thin; scrollbar-color: var(--g-200) t
 ::-webkit-scrollbar-thumb:hover { background: var(--g-300); background-clip: padding-box; }
 ::-webkit-scrollbar-corner { background: transparent; }
 .guide ul, .guide ol { padding-left: 22px; } .guide li { margin: 4px 0; }
+
+/* the last row's soft divider must not override the table's own ink border (collapsed borders: cell beats table) */
+.tbl tbody tr:last-child td { border-bottom: var(--line); }
