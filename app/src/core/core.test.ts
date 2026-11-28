@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { checkEnglish, checkNoun, checkPlural, checkWord, germanEq, normEn, checkEnToDe } from './check';
 import { adjForms, nounForms, verbForms } from './forms';
 import { applyAnswer, bookRechecks, dueCards, introduceWord, mastery, LADDER, markWeak, leechCards, clearLeech } from './srs';
-import { buildIndex, lookupToken, familyRoot, familyTree } from './index';
+import { buildIndex, lookupToken, familyRoot, familyTree, groupTopics } from './index';
 import { buildPath, position, topicStats, syncInserts, insertNode } from './path';
 import { FORMATS, emptyProgress } from './types';
 import type { Word } from './types';
@@ -406,6 +406,31 @@ describe('the mastery schedule documented on the Guide page', () => {
     expect(topicStats(idx, path, p, 'grafiken-statistik').health).toBeCloseTo(1);
     p.inserts.push({ id: 'recheck:set:zunahme-abnahme:3', kind: 'recheck', level: 'set', scopeId: 'zunahme-abnahme', dueAt: 3 });
     expect(topicStats(idx, path, p, 'grafiken-statistik').health).toBeCloseTo(0.9);
+  });
+});
+
+describe('topic quizzes pass at 90%; topics can be grouped under headings', () => {
+  const path = buildPath(idx);
+  it('topic quizzes need 90%, group quizzes still need every answer', () => {
+    const p = emptyProgress();
+    expect(buildRun(path.byId.get('topic:grafiken-statistik:quiz')!, idx, p, rng).passMark).toBe(0.9);
+    expect(buildRun(path.byId.get('group:veraenderungen-beschreiben:quiz')!, idx, p, rng).passMark).toBe(1);
+    expect(path.byId.get('topic:grafiken-statistik:quiz')!.sub).toMatch(/90%/);
+  });
+  it('reads topicGroup from _topic.json', () => {
+    expect(idx.topicById.get('grafiken-statistik')!.topicGroup).toBe('Academic');
+    expect(idx.topicById.get('arbeit-berufe')!.topicGroup).toBe('Everyday');
+  });
+  it('groups topics under headings in order of first appearance', () => {
+    const t = (id: string, g?: string) => ({ id, name: id, topicGroup: g, groups: [], texts: [] });
+    const secs = groupTopics([t('a', 'Academic'), t('b', 'Everyday'), t('c', 'academic'), t('d'), t('e', ' Everyday ')]);
+    expect(secs.map((x) => x.name)).toEqual(['Academic', 'Everyday', 'Other topics']);          // case and spaces ignored, first spelling kept
+    expect(secs[0].topics.map((x) => [x.topic.id, x.index])).toEqual([['a', 0], ['c', 2]]);     // global numbering is kept
+    expect(secs[2].topics.map((x) => x.topic.id)).toEqual(['d']);
+  });
+  it('no topicGroup anywhere = one unnamed section (the old overview)', () => {
+    const secs = groupTopics([{ id: 'a', name: 'a', groups: [], texts: [] }, { id: 'b', name: 'b', groups: [], texts: [] }]);
+    expect(secs).toHaveLength(1); expect(secs[0].name).toBeNull(); expect(secs[0].topics).toHaveLength(2);
   });
 });
 

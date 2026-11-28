@@ -62,6 +62,25 @@ export function buildIndex(bundle: DataBundle): DataIndex {
   return idx;
 }
 
+export interface TopicSection { name: string | null; topics: { topic: TopicData; index: number }[] }
+/**
+ * Topics under their `topicGroup` headings, one section after another, in the order each group first appears.
+ * Without any topicGroup there is a single unnamed section; topics without one go under "Other topics".
+ */
+export function groupTopics(topics: TopicData[]): TopicSection[] {
+  if (!topics.some((t) => t.topicGroup?.trim())) return [{ name: null, topics: topics.map((topic, index) => ({ topic, index })) }];
+  const sections: TopicSection[] = [];
+  const byKey = new Map<string, TopicSection>();
+  topics.forEach((topic, index) => {
+    const name = topic.topicGroup?.trim() || 'Other topics';
+    const key = name.toLowerCase();
+    let s = byKey.get(key);
+    if (!s) { s = { name, topics: [] }; byKey.set(key, s); sections.push(s); }
+    s.topics.push({ topic, index });
+  });
+  return sections;
+}
+
 export function resolveId(idx: DataIndex, id: string): string | undefined { return idx.byId.get(id)?.id; }
 
 export function familyRoot(idx: DataIndex, id: string): string {

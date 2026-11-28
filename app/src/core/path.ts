@@ -51,7 +51,7 @@ export function buildPath(idx: DataIndex): Path {
       push({ ...gs, id: `group:${group.id}:test`, type: 'gtest', name: 'Group test', sub: '90% to pass', glyph: '★', boss: true });
     }
     const ts = { level: 'topic' as const, scopeId: topic.id, topicId: topic.id, section: `${topic.name} · Topic round` };
-    push({ ...ts, id: `topic:${topic.id}:quiz`, type: 'tquiz', name: 'Topic quizzes', sub: 'all formats mixed', glyph: '◆', boss: false });
+    push({ ...ts, id: `topic:${topic.id}:quiz`, type: 'tquiz', name: 'Topic quizzes', sub: '90% to pass', glyph: '◆', boss: false });
     for (const t of topic.texts) push({ ...ts, id: `topic:${topic.id}:reading:${t.id}`, type: 'treading', name: 'Topic reading', sub: t.title, glyph: '¶', boss: false, textId: t.id });
     push({ ...ts, id: `topic:${topic.id}:test`, type: 'ttest', name: 'Topic test', sub: '90% to pass', glyph: '★', boss: true });
   }

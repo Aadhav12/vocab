@@ -60,7 +60,7 @@ export interface TextFile {
 
 export interface SetData { id: string; name: string; words: Word[]; text?: TextFile; file: string }
 export interface GroupData { id: string; name: string; description?: string; sets: SetData[]; texts: TextFile[] }
-export interface TopicData { id: string; name: string; description?: string; groups: GroupData[]; texts: TextFile[] }
+export interface TopicData { id: string; name: string; description?: string; topicGroup?: string; groups: GroupData[]; texts: TextFile[] }
 export interface Problem { file: string; message: string }
 export interface DataBundle { topics: TopicData[]; problems: Problem[]; version: number }
 

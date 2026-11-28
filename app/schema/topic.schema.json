@@ -26,6 +26,11 @@
     },
     "description": {
       "type": "string"
+    },
+    "topicGroup": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Heading this topic is listed under on the overview. Topics with the same name share one heading; headings appear in the order of their first topic."
     }
   }
 }

@@ -74,7 +74,7 @@ export function loadData(dataDir: string, version = 0): DataBundle {
   const dirs = (d: string) => fs.readdirSync(d, { withFileTypes: true }).filter((e) => e.isDirectory() && !e.name.startsWith('_') && !e.name.startsWith('.')).map((e) => e.name).sort(byPrefix);
   for (const td of dirs(dataDir)) {
     const tdir = path.join(dataDir, td);
-    const th = loadHeader<{ id: string; name: string; description?: string }>(path.join(tdir, '_topic.json'), `${td}/_topic.json`, 'topic', problems);
+    const th = loadHeader<{ id: string; name: string; description?: string; topicGroup?: string }>(path.join(tdir, '_topic.json'), `${td}/_topic.json`, 'topic', problems);
     if (!th) continue;
     const groups: GroupData[] = [];
     for (const gd of dirs(tdir)) {
@@ -88,7 +88,7 @@ export function loadData(dataDir: string, version = 0): DataBundle {
       }
       groups.push({ id: gh.id, name: gh.name, description: gh.description, sets, texts: loadTexts(gdir, `${td}/${gd}`, problems) });
     }
-    topics.push({ id: th.id, name: th.name, description: th.description, groups, texts: loadTexts(tdir, td, problems) });
+    topics.push({ id: th.id, name: th.name, description: th.description, ...(th.topicGroup?.trim() ? { topicGroup: th.topicGroup.trim() } : {}), groups, texts: loadTexts(tdir, td, problems) });
   }
   const bundle: DataBundle = { topics, problems, version };
   problems.push(...semanticCheck(bundle));

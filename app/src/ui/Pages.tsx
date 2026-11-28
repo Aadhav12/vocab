@@ -1,6 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { attemptsFor, mutateProgress, resetAll, useCore, useStore } from '../store';
 import { dueCards, mastery } from '../core/srs';
+import { groupTopics } from '../core/index';
 import { position, topicStats, type PathNode, type Position } from '../core/path';
 import { DEFAULT_SETTINGS, type Attempt, type Progress, type Settings } from '../core/types';
 import { articleFor } from '../core/forms';
@@ -27,30 +28,38 @@ export function Overview() {
           </a>
         ) : <div className="continue"><div><div className="label">All done</div><b>You've finished every node on the path.</b></div></div>}
       </div>
-      <div className="sec" style={{ marginTop: 28 }}>
-        <div className="sec-h"><span className="n">01</span><h2>Topics</h2><span className="note">{idx.bundle.topics.length} topics · {idx.sets.length} sets · {idx.words.length} words</span></div>
-        <div className="grid g3">
-          {idx.bundle.topics.map((t, i) => {
-            const st = topicStats(idx, path, p, t.id);
-            const ws = t.groups.flatMap((g) => g.sets.flatMap((s) => s.words));
-            const counts = [0, 0, 0, 0, 0]; ws.forEach((w) => counts[mastery(p, w.id)]++);
-            const body = (
-              <div className="card soft" style={{ opacity: st.unlocked ? 1 : 0.55, borderStyle: st.unlocked ? 'solid' : 'dashed', height: '100%' }}>
-                <div className="label">Topic {i + 1}{!st.unlocked && ' · locked'}</div>
-                <div style={{ fontSize: 18, fontWeight: 500 }}>{t.name}</div>
-                <div className="small muted">{st.groups} group{st.groups === 1 ? '' : 's'} · {st.sets} sets · {st.words} words</div>
-                <div className="bar cyan" style={{ margin: '8px 0 4px' }}><i style={{ width: `${st.total ? (st.done / st.total) * 100 : 0}%` }} /></div>
-                <div className="small mono muted">{st.done}/{st.total} steps · health {pct(st.health)}</div>
-                <div style={{ marginTop: 6 }}><MasteryBar counts={counts} total={ws.length} /></div>
+      {groupTopics(idx.bundle.topics).map((sec, si, all) => {
+        const sets = sec.topics.reduce((a, x) => a + x.topic.groups.reduce((b, g) => b + g.sets.length, 0), 0);
+        const wordCount = sec.topics.reduce((a, x) => a + x.topic.groups.reduce((b, g) => b + g.sets.reduce((c, st) => c + st.words.length, 0), 0), 0);
+        return (
+          <div className="sec" style={{ marginTop: si === 0 ? 28 : 40 }} key={sec.name ?? 'topics'}>
+            <div className="sec-h"><span className="n">{String(si + 1).padStart(2, '0')}</span><h2>{sec.name ?? 'Topics'}</h2><span className="note">{sec.topics.length} topic{sec.topics.length === 1 ? '' : 's'} · {sets} set{sets === 1 ? '' : 's'} · {wordCount} words</span></div>
+            <div className="grid g3">
+              {sec.topics.map(({ topic: t, index: i }) => {
+                const st = topicStats(idx, path, p, t.id);
+                const ws = t.groups.flatMap((g) => g.sets.flatMap((s) => s.words));
+                const counts = [0, 0, 0, 0, 0]; ws.forEach((w) => counts[mastery(p, w.id)]++);
+                const body = (
+                  <div className="card soft" style={{ opacity: st.unlocked ? 1 : 0.55, borderStyle: st.unlocked ? 'solid' : 'dashed', height: '100%' }}>
+                    <div className="label">Topic {i + 1}{!st.unlocked && ' · locked'}</div>
+                    <div style={{ fontSize: 18, fontWeight: 500 }}>{t.name}</div>
+                    <div className="small muted">{st.groups} group{st.groups === 1 ? '' : 's'} · {st.sets} set{st.sets === 1 ? '' : 's'} · {st.words} words</div>
+                    <div className="bar cyan" style={{ margin: '8px 0 4px' }}><i style={{ width: `${st.total ? (st.done / st.total) * 100 : 0}%` }} /></div>
+                    <div className="small mono muted">{st.done}/{st.total} steps · health {pct(st.health)}</div>
+                    <div style={{ marginTop: 6 }}><MasteryBar counts={counts} total={ws.length} /></div>
+                  </div>
+                );
+                return st.unlocked ? <a key={t.id} href={`#/topic/${t.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>{body}</a> : <div key={t.id}>{body}</div>;
+              })}
+            </div>
+            {si === all.length - 1 && (
+              <div className="legend" style={{ marginTop: 10 }}>
+                <span style={{ ['--c' as string]: 'var(--ink)' }}>mastered</span><span style={{ ['--c' as string]: 'var(--cyan)' }}>solid</span><span style={{ ['--c' as string]: 'var(--cyan-20)' }}>familiar</span><span style={{ ['--c' as string]: 'var(--g-200)' }}>learning</span><span style={{ ['--c' as string]: 'var(--paper)' }}>new</span>
               </div>
-            );
-            return st.unlocked ? <a key={t.id} href={`#/topic/${t.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>{body}</a> : <div key={t.id}>{body}</div>;
-          })}
-        </div>
-        <div className="legend" style={{ marginTop: 10 }}>
-          <span style={{ ['--c' as string]: 'var(--ink)' }}>mastered</span><span style={{ ['--c' as string]: 'var(--cyan)' }}>solid</span><span style={{ ['--c' as string]: 'var(--cyan-20)' }}>familiar</span><span style={{ ['--c' as string]: 'var(--g-200)' }}>learning</span><span style={{ ['--c' as string]: 'var(--paper)' }}>new</span>
-        </div>
-      </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -182,7 +191,11 @@ export function Words() {
       <div className="screen-head"><h3>Words</h3><span className="counter">{list.length} of {idx.words.length}</span></div>
       <div className="row" style={{ marginBottom: 12 }}>
         <input className="input sm" style={{ flex: 1, minWidth: 220 }} placeholder="Search German or English…" value={q} onChange={(e) => setQ(e.target.value)} />
-        <select className="sel" value={topic} onChange={(e) => setTopic(e.target.value)}><option value="">All topics</option>{idx.bundle.topics.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}</select>
+        <select className="sel" value={topic} onChange={(e) => setTopic(e.target.value)}><option value="">All topics</option>
+          {groupTopics(idx.bundle.topics).map((sec) => sec.name === null
+            ? sec.topics.map(({ topic: t }) => <option key={t.id} value={t.id}>{t.name}</option>)
+            : <optgroup key={sec.name} label={sec.name}>{sec.topics.map(({ topic: t }) => <option key={t.id} value={t.id}>{t.name}</option>)}</optgroup>)}
+        </select>
       </div>
       <table className="tbl"><thead><tr><th style={{ width: 24 }} /><th>German</th><th>English</th><th>Set</th><th>Level</th></tr></thead><tbody>
         {list.map((w) => {

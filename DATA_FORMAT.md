@@ -63,6 +63,9 @@ Every file starts with `"$schema"` (relative path to the schema) and `"schemaVer
 | `id` | yes | unique among topics (resp. groups). Lower-case, hyphens. |
 | `name` | yes | shown in the app |
 | `description` | no | |
+| `topicGroup` | no | `_topic.json` only. A heading to list the topic under on the overview (see below) |
+
+**Topic groups.** Add `"topicGroup": "Academic"` to a `_topic.json` and the overview lists that topic under an "Academic" heading. Topics that use the same name (case and spaces ignored) share one heading, headings follow the order in which their first topic appears (that is, the folder number prefixes), and the topics under a heading keep their numbering and order. Topics without a `topicGroup` go under "Other topics" once any topic has one. If no topic has a `topicGroup`, the overview is the single "Topics" list as before.
 
 **Set file** (`NN-name.json`):
 

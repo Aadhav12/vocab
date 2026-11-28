@@ -9,6 +9,8 @@ import type { PathNode } from './path';
 
 /** Warm-ups pass at 90% (all other practice nodes need every answer correct). */
 export const WARMUP_PASS = 0.9;
+/** Topic quizzes pass at 90% too (group quizzes and the other practice nodes still need every answer). */
+export const TOPIC_QUIZ_PASS = 0.9;
 
 export type RunKind = 'warmup' | 'intro' | 'flash' | 'items' | 'reading';
 export interface Run {
@@ -145,7 +147,7 @@ export function buildRun(node: PathNode, idx: DataIndex, p: Progress, rng: Rng):
     }
     case 'gquiz': case 'tquiz': {
       const ws = scopeWords(idx, node.level, node.scopeId);
-      return { kind: 'items', title: node.name, passMark: 1, items: mixedItems(ws, p, ctx, node.level === 'group' ? 0.6 : 0.8), words: ws, sectioned: true };
+      return { kind: 'items', title: node.name, passMark: node.type === 'tquiz' ? TOPIC_QUIZ_PASS : 1, items: mixedItems(ws, p, ctx, node.level === 'group' ? 0.6 : 0.8), words: ws, sectioned: true };
     }
     case 'test': case 'gtest': case 'ttest': case 'recheck': {
       const ws = scopeWords(idx, node.level, node.scopeId);
