@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { blockKind, closeFences, handleEnter, indentLines, joinBlocks, mapClickToSource, splitBlocks, toggleCheckbox, wrapSelection } from '../notebooks/markdown';
-import { renderWithWords, type Rendered } from '../notebooks/showwords';
+import { indentPadding, renderBlockEx, START, type EmbedRef, type Rendered, type State } from '../notebooks/directives';
+import { findWordByText } from '../core/lookup';
+import { WORD_SECTIONS, WordCard, sectionId } from './WordCard';
 import { useStore } from '../store';
 import { fmtDate, go, useOpenWord } from './common';
 
@@ -16,6 +18,18 @@ const api = async <T,>(url: string, method = 'GET', body?: unknown): Promise<T> 
 const LAST = 'testdaf-last-notebook';
 const remember = (id: string) => { try { localStorage.setItem(LAST, id); } catch { /* optional */ } };
 const recall = () => { try { return localStorage.getItem(LAST); } catch { return null; } };
+
+// ====================================================================== embeds
+/** [[embed:der Anstieg]] / [[embed:der Anstieg#Notes]]: the real word card, in the notebook. */
+function Embed({ r }: { r: EmbedRef }) {
+  const idx = useStore((x) => x.idx)!;
+  const w = findWordByText(idx, r.word);
+  if (!w) return <div className="callout red">No word “{r.word}” in the vocabulary.</div>;
+  if (!r.section) return <WordCard w={w} />;
+  const sec = sectionId(r.section);
+  if (!sec) return <div className="callout red">Unknown section “{r.section}”. Available: {Object.values(WORD_SECTIONS).map((n) => n[0]).join(', ')}.</div>;
+  return <WordCard w={w} only={sec} />;
+}
 
 // ====================================================================== editor
 interface EditorApi { focusFirst(): void }
@@ -226,7 +240,6 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
     // an underlined word (inside [[showwords]]) opens its card; Ctrl/Cmd/Alt-click edits the text instead
     const wordEl = target.closest('[data-w]') as HTMLElement | null;
     if (wordEl && !(e.ctrlKey || e.metaKey || e.altKey)) { openWord(wordEl.dataset.w!); return; }
-    if (target.closest('.nb-marker')) { goto(i, 'end'); return; }
     if (target.matches('input[data-nbcheck]')) {
       const boxes = [...el.querySelectorAll('input[data-nbcheck]')];
       const n = boxes.indexOf(target as HTMLInputElement);
@@ -259,25 +272,31 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
     else commit([...blocks.map((b, k) => (k === active ? closeFences(b) : b)), ''], blocks.length, 0);
   };
 
-  // rendering: blocks are rendered once and cached; each knows whether a [[showwords]] region is open when it starts
+  // rendering: blocks are rendered once and cached; each knows the [[showwords]] / [[indent]] state it starts in
   const cache = useMemo(() => new Map<string, Rendered>(), [idx]);
   const views: Rendered[] = [];
-  let regionOpen = false;
+  let carried: State = START;
   for (const b of blocks) {
-    const key = `${regionOpen ? 1 : 0}\u0000${b}`;
+    const key = `${carried.show ? 1 : 0}${carried.indent}\u0000${b}`;
     let v = cache.get(key);
-    if (!v) { v = renderWithWords(b, regionOpen, idx); if (cache.size > 800) cache.clear(); cache.set(key, v); }
+    if (!v) { v = renderBlockEx(b, carried, idx); if (cache.size > 800) cache.clear(); cache.set(key, v); }
     views.push(v);
-    regionOpen = v.endOpen;
+    carried = v.end;
   }
+  const clickEmbed = (i: number, e: React.MouseEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLElement).closest('.wc-link')) return;   // links inside the card still work
+    goto(i, 'end');
+  };
 
   return (
     <div className="nb-editor" ref={root}>
       {blocks.map((b, i) => {
         const kind = blockKind(b);
+        const v = views[i];
+        const pad = { paddingLeft: indentPadding(v.indent) };
         if (i === active) {
           return (
-            <div key={i} className={`nb-block nb-active k-${kind || 'p'}`}>
+            <div key={i} className={`nb-block nb-active k-${kind || 'p'}`} style={pad}>
               <textarea ref={ta} value={b} rows={1} spellCheck={false} autoCapitalize="off" aria-label="Edit block"
                 placeholder={blocks.length === 1 ? 'Start typing…  Markdown works: # heading, - list, [ ] task, > quote, ``` code' : ''}
                 onChange={onInput} onKeyDown={onKeyDown} onBlur={onBlur} />
@@ -285,9 +304,19 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
           );
         }
         if (!b.trim()) return null;
+        if (v.embeds) {
+          return (
+            <div key={i} className="nb-block nb-view nb-embeds" style={pad} onClick={(e) => clickEmbed(i, e)} title="Click to edit the embed">
+              {v.embeds.map((r, k) => <div key={k} className="nb-embed"><Embed r={r} /></div>)}
+            </div>
+          );
+        }
+        if (v.marker) {   // [[showwords]] / [[indent]] lines: invisible until clicked (or reached with the arrow keys)
+          return <div key={i} className="nb-block nb-view nb-hid" title={`${b.trim()} — click to edit`} onClick={() => goto(i, 'end')} />;
+        }
         return (
-          <div key={i} className={`nb-block nb-view k-${kind || 'p'}`} onClick={(e) => clickBlock(i, e)}
-            dangerouslySetInnerHTML={{ __html: views[i].html }} />
+          <div key={i} className={`nb-block nb-view k-${kind || 'p'}`} style={pad} onClick={(e) => clickBlock(i, e)}
+            dangerouslySetInnerHTML={{ __html: v.html }} />
         );
       })}
       <div className="nb-tail" onClick={clickTail} title="Click to add text at the end" />
@@ -449,7 +478,7 @@ export function Notebooks({ id }: { id?: string }) {
               <Editor key={cur.id} initial={cur.body} apiRef={editorApi}
                 onChange={(body) => { setCur((c) => (c ? { ...c, body } : c)); save({ id: cur.id, body }); }} />
             </div>
-            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo<br />[[showwords]] … [[/showwords]] underlines the vocabulary inside: click a word for its meaning, Ctrl+click to edit the text.</div>
+            <div className="annot">Enter new block · Shift+Enter line break · ↑ ↓ move between blocks · Esc finish · Ctrl+B / Ctrl+I · Ctrl+Z undo<br />[[showwords]] … [[/showwords]] underlines vocabulary (click a word for its meaning, Ctrl+click to edit) · [[indent]] … [[/indent]] indents · [[embed:der Anstieg]] or [[embed:der Anstieg#Notes]] embeds a word card.</div>
           </div>
         ) : list !== null && !list.length ? (
           <div className="card" style={{ marginTop: 6 }}>

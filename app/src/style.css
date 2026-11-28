@@ -124,5 +124,12 @@ html, .modal-bg, .modal { scrollbar-width: thin; scrollbar-color: var(--g-200) t
 /* [[showwords]] regions: same dotted underline as the reading texts */
 .nb-view .tok { cursor: pointer; }
 .nb-view .tok:hover { background: var(--cyan-10); border-bottom: 1px solid var(--cyan); }
-.nb-view .nb-marker { display: flex; align-items: center; gap: 10px; min-height: 24px; }
-.nb-view .nb-marker i { flex: 1; border-top: 1px dashed var(--g-300); }
+/* marker lines ([[showwords]], [[indent]] …) take almost no room and show nothing until clicked */
+.nb-hid { min-height: 6px; padding-top: 2px; padding-bottom: 2px; cursor: text; }
+/* embedded word cards */
+.nb-embeds { cursor: default; }
+.nb-embed { border: var(--line-soft); padding: 14px 16px; background: var(--paper); }
+.nb-embed + .nb-embed { margin-top: 8px; }
+.nb-embeds:hover .nb-embed { border-color: var(--g-400); }
+.nb-embed .wc-row:first-child { border-top: 0; }
+.nb-embed:has(> .callout:only-child) { border: 0; padding: 0; background: none; }

@@ -47,5 +47,10 @@ The editor is live-preview: the block you are typing in shows its markdown, ever
 * `Ctrl+B` / `Ctrl+I` bold / italic, `Tab` / `Shift+Tab` indent list items, `Ctrl+Z` / `Ctrl+Shift+Z` undo and redo across the whole notebook.
 * Click a rendered block to edit it (the caret lands where you clicked); click a checkbox to tick it; `Ctrl`-click a link to open it. Raw HTML is shown as text, never run.
 
-### `[[showwords]]` in notebooks
-Wrap any part of a notebook in `[[showwords]]` … `[[/showwords]]` and every vocabulary word inside (found the same way as in the reading texts: lemma, plural, case and verb forms) gets the dotted underline. Click one to open its word card. The region can span paragraphs, lists and tables; an unclosed `[[showwords]]` runs to the end of the notebook. Code, links and the markers inside code blocks are left alone. `Ctrl`/`Cmd`/`Alt`-click an underlined word to edit the text instead of opening the card. A line holding only a marker is shown as a small "show words" bar so it can still be clicked and edited.
+### Directives in notebooks
+Directives are written in the markdown itself. The marker lines are invisible once you leave them (click the thin strip where they are, or arrow into it, to edit); everything else about the text stays plain markdown.
+
+* `[[showwords]]` … `[[/showwords]]` — every vocabulary word inside (found the same way as in the reading texts: lemma, plural, case and verb forms) gets the dotted underline; click one to open its word card. `Ctrl`/`Cmd`/`Alt`-click an underlined word to edit the text instead. Regions can span paragraphs, lists and tables; code and links are left alone; an unclosed marker runs to the end of the notebook.
+* `[[indent]]` … `[[/indent]]` — everything inside is indented; regions nest for deeper levels.
+* `[[embed:der Anstieg]]` — the word card, in place (links inside it still work; click its background to edit the line). The word is found by article + lemma, lemma alone, or id, ignoring case and `ae/oe/ue/ss` spellings. An embed has to be on its own line (several embed lines in one block are fine).
+* `[[embed:der Anstieg#Notes]]` — just one section of the card. Sections: `header`, `home`, `senses`, `plural`, `declension`, `forms` (also `conjugation`), `comparison`, `case`, `conjunction`, `governs`, `rektion`, `examples`, `collocations`, `synonyms`, `opposites` (also `antonyms`), `notes`, `family` (also `tree`). A missing word, an unknown section or a section the word does not have shows a short message instead.

@@ -27,7 +27,7 @@ function Tree({ w, idx, p }: { w: Word; idx: DataIndex; p: Progress }) {
           const h = idx.home.get(m.id);
           const locked = p.introduced[m.id] === undefined && h?.set.id !== homeSet;
           const mm = mastery(p, m.id);
-          const cls = `w ${m.id === w.id ? 'self' : ''} ${locked ? 'lock' : mm >= 2 ? `m${mm}` : ''}`;
+          const cls = `w wc-link ${m.id === w.id ? 'self' : ''} ${locked ? 'lock' : mm >= 2 ? `m${mm}` : ''}`;
           return (
             <div key={n.id} style={{ paddingLeft: n.depth * 18 }}>
               {n.depth > 0 && <span className="br">└</span>}
@@ -41,7 +41,20 @@ function Tree({ w, idx, p }: { w: Word; idx: DataIndex; p: Progress }) {
   );
 }
 
-export function WordCard({ w, compact = false }: { w: Word; compact?: boolean }) {
+/** Section ids a word card is made of, and the names an embed may use for them. */
+export const WORD_SECTIONS: Record<string, string[]> = {
+  header: ['header', 'title', 'heading'], home: ['home', 'location'], senses: ['senses', 'meanings'], plural: ['plural'],
+  declension: ['declension', 'cases'], forms: ['forms', 'conjugation', 'principal'], comparison: ['comparison'], case: ['case'],
+  conjunction: ['conjunction'], governs: ['governs'], rektion: ['rektion', 'government'], examples: ['examples', 'example', 'sentences'],
+  collocations: ['collocations'], synonyms: ['synonyms'], opposites: ['opposites', 'antonyms'], notes: ['notes', 'note'], family: ['family', 'tree'],
+};
+export function sectionId(name: string): string | null {
+  const n = name.trim().toLowerCase();
+  return Object.entries(WORD_SECTIONS).find(([, names]) => names.includes(n))?.[0] ?? null;
+}
+
+/** The word card. `only` shows a single section (used by notebook embeds). */
+export function WordCard({ w, compact = false, only }: { w: Word; compact?: boolean; only?: string }) {
   const idx = useStore((s) => s.idx)!, p = useStore((s) => s.progress);
   const open = useOpenWord();
   const h = idx.home.get(w.id);
@@ -55,55 +68,73 @@ export function WordCard({ w, compact = false }: { w: Word; compact?: boolean })
   const irr = (k: string) => (vf?.irregular.has(k as never) ? 'irr' : '');
   const showForms = w.noun && w.noun.declension && w.noun.declension !== 'strong';
   const row = (k: string, v: React.ReactNode) => <div className="wc-row"><span className="k">{k}</span><div>{v}</div></div>;
+
+  // every part of the card, in order; `top` parts sit above the body block
+  const parts: { id: string; top?: boolean; node: React.ReactNode }[] = [];
+  const add = (id: string, node: React.ReactNode, top = false) => { if (node) parts.push({ id, node, top }); };
+
+  add('header', (
+    <div className="row" style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>
+      <div>
+        <div className="wc-lemma"><Art w={w} />{w.lemma}</div>
+        <div style={{ fontSize: 17, color: 'var(--g-600)' }}>{w.senses.map((s) => s.en.join(', ')).join(' · ')}</div>
+      </div>
+      <div className="row" style={{ gap: 6 }}>
+        <span className="tag">{POS[w.pos]}</span>{w.level && <span className="tag">{w.level}</span>}
+        <span className="tag wc-link" style={{ cursor: 'pointer' }} onClick={() => speak(w.noun ? `${articleFor(w.noun.gender, 'Nom')} ${w.lemma}` : w.lemma, true)}>♪ listen</span>
+      </div>
+    </div>
+  ), true);
+  add('home', h && <div className="annot" style={{ marginTop: 4 }}>{h.topic.name} › {h.group.name} › Set {h.setOrder + 1} · {h.set.name} · <MasteryDot p={p} id={w.id} /></div>, true);
+  const sensesShown = only === 'senses' ? w.senses.length > 0 : w.senses.length > 1 && !compact && w.senses.some((s) => s.hint);
+  add('senses', sensesShown && row('SENSES', <div>{w.senses.map((s, i) => <div key={i}>{s.en.join(', ')}{s.hint && <span className="muted small"> — {s.hint}</span>}</div>)}</div>), true);
+
+  add('plural', w.noun && row('PLURAL', <span className="serif" style={{ fontSize: 17 }}>{w.noun.number === 'singular-only' || !w.noun.plural ? <span className="muted">no plural</span> : `die ${w.noun.plural}`}{w.noun.genitive && <span className="muted small"> · Gen. {w.noun.genitive}</span>}</span>));
+  add('declension', showForms && nf && (
+    <div className="wc-row"><span className="k">{w.noun!.declension!.toUpperCase()}</span>
+      <table className="forms"><thead><tr><th>Nom</th><th>Akk</th><th>Dat</th><th>Gen</th></tr></thead>
+        <tbody><tr>{(['Nom', 'Akk', 'Dat', 'Gen'] as const).map((c) => <td key={c} className={nf[c][0] !== nf.Nom[0] ? 'irr' : ''}>{articleFor(w.noun!.gender, c)} {nf[c][0]}</td>)}</tr></tbody></table>
+    </div>
+  ));
+  add('forms', vf && (
+    <div className="wc-row"><span className="k">FORMS</span>
+      <div>
+        <table className="forms"><thead><tr>{vf.du && <th>du</th>}<th>er/sie/es</th><th>Präteritum</th><th>Partizip II</th><th>Hilfsverb</th></tr></thead>
+          <tbody><tr>{vf.du && <td className={irr('du') || 'irr'}>{vf.du}</td>}<td className={irr('praesens3sg')}>{vf.praesens3sg}</td><td className={irr('praeteritum')}>{vf.praeteritum}</td><td className={irr('partizip2')}>{vf.partizip2}</td><td className={irr('aux')}>{vf.aux}</td></tr></tbody></table>
+        {vf.likeLemma && <div className="annot">conjugates like <i className="serif">{vf.likeLemma}</i></div>}
+        {w.verb?.reflexive && w.verb.reflexive !== 'none' && <div className="annot">reflexive ({w.verb.reflexive})</div>}
+      </div>
+    </div>
+  ));
+  add('comparison', af && (
+    <div className="wc-row"><span className="k">COMPARISON</span>
+      <table className="forms"><thead><tr><th>Positiv</th><th>Komparativ</th><th>Superlativ</th></tr></thead>
+        <tbody><tr><td>{w.lemma}</td><td className={w.adj?.irregular ? 'irr' : ''}>{af.komparativ}</td><td className={w.adj?.irregular ? 'irr' : ''}>{af.superlativ}</td></tr></tbody></table>
+    </div>
+  ));
+  add('case', w.prep && row('CASE', <span>{w.prep.cases.join(' / ')}{w.prep.position === 'post' ? ' · postposition' : ''}{w.prep.contractions?.length ? ` · ${w.prep.contractions.join(', ')}` : ''}</span>));
+  add('conjunction', w.conj && row('CONJUNCTION', <span>{w.conj.kind}{w.conj.verbPosition ? ` · verb position: ${w.conj.verbPosition}` : ''}{w.conj.pair ? ` · ${w.conj.pair}` : ''}</span>));
+  add('governs', w.phrase?.governs && row('GOVERNS', <span>{w.phrase.governs}</span>));
+  add('rektion', w.rektion?.length ? <>{w.rektion.map((r, i) => <div key={i}>{row(i === 0 ? 'REKTION' : '', <span><span className="serif" style={{ fontSize: 17 }}>{r.pattern.replace(/\{(\d+)\}/g, (_, n) => (r.slots[+n]?.prep ? `${r.slots[+n].prep} (${r.slots[+n].case})` : `(${r.slots[+n]?.case})`))}</span> <span className="muted small">— {r.en}</span></span>)}</div>)}</> : null);
+  add('examples', w.examples.length ? <>{w.examples.map((e, i) => <div className="wc-row" key={i}><span className="k">{i === 0 ? 'EXAMPLE' : ''}</span><div className="ex" style={{ marginTop: 0 }}><Gapped text={e.de} /><small>{e.en}</small></div></div>)}</> : null);
+  add('collocations', w.collocations?.length ? row('COLLOCATIONS', <div>{w.collocations.map((c, i) => <div key={i}><Gapped text={c.de} cls="serif" /> <span className="muted small">— {c.en}</span></div>)}</div>) : null);
+  add('synonyms', syns.size > 0 && row('SYNONYMS', <div>{[...syns.values()].map(({ w: o, contrast }) => <div key={o.id}><span className="tag cyan wc-link" style={{ cursor: 'pointer' }} onClick={() => open(o.id)}>{o.lemma}</span> <span className="muted small">{contrast}</span></div>)}</div>));
+  add('opposites', ants.length > 0 && row('OPPOSITES', <span className="row" style={{ gap: 6 }}>{ants.map((o) => <span key={o.id} className="tag wc-link" style={{ cursor: 'pointer' }} onClick={() => open(o.id)}>{o.noun ? articleFor(o.noun.gender, 'Nom') + ' ' : ''}{o.lemma}</span>)}</span>));
+  add('notes', w.notes && row('NOTES', <div>{[w.notes].flat().map((n, i) => <div key={i}>{n}</div>)}</div>));
+  add('family', familyTree(idx, familyRoot(idx, w.id)).length >= 2 && <Tree w={w} idx={idx} p={p} />);
+
+  if (only) {
+    const got = parts.filter((x) => x.id === only);
+    if (!got.length) {
+      const label = Object.entries(WORD_SECTIONS).find(([k]) => k === only)?.[1][0] ?? only;
+      return <div className="callout">“{w.lemma}” has no <b>{label}</b> section.</div>;
+    }
+    return <div>{got.map((x, i) => <div key={i}>{x.node}</div>)}</div>;
+  }
   return (
     <div>
-      <div className="row" style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <div>
-          <div className="wc-lemma"><Art w={w} />{w.lemma}</div>
-          <div style={{ fontSize: 17, color: 'var(--g-600)' }}>{w.senses.map((s) => s.en.join(', ')).join(' · ')}</div>
-        </div>
-        <div className="row" style={{ gap: 6 }}>
-          <span className="tag">{POS[w.pos]}</span>{w.level && <span className="tag">{w.level}</span>}
-          <span className="tag" style={{ cursor: 'pointer' }} onClick={() => speak(w.noun ? `${articleFor(w.noun.gender, 'Nom')} ${w.lemma}` : w.lemma, true)}>♪ listen</span>
-        </div>
-      </div>
-      {h && <div className="annot" style={{ marginTop: 4 }}>{h.topic.name} › {h.group.name} › Set {h.setOrder + 1} · {h.set.name} · <MasteryDot p={p} id={w.id} /></div>}
-      {w.senses.length > 1 && !compact && w.senses.some((s) => s.hint) && row('SENSES', <div>{w.senses.map((s, i) => <div key={i}>{s.en.join(', ')}{s.hint && <span className="muted small"> — {s.hint}</span>}</div>)}</div>)}
-      <div style={{ marginTop: 12 }}>
-        {w.noun && row('PLURAL', <span className="serif" style={{ fontSize: 17 }}>{w.noun.number === 'singular-only' || !w.noun.plural ? <span className="muted">no plural</span> : `die ${w.noun.plural}`}{w.noun.genitive && <span className="muted small"> · Gen. {w.noun.genitive}</span>}</span>)}
-        {showForms && nf && (
-          <div className="wc-row"><span className="k">{w.noun!.declension!.toUpperCase()}</span>
-            <table className="forms"><thead><tr><th>Nom</th><th>Akk</th><th>Dat</th><th>Gen</th></tr></thead>
-              <tbody><tr>{(['Nom', 'Akk', 'Dat', 'Gen'] as const).map((c) => <td key={c} className={nf[c][0] !== nf.Nom[0] ? 'irr' : ''}>{articleFor(w.noun!.gender, c)} {nf[c][0]}</td>)}</tr></tbody></table>
-          </div>
-        )}
-        {vf && (
-          <div className="wc-row"><span className="k">FORMS</span>
-            <div>
-              <table className="forms"><thead><tr>{vf.du && <th>du</th>}<th>er/sie/es</th><th>Präteritum</th><th>Partizip II</th><th>Hilfsverb</th></tr></thead>
-                <tbody><tr>{vf.du && <td className={irr('du') || 'irr'}>{vf.du}</td>}<td className={irr('praesens3sg')}>{vf.praesens3sg}</td><td className={irr('praeteritum')}>{vf.praeteritum}</td><td className={irr('partizip2')}>{vf.partizip2}</td><td className={irr('aux')}>{vf.aux}</td></tr></tbody></table>
-              {vf.likeLemma && <div className="annot">conjugates like <i className="serif">{vf.likeLemma}</i></div>}
-              {w.verb?.reflexive && w.verb.reflexive !== 'none' && <div className="annot">reflexive ({w.verb.reflexive})</div>}
-            </div>
-          </div>
-        )}
-        {af && (
-          <div className="wc-row"><span className="k">COMPARISON</span>
-            <table className="forms"><thead><tr><th>Positiv</th><th>Komparativ</th><th>Superlativ</th></tr></thead>
-              <tbody><tr><td>{w.lemma}</td><td className={w.adj?.irregular ? 'irr' : ''}>{af.komparativ}</td><td className={w.adj?.irregular ? 'irr' : ''}>{af.superlativ}</td></tr></tbody></table>
-          </div>
-        )}
-        {w.prep && row('CASE', <span>{w.prep.cases.join(' / ')}{w.prep.position === 'post' ? ' · postposition' : ''}{w.prep.contractions?.length ? ` · ${w.prep.contractions.join(', ')}` : ''}</span>)}
-        {w.conj && row('CONJUNCTION', <span>{w.conj.kind}{w.conj.verbPosition ? ` · verb position: ${w.conj.verbPosition}` : ''}{w.conj.pair ? ` · ${w.conj.pair}` : ''}</span>)}
-        {w.phrase?.governs && row('GOVERNS', <span>{w.phrase.governs}</span>)}
-        {w.rektion?.map((r, i) => row(i === 0 ? 'REKTION' : '', <span><span className="serif" style={{ fontSize: 17 }}>{r.pattern.replace(/\{(\d+)\}/g, (_, n) => (r.slots[+n]?.prep ? `${r.slots[+n].prep} (${r.slots[+n].case})` : `(${r.slots[+n]?.case})`))}</span> <span className="muted small">— {r.en}</span></span>))}
-        {w.examples.map((e, i) => <div className="wc-row" key={i}><span className="k">{i === 0 ? 'EXAMPLE' : ''}</span><div className="ex" style={{ marginTop: 0 }}><Gapped text={e.de} /><small>{e.en}</small></div></div>)}
-        {w.collocations?.length ? row('COLLOCATIONS', <div>{w.collocations.map((c, i) => <div key={i}><Gapped text={c.de} cls="serif" /> <span className="muted small">— {c.en}</span></div>)}</div>) : null}
-        {syns.size > 0 && row('SYNONYMS', <div>{[...syns.values()].map(({ w: o, contrast }) => <div key={o.id}><span className="tag cyan" style={{ cursor: 'pointer' }} onClick={() => open(o.id)}>{o.lemma}</span> <span className="muted small">{contrast}</span></div>)}</div>)}
-        {ants.length > 0 && row('OPPOSITES', <span className="row" style={{ gap: 6 }}>{ants.map((o) => <span key={o.id} className="tag" style={{ cursor: 'pointer' }} onClick={() => open(o.id)}>{o.noun ? articleFor(o.noun.gender, 'Nom') + ' ' : ''}{o.lemma}</span>)}</span>)}
-        {w.notes && row('NOTES', <div>{[w.notes].flat().map((n, i) => <div key={i}>{n}</div>)}</div>)}
-        <Tree w={w} idx={idx} p={p} />
-      </div>
+      {parts.filter((x) => x.top).map((x) => <div key={x.id}>{x.node}</div>)}
+      <div style={{ marginTop: 12 }}>{parts.filter((x) => !x.top).map((x) => <div key={x.id}>{x.node}</div>)}</div>
     </div>
   );
 }
