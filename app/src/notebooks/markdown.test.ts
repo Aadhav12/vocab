@@ -113,3 +113,48 @@ describe('rendering', () => {
     expect(renderBlock('[ok](https://example.com)')).toContain('rel="noopener noreferrer"');
   });
 });
+
+describe('LaTeX', () => {
+  it('renders inline and display math with KaTeX', () => {
+    expect(renderBlock('Es gilt $x^2 + y^2 = z^2$ hier.')).toContain('class="katex"');
+    const d = renderBlock('$$\\int_0^1 x\\,dx = \\frac12$$');
+    expect(d).toContain('katex-display');
+    expect(renderBlock('\\(a_i\\) und \\[b^2\\]')).toContain('katex');
+    expect(renderBlock('$x$')).toContain('data-tex="x"');
+  });
+  it('a $$ … $$ block over several lines is one display equation', () => {
+    const h = renderBlock('$$\n\\sum_{i=1}^n i\n= \\frac{n(n+1)}{2}\n$$');
+    expect(h).toContain('nb-math-display'); expect(h).toContain('katex-display'); expect(h).not.toContain('$$');
+  });
+  it('money and escaped dollars are not math', () => {
+    expect(renderBlock('Es kostet $5 und $10 zusammen.')).not.toContain('katex');
+    expect(renderBlock('Preis: \\$5 und \\$6')).not.toContain('katex');
+    expect(renderBlock('`$x$`')).not.toContain('class="katex"');
+  });
+  it('bad TeX shows an error instead of breaking the page', () => {
+    const h = renderBlock('$\\frac{1$');
+    expect(h).toContain('katex');
+  });
+  it('markup inside math is left alone', () => {
+    const h = renderBlock('$a*b*c$ und *kursiv*');
+    expect(h).toContain('<em>kursiv</em>'); expect((h.match(/<em>/g) || []).length).toBe(1);
+  });
+  it('$$ blocks keep blank lines inside them, like code fences', () => {
+    const doc = 'vorher\n\n$$\na = 1\n\nb = 2\n$$\n\nnachher\n';
+    expect(splitBlocks(doc)).toEqual(['vorher', '$$\na = 1\n\nb = 2\n$$', 'nachher']);
+    expect(joinBlocks(splitBlocks(doc))).toBe(doc);
+    expect(splitBlocks('Text $$x$$ mehr\n\nnoch ein Absatz')).toHaveLength(2);       // an inline $$x$$ is not a block
+  });
+  it('an unclosed $$ block is closed when the block is left; $$ is not confused with code fences', () => {
+    expect(openFence('$$\nx = 1')).toBe('$$');
+    expect(closeFences('$$\nx = 1')).toBe('$$\nx = 1\n$$');
+    expect(openFence('```\n$$\n```')).toBeNull();
+    expect(openFence('$$\n```\n$$')).toBeNull();
+    expect(blockKind('$$\nx\n$$')).toBe('math'); expect(blockKind('```\nx')).toBe('code');
+  });
+  it('Enter on a $$ line adds the closing $$; inside the block it is a newline', () => {
+    expect(handleEnter('$$', 2, 2)).toEqual({ kind: 'edit', value: '$$\n\n$$', caret: 3 });
+    expect(handleEnter('$$\nx = 1', 8, 8)).toEqual({ kind: 'default' });
+    expect(handleEnter('$$\nx = 1\n$$', 11, 11)).toEqual({ kind: 'split', before: '$$\nx = 1\n$$', after: '' });
+  });
+});

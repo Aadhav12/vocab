@@ -1,10 +1,12 @@
 // Pure helpers for the notebook editor. A document is a list of markdown *blocks* (paragraph, heading, list,
 // quote, table, fenced code …). The block being typed in is shown as raw markdown; all others are rendered.
 import { Marked } from 'marked';
+import katex from 'katex';
 
 // ---------------------------------------------------------------- blocks
-const OPENER = /^\s{0,3}(`{3,}|~{3,})/;
-const closerFor = (fence: string) => new RegExp(`^\\s{0,3}${fence[0]}{${fence.length},}\\s*$`);
+// a "fence" is ``` / ~~~ code, or a $$ line that opens a multi-line display-math block
+const OPENER = /^\s{0,3}(`{3,}|~{3,}|\$\$(?=[ \t]*$))/;
+const closerFor = (fence: string) => (fence === '$$' ? /^\s{0,3}\$\$[ \t]*$/ : new RegExp(`^\\s{0,3}${fence[0]}{${fence.length},}\\s*$`));
 
 /** Split markdown into blocks: separated by blank lines; a fenced code block is always one block. */
 export function splitBlocks(md: string): string[] {
@@ -53,7 +55,8 @@ export function closeFences(text: string): string {
 export function blockKind(text: string): string {
   const h = /^(#{1,6})\s/.exec(text);
   if (h) return `h${h[1].length}`;
-  if (OPENER.test(text)) return 'code';
+  const o = OPENER.exec(text.split('\n')[0]);
+  if (o) return o[1] === '$$' ? 'math' : 'code';
   return '';
 }
 
@@ -190,7 +193,45 @@ export function toggleCheckbox(raw: string, n: number): string {
 // ---------------------------------------------------------------- rendering
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// ---- LaTeX (KaTeX): $x$ and \(x\) inline, $$x$$ and \[x\] display, and a multi-line block between two `$$` lines.
+// Rendered math is kept aside and put back after the HTML is built, so later passes (word underlining) never see it.
+let mathStore: string[] | null = null;
+const PH_OPEN = '\uE020', PH_CLOSE = '\uE021';
+function stash(tex: string, display: boolean, block = false): string {
+  let inner: string;
+  try { inner = katex.renderToString(tex, { displayMode: display, throwOnError: false, strict: 'ignore', trust: false }); }
+  catch { inner = `<span class="nb-mathfail">${esc(tex)}</span>`; }
+  const tag = block ? 'div' : 'span';
+  const store = mathStore ?? (mathStore = []);
+  store.push(`<${tag} class="nb-math${display ? ' nb-math-display' : ''}" data-tex="${esc(tex)}">${inner}</${tag}>`);
+  return `${PH_OPEN}${store.length - 1}${PH_CLOSE}`;
+}
+const INLINE_MATH: [RegExp, boolean][] = [
+  [/^\$\$([\s\S]+?)\$\$/, true],
+  [/^\\\[([\s\S]+?)\\\]/, true],
+  [/^\\\(([\s\S]+?)\\\)/, false],
+  [/^\$(?!\s)((?:\\.|[^$\\\n])+?)(?<!\s)\$(?!\d)/, false],   // "$5 and $10" is money, not math
+];
+
 const md = new Marked({ gfm: true, breaks: true });
+md.use({
+  extensions: [
+    {
+      name: 'mathBlock', level: 'block',
+      start(src: string) { const m = /(?:^|\n)\$\$[ \t]*\n/.exec(src); return m ? m.index + (m[0].startsWith('\n') ? 1 : 0) : undefined; },
+      tokenizer(src: string) { const m = /^\$\$[ \t]*\n([\s\S]*?)\n[ \t]*\$\$[ \t]*(?:\n|$)/.exec(src); if (m) return { type: 'mathBlock', raw: m[0], tex: m[1].trim() }; },
+      renderer(t: any) { return stash(t.tex, true, true); },
+    },
+    {
+      name: 'mathInline', level: 'inline',
+      start(src: string) { const i = src.search(/\$|\\\(|\\\[/); return i < 0 ? undefined : i; },
+      tokenizer(src: string) {
+        for (const [re, display] of INLINE_MATH) { const m = re.exec(src); if (m) return { type: 'mathInline', raw: m[0], tex: m[1].trim(), display }; }
+      },
+      renderer(t: any) { return stash(t.tex, t.display); },
+    },
+  ],
+});
 md.use({
   renderer: {
     // raw HTML in notes is shown as text, never executed
@@ -203,8 +244,18 @@ md.use({
   },
 });
 
+/** HTML with math still as placeholders (see finishMath). */
+export function renderBlockRaw(src: string): { html: string; math: string[] } {
+  mathStore = [];
+  try {
+    const html = (md.parse(src, { async: false }) as string).replace(/<table>/g, '<table class="tbl">');   // tables reuse the site's table style
+    return { html, math: mathStore };
+  } finally { mathStore = null; }
+}
+export const finishMath = (html: string, math: string[]) => html.replace(/\uE020(\d+)\uE021/g, (_, n) => math[+n] ?? '');
+
 export function renderBlock(src: string): string {
   if (!src.trim()) return '';
-  // tables reuse the site's table style (.tbl)
-  return (md.parse(src, { async: false }) as string).replace(/<table>/g, '<table class="tbl">');
+  const r = renderBlockRaw(src);
+  return finishMath(r.html, r.math);
 }

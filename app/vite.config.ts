@@ -4,6 +4,6 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: { port: 5173, proxy: { '/api': 'http://localhost:4317' } },
-  build: { outDir: 'dist' },
+  build: { outDir: 'dist', chunkSizeWarningLimit: 1500 },
   test: { include: ['src/**/*.test.ts', 'server/**/*.test.ts'] },
 } as any);

@@ -10,7 +10,7 @@ import type { DataIndex } from '../core/index';
 import { tokenize } from '../core/index';
 import { findWordByText } from '../core/lookup';
 import { articleFor } from '../core/forms';
-import { renderBlock } from './markdown';
+import { finishMath, renderBlock, renderBlockRaw } from './markdown';
 
 export interface State { show: boolean; indent: number }
 export const START: State = { show: false, indent: 0 };
@@ -90,7 +90,8 @@ export function renderBlockEx(src: string, start: State, idx: DataIndex): Render
   if (directives) return { html: '', end: start, indent: start.indent, marker: false, directives };
   if (!start.show && !HAS_MARKER.test(src)) return { html: renderBlock(src), end: start, indent: start.indent, marker: false };
 
-  const html = renderBlock(src.replace(SHOW_OPEN, P_SHOW_OPEN).replace(SHOW_CLOSE, P_SHOW_CLOSE).replace(IND_OPEN, P_IND_OPEN).replace(IND_CLOSE, P_IND_CLOSE));
+  const raw = renderBlockRaw(src.replace(SHOW_OPEN, P_SHOW_OPEN).replace(SHOW_CLOSE, P_SHOW_CLOSE).replace(IND_OPEN, P_IND_OPEN).replace(IND_CLOSE, P_IND_CLOSE));
+  const html = raw.html;
   let show = start.show, indent = start.indent, skip = 0, sawMarker = false;
   let firstIndent: number | null = null;     // depth where the block's visible content begins
   const touch = (t: string) => { if (firstIndent === null && t.replace(/&nbsp;|\s/g, '') !== '') firstIndent = indent; };
@@ -115,9 +116,10 @@ export function renderBlockEx(src: string, start: State, idx: DataIndex): Render
       return piece ? withChips(piece, show, idx) : piece;
     }).join('');
   }).join('');
+  const done = finishMath(out, raw.math);
 
   const visible = out.replace(/<[^>]+>/g, '').trim() !== '' || /<(hr|img|table|pre|input)\b/i.test(out);
   const end = { show, indent };
   if (!visible && sawMarker) return { html: '', end, indent, marker: true };
-  return { html: out, end, indent: firstIndent ?? start.indent, marker: false };
+  return { html: done, end, indent: firstIndent ?? start.indent, marker: false };
 }

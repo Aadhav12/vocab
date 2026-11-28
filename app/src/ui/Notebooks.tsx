@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { blockKind, closeFences, handleEnter, indentLines, joinBlocks, mapClickToSource, splitBlocks, toggleCheckbox, wrapSelection } from '../notebooks/markdown';
+import { blockKind, closeFences, handleEnter, indentLines, joinBlocks, mapClickToSource, renderBlock, splitBlocks, toggleCheckbox, wrapSelection } from '../notebooks/markdown';
 import { indentPadding, renderBlockEx, START, type Rendered, type State } from '../notebooks/directives';
 import { DirectiveView } from './NotebookData';
 import { useStore } from '../store';
@@ -224,6 +224,9 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
   const clickBlock = (i: number, e: React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
     const target = e.target as HTMLElement;
+    // a formula: put the caret at the end of its TeX source
+    const mathEl = target.closest('.nb-math') as HTMLElement | null;
+    if (mathEl) { const tex = mathEl.dataset.tex ?? ''; const k = blocks[i].indexOf(tex); goto(i, k >= 0 ? k + tex.length : 'end'); return; }
     // an underlined word (inside [[showwords]]) opens its card; Ctrl/Cmd/Alt-click edits the text instead
     const wordEl = target.closest('[data-w]') as HTMLElement | null;
     if (wordEl && !(e.ctrlKey || e.metaKey || e.altKey)) { openWord(wordEl.dataset.w!); return; }
@@ -287,6 +290,10 @@ function Editor({ initial, onChange, apiRef }: { initial: string; onChange: (md:
               <textarea ref={ta} value={b} rows={1} spellCheck={false} autoCapitalize="off" aria-label="Edit block"
                 placeholder={blocks.length === 1 ? 'Start typing…  Markdown works: # heading, - list, [ ] task, > quote, ``` code' : ''}
                 onChange={onInput} onKeyDown={onKeyDown} onBlur={onBlur} />
+              {/\$|\\\(|\\\[/.test(b) && (
+                <div className="nb-preview"><span className="nb-preview-l">preview</span>
+                  <div className="nb-view-body" dangerouslySetInnerHTML={{ __html: renderBlock(closeFences(b)) }} /></div>
+              )}
             </div>
           );
         }

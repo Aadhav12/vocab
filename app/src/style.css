@@ -145,3 +145,16 @@ html, .modal-bg, .modal { scrollbar-width: thin; scrollbar-color: var(--g-200) t
 .nb-view .nb-word { cursor: pointer; }
 .nb-view .nb-missing { color: var(--red-ink); border-bottom: 1px dotted var(--red); }
 .nb-embed .tbl td.mono { white-space: nowrap; }
+
+/* LaTeX */
+.nb-view .katex { font-size: 1.05em; }
+.nb-view .nb-math-display { display: block; margin: 2px 0; overflow-x: auto; overflow-y: hidden; }
+.nb-view .katex-display { margin: 0.3em 0; }
+.nb-view .nb-math { cursor: text; }
+.nb-view .nb-math:hover { background: var(--cyan-10); }
+.nb-view .nb-mathfail, .nb-view .katex-error { color: var(--red-ink); font-family: var(--mono); font-size: 0.9em; }
+.nb-block.k-math textarea { font: 13.5px/1.55 var(--mono); }
+.nb-preview { margin-top: 6px; padding: 6px 0 2px 0; border-top: 1px dashed var(--g-300); position: relative; color: var(--g-800); }
+.nb-preview-l { font: 500 10.5px var(--mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--g-400); display: block; margin-bottom: 2px; }
+.nb-preview .katex { font-size: 1.05em; }
+.nb-preview .nb-math-display { display: block; }
