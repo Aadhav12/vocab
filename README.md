@@ -17,6 +17,9 @@ records/   everything about the learner; the app is the only writer
 `data/` is watched: add or edit a JSON file and the open page refreshes. JSON Schemas in `app/schema/` give editors autocomplete.
 `records/` is portable: copy it into another install and all progress and history come with it (records refer to words by stable ids; renamed words keep their `aliases`).
 
+## Dark mode
+The **☾ dark / ☀ light** button at the right end of the navbar switches the theme. Until you use it the app follows your system setting; after that it remembers your choice (in this browser). The dark palette is the same system inverted: near-black paper, light text, softer ruled lines, and the cyan, green and red lightened slightly so they stay readable.
+
 ## Keyboard
 Every question can be answered without the mouse.
 

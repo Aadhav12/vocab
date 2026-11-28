@@ -126,7 +126,7 @@ export function TopicPage({ id }: { id: string }) {
     const seg = (a: number[], b: number[]) => `M${a[0]} ${a[1]} C${a[0]} ${(a[1] + b[1]) / 2} ${b[0]} ${(a[1] + b[1]) / 2} ${b[0]} ${b[1]}`;
     let solid = '', dashed = '';
     for (let i = 0; i < pts.length - 1; i++) (i < curI ? (solid += seg(pts[i], pts[i + 1])) : (dashed += seg(pts[i], pts[i + 1])));
-    svg.current.innerHTML = `<path d="${solid}" fill="none" stroke="#4d8b96" stroke-width="1.5"/><path d="${dashed}" fill="none" stroke="#9c9c9c" stroke-width="1" stroke-dasharray="4 4"/>`;
+    svg.current.innerHTML = `<path d="${solid}" fill="none" style="stroke:var(--cyan)" stroke-width="1.5"/><path d="${dashed}" fill="none" style="stroke:var(--g-400)" stroke-width="1" stroke-dasharray="4 4"/>`;
   };
   useLayoutEffect(() => { draw(); const f = () => draw(); addEventListener('resize', f); (document as any).fonts?.ready.then(draw); return () => removeEventListener('resize', f); });
   const topics = idx.bundle.topics;

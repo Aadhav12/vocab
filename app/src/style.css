@@ -18,14 +18,14 @@ a.btn { text-decoration: none; display: inline-block; }
 .fields .v { overflow: hidden; }
 .fields.dyn > * { border-bottom: var(--line-soft); }
 .fields.dyn { border-bottom: none; }
-.fields.dyn::after { content: ''; grid-column: 1 / -1; border-top: 1px solid var(--ink); }
+.fields.dyn::after { content: ''; grid-column: 1 / -1; border-top: 1px solid var(--rule); }
 .fields .v .seg { margin-top: 0; }
 .fields .v .seg span { padding: 2px 10px; }
 .choice { gap: 0; }
 .choice .kbd { flex-shrink: 0; }
 .tbl tr.click { cursor: pointer; }
 .tbl tr.click:hover td { background: var(--g-50); }
-.sd { display: inline-block; width: 10px; height: 10px; border: 1px solid var(--ink); vertical-align: -1px; }
+.sd { display: inline-block; width: 10px; height: 10px; border: 1px solid var(--rule); vertical-align: -1px; }
 .sd.m0 { background: var(--paper); } .sd.m1 { background: var(--g-200); } .sd.m2 { background: var(--cyan-20); } .sd.m3 { background: var(--cyan); } .sd.m4 { background: var(--ink); }
 .modal-bg { position: fixed; inset: 0; background: rgba(20, 20, 20, 0.35); display: flex; justify-content: center; align-items: flex-start; padding: 32px 16px; overflow: auto; z-index: 20; }
 .modal { background: var(--paper); border: var(--line); width: 100%; max-width: 780px; padding: 18px 24px 24px; }
@@ -191,3 +191,10 @@ html, .modal-bg, .modal { scrollbar-width: thin; scrollbar-color: var(--g-200) t
 .nb-folder:focus, .nb-item:focus { outline: none; }
 .nb-folder:focus-visible, .nb-item:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
 .nb-ctx-l { padding-left: 2px; }
+
+/* theme toggle, the last thing in the navbar */
+.top > .themebtn { margin: 0 0 14px 18px; padding: 2px 8px; font: 12.5px var(--mono); color: var(--g-600); background: transparent; border: var(--line-soft); cursor: pointer; white-space: nowrap; }
+.top > .themebtn:hover { color: var(--ink); border-color: var(--g-500); }
+.top > .themebtn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+@media (max-width: 900px) { .top > .themebtn { margin-left: auto; } }
+:root[data-theme="dark"] .modal-bg { background: rgba(0, 0, 0, 0.6); }

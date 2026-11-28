@@ -7,6 +7,7 @@ import { Practice } from './Practice';
 import { Guide } from './Guide';
 import { Notebooks } from './Notebooks';
 import { Modal, WordOpenCtx, useHash } from './common';
+import { toggleTheme, useTheme } from '../theme';
 import { WordCard, WordHistory } from './WordCard';
 
 export function App() {
@@ -18,6 +19,7 @@ export function App() {
   const path = useStore((s) => s.path);
   const saveError = useStore((s) => s.saveError);
   const hash = useHash();
+  const theme = useTheme();
   const [wordId, setWordId] = useState<string | null>(null);
   useEffect(() => { init(); }, []);
   if (!loaded) return <div className="wrap"><p className="mono muted" style={{ marginTop: 40 }}>loading…</p></div>;
@@ -54,6 +56,7 @@ export function App() {
           {bundle.problems.length > 0 && <a href="#/problems" className="prob"><b>{bundle.problems.length}</b> data problem{bundle.problems.length === 1 ? '' : 's'}</a>}
           <span><b>{setsDone}</b> sets done</span><span className="due"><b>{due}</b> due</span><span><b>{p.xp.toLocaleString()}</b> xp</span><span><b>{p.streak.count}</b> day streak</span>
         </div>
+        <button className="themebtn" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>{theme === 'dark' ? '☀ light' : '☾ dark'}</button>
       </header>
       {saveError && <div className="savewarn">Your progress could not be saved ({saveError}). Retrying automatically — keep this tab open and make sure the server is still running.</div>}
       <div className="wrap">{page}</div>

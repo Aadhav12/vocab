@@ -23,12 +23,28 @@
   --red-ink: #7d3d3b;
   --red-10: rgba(168, 92, 90, 0.12);
 
-  --line: 1px solid var(--ink);
+  /* structure lines, and the filled surfaces that invert in dark mode */
+  --rule: #141414;
+  --solid: #141414; --on-solid: #ffffff; --on-solid-dim: #c4c4c4;
+  --hatch: #e4eef0; --tint: #f0f6f7;
+  --line: 1px solid var(--rule);
   --line-soft: 1px solid var(--g-300);
 
   --sans: 'IBM Plex Sans', system-ui, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, monospace;
   --serif: 'Source Serif 4', Georgia, serif;
+}
+/* dark mode: the same system, inverted. Lines are softer than the text so the ruled look doesn't glare. */
+:root { color-scheme: light; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141516; --ink: #e8e8e8;
+  --g-800: #d0d0d0; --g-600: #a6a6a6; --g-500: #8b8b8b; --g-400: #6e6e6e; --g-300: #474747; --g-200: #323334; --g-100: #262728; --g-50: #1c1d1e;
+  --cyan: #5aa3b0; --cyan-ink: #86c4cf; --cyan-10: rgba(90, 163, 176, 0.14); --cyan-20: rgba(90, 163, 176, 0.28);
+  --green: #6fa577; --green-ink: #93cc9b; --green-10: rgba(111, 165, 119, 0.16);
+  --red: #c97b79; --red-ink: #e59997; --red-10: rgba(201, 123, 121, 0.16);
+  --rule: #8c8c8c; --solid: #d6d6d6; --on-solid: #141516; --on-solid-dim: #5a5a5a;
+  --hatch: #1e3236; --tint: #162a2e;
 }
 * { box-sizing: border-box; border-radius: 0 !important; }
 html { background: var(--paper); }
@@ -80,7 +96,7 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 /* buttons */
 .btn { font: 500 14px var(--sans); padding: 8px 16px; border: var(--line); background: var(--paper); color: var(--ink); cursor: pointer; }
 .btn:hover { background: var(--g-50); }
-.btn.primary { background: var(--ink); color: var(--paper); }
+.btn.primary { background: var(--solid); color: var(--on-solid); border-color: var(--solid); }
 .btn.accent { background: var(--cyan); border-color: var(--cyan); color: var(--paper); }
 .btn.ghost { border-color: transparent; color: var(--g-600); }
 .btn.danger { border-color: var(--red); color: var(--red-ink); }
@@ -91,7 +107,7 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 .tag.cyan { border-color: var(--cyan); color: var(--cyan-ink); background: var(--cyan-10); }
 .tag.green { border-color: var(--green); color: var(--green-ink); background: var(--green-10); }
 .tag.red { border-color: var(--red); color: var(--red-ink); background: var(--red-10); }
-.tag.ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.tag.ink { background: var(--solid); color: var(--on-solid); border-color: var(--solid); }
 .kbd { display: inline-block; min-width: 20px; text-align: center; font: 11px/18px var(--mono); border: var(--line-soft); border-bottom-width: 2px; color: var(--g-600); margin-right: 8px; }
 
 /* inputs */
@@ -185,22 +201,22 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 .path .sect span { background: var(--paper); padding: 0 10px; border: var(--line-soft); }
 .pn { display: flex; align-items: center; gap: 12px; width: 260px; position: relative; }
 .node { width: 46px; height: 46px; border: var(--line); background: var(--paper); display: grid; place-items: center; font: 500 15px var(--mono); flex-shrink: 0; position: relative; z-index: 1; }
-.node.boss { width: 58px; height: 58px; outline: 1px solid var(--ink); outline-offset: 3px; }
+.node.boss { width: 58px; height: 58px; outline: 1px solid var(--rule); outline-offset: 3px; }
 .node.done { background: var(--cyan); border-color: var(--cyan); color: var(--paper); }
 .node.boss.done { outline-color: var(--cyan); }
 .node.cur { border: 2px solid var(--cyan); color: var(--cyan-ink); box-shadow: 0 0 0 5px var(--cyan-20); }
 .node.boss.cur { outline-color: var(--cyan); }
 .node.lock { border: 1px dashed var(--g-400); color: var(--g-400); }
 .node.boss.lock { outline: 1px dashed var(--g-300); }
-.node.review { border-color: var(--cyan); color: var(--cyan-ink); background: repeating-linear-gradient(135deg, #e4eef0 0 4px, var(--paper) 4px 8px); }
+.node.review { border-color: var(--cyan); color: var(--cyan-ink); background: repeating-linear-gradient(135deg, var(--hatch) 0 4px, var(--paper) 4px 8px); }
 .node.fail { border-color: var(--red); color: var(--red-ink); background: var(--red-10); }
 .pn .t { line-height: 1.25; }
 .pn .t b { font-weight: 500; display: block; }
 .pn .t span { font: 12px var(--mono); color: var(--g-500); }
-.inserted { border: 1px dashed var(--cyan); background: #f0f6f7; padding: 10px 22px 14px; display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; z-index: 1; }
+.inserted { border: 1px dashed var(--cyan); background: var(--tint); padding: 10px 22px 14px; display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; z-index: 1; }
 .inserted .label { color: var(--cyan-ink); }
-.continue { display: flex; align-items: center; gap: 16px; border: var(--line); background: var(--ink); color: var(--paper); padding: 14px 20px; }
-.continue .label { color: var(--g-300); }
+.continue { display: flex; align-items: center; gap: 16px; border: 1px solid var(--solid); background: var(--solid); color: var(--on-solid); padding: 14px 20px; }
+.continue .label { color: var(--on-solid-dim); }
 .continue b { font: 500 18px var(--sans); }
 .continue .go { margin-left: auto; font: 13px var(--mono); }
 
@@ -213,7 +229,7 @@ h1, h2, h3 { font-weight: 500; margin: 0; }
 .tbl .x { color: var(--red-ink); text-decoration: line-through; }
 .tbl .y { color: var(--green-ink); }
 .dots { display: inline-flex; gap: 3px; }
-.dots i { width: 9px; height: 9px; border: 1px solid var(--ink); }
+.dots i { width: 9px; height: 9px; border: 1px solid var(--rule); }
 .dots i.ok { background: var(--green); border-color: var(--green); }
 .dots i.bad { background: var(--red); border-color: var(--red); }
 
