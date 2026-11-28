@@ -382,6 +382,33 @@ describe('the path never contains a step with nothing to ask', () => {
   });
 });
 
+describe('the mastery schedule documented on the Guide page', () => {
+  it('climbs familiar → solid → mastered on the documented sets when reviewed exactly when due', () => {
+    const p = emptyProgress(); p.setCount = 4;
+    introduceWord(p, 'w', ['de-en', 'en-de']);
+    const N = p.setCount + 1; p.setCount = N;       // the introducing set's test has been passed
+    const seen: [number, number, number][] = [];
+    for (let i = 0; i < 4; i++) {
+      while (p.setCount < p.cards['w|de-en'].due) p.setCount++;
+      applyAnswer(p, 'w', 'de-en', true); applyAnswer(p, 'w', 'en-de', true);
+      seen.push([p.setCount - N + 1, p.cards['w|de-en'].step, mastery(p, 'w')]);
+    }
+    expect(seen).toEqual([[1, 1, 2], [4, 2, 3], [11, 3, 3], [26, 4, 4]]);
+  });
+  it('health: overdue means due before the current set count; failed rechecks cost 10 points', () => {
+    const path = buildPath(idx); const p = emptyProgress();
+    for (const id of ['nehmen', 'zunehmen']) introduceWord(p, id, ['de-en']);
+    p.setCount = 3;
+    p.cards['nehmen|de-en'].due = 3;                // due now: not overdue
+    p.cards['zunehmen|de-en'].due = 2;              // overdue
+    expect(topicStats(idx, path, p, 'grafiken-statistik').health).toBeCloseTo(0.5);
+    p.cards['zunehmen|de-en'].due = 9;
+    expect(topicStats(idx, path, p, 'grafiken-statistik').health).toBeCloseTo(1);
+    p.inserts.push({ id: 'recheck:set:zunahme-abnahme:3', kind: 'recheck', level: 'set', scopeId: 'zunahme-abnahme', dueAt: 3 });
+    expect(topicStats(idx, path, p, 'grafiken-statistik').health).toBeCloseTo(0.9);
+  });
+});
+
 describe('data validation', () => {
   it('sample data is clean', () => { expect(bundle.problems).toEqual([]); });
 });

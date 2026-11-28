@@ -4,6 +4,7 @@ import { dueCards } from '../core/srs';
 import { History, Overview, Problems, SettingsPage, TopicPage, Words } from './Pages';
 import { NodeScreen } from './NodeScreen';
 import { Practice } from './Practice';
+import { Guide } from './Guide';
 import { Modal, WordOpenCtx, useHash } from './common';
 import { WordCard, WordHistory } from './WordCard';
 
@@ -26,7 +27,7 @@ export function App() {
   const [, a, b] = hash.split('/');
   const rest = hash.split('/').slice(2).join('/');
   const section = a || '';
-  const nav = [['', 'Path', '#/'], ['practice', 'Practice', '#/practice'], ['words', 'Words', '#/words'], ['settings', 'Settings', '#/settings']] as const;
+  const nav = [['', 'Path', '#/'], ['practice', 'Practice', '#/practice'], ['words', 'Words', '#/words'], ['guide', 'Guide', '#/guide'], ['settings', 'Settings', '#/settings']] as const;
   const activeKey = ['topic', 'node', 'history', ''].includes(section) ? '' : section;
   const w = wordId ? idx.byId.get(wordId) : null;
 
@@ -37,6 +38,7 @@ export function App() {
   else if (section === 'practice') page = <div style={{ marginTop: 24 }}><Practice /></div>;
   else if (section === 'words') page = <Words />;
   else if (section === 'settings') page = <SettingsPage />;
+  else if (section === 'guide') page = <Guide />;
   else if (section === 'problems') page = <Problems />;
   else page = <Overview />;
 
