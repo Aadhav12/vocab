@@ -62,7 +62,7 @@ export function NodeScreen({ id }: { id: string }) {
             {f.rounds.map((r, i) => <tr key={i}><td className="mono">{r.chunk && f.rounds.some((x) => x.chunk !== 1) ? `${r.chunk}.` : ''}{r.round}</td><td className="mono" style={{ color: r.misses ? 'var(--red-ink)' : 'var(--green-ink)' }}>{r.misses}</td><td className="mono">{fmtSec(r.avgRecogMs)}</td><td className="mono">{fmtSec(r.avgProdMs)}</td></tr>)}
           </tbody></table>
           <div className="row" style={{ justifyContent: 'space-between', marginTop: 14 }}><button className="btn ghost" onClick={back}>Back to path</button>
-            <span className="row"><button className="btn" onClick={retake}>{out.passed ? 'Replay' : 'Retake'}</button>{out.passed && <button className="btn primary" onClick={goOn}>Continue</button>}</span></div>
+            <span className="row"><button className="btn" onClick={retake} autoFocus={!out.passed}>{out.passed ? 'Replay' : 'Retake'}</button>{out.passed && <button className="btn primary" onClick={goOn} autoFocus>Continue</button>}</span></div>
         </div>
       );
     }
@@ -81,7 +81,7 @@ export function NodeScreen({ id }: { id: string }) {
         <div className="screen-head"><h3>Warm-up</h3><span className="counter">{dueCards(s.progress).length} due</span></div>
         <p>Nothing is due right now. Reviews will appear here when cards from earlier sets come due.</p>
         <div className="row" style={{ justifyContent: 'space-between' }}><button className="btn ghost" onClick={back}>Back to path</button>
-          <button className="btn primary" onClick={() => { const out = commit([], Date.now()); setDone({ out, results: [] }); goOn(); }}>Pass and continue</button></div>
+          <button className="btn primary" autoFocus onClick={() => { const out = commit([], Date.now()); setDone({ out, results: [] }); goOn(); }}>Pass and continue</button></div>
       </div>
     );
   }

@@ -23,7 +23,7 @@ export function ItemView({ item, instant, onResult, onNext }: ItemViewProps) {
   const [grade, setGrade] = useState<Grade | null>(null);
   const [sel, setSel] = useState<number | null>(null);
   const [alt, setAlt] = useState<string | null>(null);
-  const inputs = useRef<(HTMLInputElement | null)[]>([]);
+  const inputs = useRef<(HTMLElement | null)[]>([]);
   const lastFocus = useRef(0);
   const nextRef = useRef(onNext); nextRef.current = onNext;
   const setPh = (p: 'answer' | 'fb') => { phaseRef.current = p; setPhase(p); };
@@ -35,7 +35,7 @@ export function ItemView({ item, instant, onResult, onNext }: ItemViewProps) {
   // focus the first editable field
   useEffect(() => {
     if (item.mode === 'fields') {
-      const i = (item.fields ?? []).findIndex((f) => !f.locked && f.check !== 'choice');
+      const i = (item.fields ?? []).findIndex((f) => !f.locked);
       setTimeout(() => inputs.current[i]?.focus(), 0);
     }
   }, [item]);
@@ -82,7 +82,7 @@ export function ItemView({ item, instant, onResult, onNext }: ItemViewProps) {
   const insertChar = (ch: string) => {
     const i = lastFocus.current;
     const el = inputs.current[i];
-    if (!el || phase !== 'answer') return;
+    if (!(el instanceof HTMLInputElement) || phase !== 'answer') return;
     const s = el.selectionStart ?? el.value.length, e = el.selectionEnd ?? s;
     const nv = el.value.slice(0, s) + ch + el.value.slice(e);
     setVals((v) => v.map((x, j) => (j === i ? nv : x)));
@@ -93,17 +93,41 @@ export function ItemView({ item, instant, onResult, onNext }: ItemViewProps) {
   const fields = item.fields ?? [];
   const typed = fields.filter((f) => !f.locked && f.check !== 'choice');
   const needsUml = typed.some((f) => f.check !== 'en');
-  const lastTyped = fields.map((f, i) => (!f.locked && f.check !== 'choice' ? i : -1)).filter((i) => i >= 0).pop() ?? 0;
-
+  // every editable field (typed or picked) can be reached and answered from the keyboard
+  const focusable = fields.map((f, i) => (!f.locked ? i : -1)).filter((i) => i >= 0);
+  const focusNext = (i: number): boolean => {
+    const k = focusable.indexOf(i);
+    if (k >= 0 && k < focusable.length - 1) { inputs.current[focusable[k + 1]]?.focus(); return true; }
+    return false;
+  };
+  const enterOn = (i: number, e: React.KeyboardEvent<HTMLElement>) => {
+    if (phaseRef.current !== 'answer') return; // the window handler continues
+    e.preventDefault(); (e.nativeEvent as any).__handled = true;
+    if (!focusNext(i)) submitFields(vals);
+  };
   const onKey = (i: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (phaseRef.current !== 'answer') return; // the window handler continues
-      e.preventDefault(); (e.nativeEvent as any).__handled = true;
-      // move to the next empty typed field, otherwise submit
-      const nextEmpty = fields.findIndex((f, j) => j > i && !f.locked && f.check !== 'choice' && !vals[j]);
-      if (nextEmpty >= 0 && i !== lastTyped) { inputs.current[nextEmpty]?.focus(); return; }
-      submitFields(vals);
-    } else if (isPrintable(e.nativeEvent)) markKey();
+    if (e.key === 'Enter') enterOn(i, e);
+    else if (isPrintable(e.nativeEvent)) markKey();
+  };
+  /** Choice field: 1–9 or the first letter picks (and moves on), ←/→ cycle, Enter moves on / submits. */
+  const onChoiceKey = (i: number, choices: string[], e: React.KeyboardEvent<HTMLElement>) => {
+    if (phaseRef.current !== 'answer') return;
+    if (e.key === 'Enter') { enterOn(i, e); return; }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const pick = (c: string, advance: boolean) => {
+      e.preventDefault(); markKey();
+      setVals((v) => v.map((x, j) => (j === i ? c : x)));
+      if (advance) focusNext(i);
+    };
+    if (/^[1-9]$/.test(e.key) && choices[+e.key - 1]) pick(choices[+e.key - 1], true);
+    else if (e.key.length === 1 && /[a-zäöü]/i.test(e.key)) {
+      const c = choices.find((x) => x.toLowerCase().startsWith(e.key.toLowerCase()));
+      if (c) pick(c, true);
+    } else if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) {
+      const cur = choices.indexOf(vals[i]);
+      const dir = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : -1;
+      pick(choices[(cur + dir + choices.length) % choices.length], false);
+    }
   };
 
   // ------- prompt block
@@ -163,11 +187,12 @@ export function ItemView({ item, instant, onResult, onNext }: ItemViewProps) {
               <span key={`k${i}`} className="k" style={{ paddingLeft: 10 + (f.indent ?? 0) * 22 }}>{f.indent !== undefined && '└ '}{f.label}</span>,
               <span key={`v${i}`} className={`v ${st}`} style={{ textDecoration: 'none', color: st === 'bad' ? 'var(--red-ink)' : undefined }}>
                 {f.check === 'choice' ? (
-                  <span className="seg" style={{ marginTop: 0 }}>
-                    {f.choices!.map((c) => (
+                  <span className="seg" style={{ marginTop: 0 }} tabIndex={phase === 'answer' ? 0 : -1} role="radiogroup" aria-label={f.label}
+                    ref={(el) => (inputs.current[i] = el)} onFocus={() => (lastFocus.current = i)} onKeyDown={(e) => onChoiceKey(i, f.choices!, e)}>
+                    {f.choices!.map((c, ci) => (
                       <span key={c} className={vals[i] === c ? (phase === 'fb' ? (c === f.expected ? 'ok' : 'bad') : 'sel') : phase === 'fb' && c === f.expected ? 'ok' : ''}
                         style={{ cursor: phase === 'answer' ? 'pointer' : 'default' }}
-                        onClick={() => { if (phase === 'answer') { markKey(); setVals((v) => v.map((x, j) => (j === i ? c : x))); } }}>{c}</span>
+                        onClick={() => { if (phase === 'answer') { markKey(); setVals((v) => v.map((x, j) => (j === i ? c : x))); } }}><i className="kn">{ci + 1}</i>{c}</span>
                     ))}
                   </span>
                 ) : f.locked ? <span>{f.prefill}</span> : (
@@ -267,13 +292,26 @@ function MatchBoard({ item, onDone, done }: { item: Item; instant: boolean; onDo
   };
   const clickL = (id: string) => { if (done || ok.has(id)) return; if (r) attempt(id, r); else setL(id === l ? null : id); };
   const clickR = (id: string) => { if (done || ok.has(id)) return; if (l) attempt(l, id); else setR(id === r ? null : id); };
+  // keyboard: 1–7 picks a German word, A–G picks a meaning (in either order)
+  const latest = useRef({ clickL, clickR, done });
+  latest.current = { clickL, clickR, done };
+  useEffect(() => {
+    const f = (e: KeyboardEvent) => {
+      if (latest.current.done || e.ctrlKey || e.metaKey || e.altKey) return;
+      if (/INPUT|TEXTAREA|SELECT/.test((e.target as HTMLElement)?.tagName ?? '')) return;
+      if (/^[1-9]$/.test(e.key)) { const x = b.left[+e.key - 1]; if (x) latest.current.clickL(x.id); }
+      else if (/^[a-z]$/i.test(e.key)) { const x = b.right[e.key.toLowerCase().charCodeAt(0) - 97]; if (x) latest.current.clickR(x.id); }
+    };
+    addEventListener('keydown', f);
+    return () => removeEventListener('keydown', f);
+  }, [b]);
   return (
     <div style={{ marginTop: 14 }}>
       <div className="match">
-        <div className="col">{b.left.map((x) => <div key={x.id} className={`choice ${ok.has(x.id) ? 'ok' : l === x.id ? 'sel' : ''}`} style={{ cursor: 'pointer' }} onClick={() => clickL(x.id)}>{x.text}</div>)}</div>
-        <div className="col">{b.right.map((x) => <div key={x.id} className={`choice ${ok.has(x.id) ? 'ok' : flash === x.id ? 'bad' : r === x.id ? 'sel' : ''}`} style={{ cursor: 'pointer', fontFamily: 'var(--sans)', fontSize: 15 }} onClick={() => clickR(x.id)}>{x.text}</div>)}</div>
+        <div className="col">{b.left.map((x, i) => <div key={x.id} className={`choice ${ok.has(x.id) ? 'ok' : l === x.id ? 'sel' : ''}`} style={{ cursor: 'pointer' }} onClick={() => clickL(x.id)}><span className="kbd">{i + 1}</span>{x.text}</div>)}</div>
+        <div className="col">{b.right.map((x, i) => <div key={x.id} className={`choice ${ok.has(x.id) ? 'ok' : flash === x.id ? 'bad' : r === x.id ? 'sel' : ''}`} style={{ cursor: 'pointer', fontFamily: 'var(--sans)', fontSize: 15 }} onClick={() => clickR(x.id)}><span className="kbd">{String.fromCharCode(65 + i)}</span>{x.text}</div>)}</div>
       </div>
-      <div className="annot">cyan = selected · red flash = wrong pair, counted as a miss</div>
+      <div className="annot">keys: 1–7 pick a German word, A–G pick its meaning · cyan = selected · red flash = wrong pair, counted as a miss</div>
     </div>
   );
 }
@@ -361,8 +399,8 @@ export function ResultScreen({ title, results, passMark, attempt, isTest, passed
       <div className="row" style={{ justifyContent: 'space-between', marginTop: 16 }}>
         <button className="btn ghost" onClick={onBack}>Back to path</button>
         <span className="row">
-          {onRetake && <button className={`btn ${passed ? '' : 'primary'}`} onClick={onRetake}>{passed ? 'Replay' : 'Retake'}</button>}
-          {primary && <button className="btn primary" onClick={primary.onClick}>{primary.label}</button>}
+          {onRetake && <button className={`btn ${passed ? '' : 'primary'}`} onClick={onRetake} autoFocus={!primary}>{passed ? 'Replay' : 'Retake'}</button>}
+          {primary && <button className="btn primary" onClick={primary.onClick} autoFocus>{primary.label}</button>}
         </span>
       </div>
     </div>

@@ -46,3 +46,7 @@ a.btn { text-decoration: none; display: inline-block; }
 .seg.v span:last-child { border-bottom: none; }
 .stack > .seg { align-self: flex-start; }
 .tbl tr.sel-row td { background: var(--cyan-10); }
+.seg:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.seg .kn { font: 11px var(--mono); color: var(--g-500); margin-right: 6px; font-style: normal; }
+.seg .sel .kn { color: var(--paper); }
+.choice .kbd { font-style: normal; }

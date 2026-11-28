@@ -94,6 +94,16 @@ export function TopicPage({ id }: { id: string }) {
   const wrap = useRef<HTMLDivElement>(null);
   const svg = useRef<SVGSVGElement>(null);
   const curIsHere = pos.node?.topicId === id;
+  const scrolled = useRef('');
+  // open the path at the next thing to do, not at the top
+  useLayoutEffect(() => {
+    if (scrolled.current === id || !wrap.current || !curIsHere) return;
+    const target = wrap.current.querySelector('.inserted') ?? wrap.current.querySelector('.node.cur');
+    if (!target) return;
+    scrolled.current = id;
+    (target as HTMLElement).scrollIntoView({ block: 'center' });
+    setTimeout(() => (target as HTMLElement).scrollIntoView({ block: 'center' }), 250); // again after web fonts settle
+  });
   const draw = () => {
     if (!wrap.current || !svg.current) return;
     const base = wrap.current.getBoundingClientRect();

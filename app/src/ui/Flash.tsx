@@ -84,7 +84,7 @@ export function Flash({ chunks, title, onDone, onBack }: { chunks: Word[][]; tit
         <div className="row" style={{ marginTop: 14, justifyContent: 'space-between' }}>
           <span className="small muted">{pass ? (lastChunk ? 'Clean and fast — flashcards passed.' : 'Chunk passed — on to the next one.') : "This round doesn't count."}</span>
           <span className="row"><button className="btn ghost" onClick={stop}>Stop for now</button>
-            <button className="btn primary" onClick={proceed}>{pass ? (lastChunk ? 'Finish' : 'Next chunk') : `Start round ${round + 1}`}</button></span>
+            <button className="btn primary" onClick={proceed} autoFocus>{pass ? (lastChunk ? 'Finish' : 'Next chunk') : `Start round ${round + 1}`}</button></span>
         </div>
       </div>
     );

@@ -14,13 +14,14 @@ export function Intro({ words, onFinish, onBack }: { words: Word[]; onFinish: ()
     const f = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') { if (i < words.length - 1) setI(i + 1); }
       if (e.key === 'ArrowLeft') setI((x) => Math.max(0, x - 1));
+      if (e.key === 'Enter' && !/^(INPUT|BUTTON|SELECT|A|TEXTAREA)$/.test((e.target as HTMLElement)?.tagName ?? '')) { e.preventDefault(); if (i < words.length - 1) setI(i + 1); else onFinish(); }
     };
     addEventListener('keydown', f); return () => removeEventListener('keydown', f);
-  }, [i, words.length]);
+  }, [i, words.length, onFinish]);
   if (!w) return <div className="card">No words in this set.</div>;
   return (
     <div className="card">
-      <div className="screen-head"><h3>Introduce{w.pos === 'verb' ? ' · verb' : ''}</h3><span className="counter">word {i + 1} / {words.length} · ← →</span></div>
+      <div className="screen-head"><h3>Introduce{w.pos === 'verb' ? ' · verb' : ''}</h3><span className="counter">word {i + 1} / {words.length} · ← → or ⏎</span></div>
       <div className="bar" style={{ marginBottom: 14 }}><i style={{ width: `${((i + 1) / words.length) * 100}%` }} /></div>
       <WordCard key={w.id} w={w} />
       <div className="row" style={{ justifyContent: 'space-between', marginTop: 14 }}>
